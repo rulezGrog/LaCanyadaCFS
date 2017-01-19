@@ -1,5 +1,12 @@
 <?php  include("header.php");
 
+function Clean88($string)
+{
+    $string = iconv('UTF-8', 'UTF-8//IGNORE', $string);
+    return preg_replace('~\p{C}+~u', '', $string);
+    return preg_replace(array('~\r\n?~', '~[^\P{C}\t\n]+~u'), array("\n", ''), $string);
+}
+
 $selecciona= "SELECT * FROM jugadores";
 
 mysql_query ("set character_set_results='utf8'");
@@ -9,34 +16,40 @@ $numfilas = mysql_num_rows($resultadosd);
 while ($filaModal = mysql_fetch_array($resultadosd))	{
 
     $pedido = $filaModal['pedido'];
+
     if ($filaModal['nom_tutor'] != ''){
-      $nombretut = decrypt($filaModal['nom_tutor']); //isset OK OK
+      // $nombretut = utf8_decode(decrypt($filaModal['nom_tutor'])); //isset OK OK
+      // echo $nombretut, ' ---> ', mb_strlen($nombretut,'HTML-ENTITIES'), '<br>';
+      $nombretut =  ucwords(strtolower(utf8_decode(Clean88(decrypt($filaModal['nom_tutor'])))));
+      echo '1111-->', $nombretut, ' ---> ', mb_strlen($nombretut,'HTML-ENTITIES'), '<br>';
+      // $nombretut = Clean88($nombretut);
+      // echo '2222-->', $nombretut, ' ---> ', mb_strlen($nombretut,'HTML-ENTITIES'), '<br>';
     }else{
       $nombretut = '';
     }
 
     if ($filaModal['ape_tutor'] != ''){
-      $apellidostut = decrypt($filaModal['ape_tutor']); //isset OK OK
+      $apellidostut = ucwords(strtolower(utf8_decode(Clean88(decrypt($filaModal['ape_tutor']))))); //isset OK OK
     }else{
       $apellidostut = '';
     }
 
     if ($filaModal['nombre'] != ''){
-      $nombre = decrypt($filaModal['nombre']);
+      $nombre = ucwords(strtolower(utf8_decode(Clean88(decrypt($filaModal['nombre'])))));
     }else{
       $nombre = '';
     }
 
 
     if ($filaModal['apellidos'] != ''){
-      $apellidos = decrypt($filaModal['apellidos']);
+      $apellidos = ucwords(strtolower(utf8_decode(Clean88(decrypt($filaModal['apellidos'])))));
     }else{
       $apellidos = '';
     }
 
 
     if ($filaModal['dni'] != 'dni'){
-      $dni = decrypt($filaModal['dni']);
+      $dni = utf8_decode(Clean88(decrypt($filaModal['dni'])));
     }else{
       $dni = '';
     }
@@ -44,61 +57,61 @@ while ($filaModal = mysql_fetch_array($resultadosd))	{
 
 
     if ($filaModal['tlf'] != ''){
-      $telefono = decrypt($filaModal['tlf']);
+      $telefono = utf8_decode(Clean88(decrypt($filaModal['tlf'])));
     }else{
       $telefono = '';
     }
 
 
     if ($filaModal['email'] != ''){
-      $email = decrypt($filaModal['email']);
+      $email = utf8_decode(Clean88(decrypt($filaModal['email'])));
     }else{
       $email = '';
     }
-    $via = $filaModal['tipo_calle'];
+    $via = ucwords(strtolower(utf8_decode(utf8_decode(Clean88($filaModal['tipo_calle'])))));
 
 
     if ($filaModal['direccion'] != ''){
-      $direccion = decrypt($filaModal['direccion']);
+      $direccion = ucwords(strtolower(utf8_decode(Clean88(decrypt($filaModal['direccion'])))));
     }else{
       $direccion = '';
     }
 
 
     if ($filaModal['poblacion'] != ''){
-      $poblacion = decrypt($filaModal['poblacion']);
+      $poblacion = ucwords(strtolower(utf8_decode(Clean88(decrypt($filaModal['poblacion'])))));
     }else{
       $poblacion = '';
     }
 
 
     if ($filaModal['provincia'] != ''){
-      $provincia = decrypt($filaModal['provincia']);
+      $provincia = ucwords(strtolower(utf8_decode(Clean88(decrypt($filaModal['provincia'])))));
     }else{
       $provincia = '';
     }
     $cp = $filaModal['cp'];
-    $mensaje = $filaModal['mensaje']; //isset OK OK
+    $mensaje = utf8_decode(utf8_decode(Clean88($filaModal['mensaje']))); //isset OK OK
     $importe = $filaModal['importe'];
     $fraccionado = $filaModal['fraccionada'];
 
 
     if ($filaModal['titular_cuenta'] != ''){
-      $titularcuenta = decrypt($filaModal['titular_cuenta']);
+      $titularcuenta = ucwords(strtolower(utf8_decode(Clean88(decrypt($filaModal['titular_cuenta'])))));
     }else{
       $titularcuenta = '';
     } //isset OK OK
 
 
     if ($filaModal['ape_cuenta'] != ''){
-      $apellidoscuenta = decrypt($filaModal['ape_cuenta']);
+      $apellidoscuenta = ucwords(strtolower(utf8_decode(Clean88(decrypt($filaModal['ape_cuenta'])))));
     }else{
       $apellidoscuenta = '';
     } //isset OK OK
 
 
     if ($filaModal['num_cuenta'] != ''){
-      $numerocuenta = decrypt($filaModal['num_cuenta']);
+      $numerocuenta = utf8_decode(Clean88(decrypt($filaModal['num_cuenta'])));
     }else{
       $numerocuenta = '';
     } //isset OK OK

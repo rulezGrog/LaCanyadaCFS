@@ -1,6 +1,6 @@
 <?php  include("header.php");
 
-$selecciona= "SELECT * FROM jugadores";
+$selecciona= "SELECT * FROM jugadores3";
 
 mysql_query ("set character_set_results='utf8'");
 $resultadosd=mysql_query($selecciona,$ilink) or die (mysql_error());

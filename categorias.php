@@ -283,11 +283,7 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 
 echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
 	<br>
-	<a type="button" class="btn btn-f pull-right fullList" name="exportfullList" href="tmp/listajugadores.csv"><b>EXPORTAR LISTA COMLPETA</b></a>
-	<!--<a class="color-2 radius puerto-btn-2 pull-right" href="tmp/listajugadores.csv">
-			<span><i class="fa fa-cloud-download"></i></span>
-			<small>EXPORTAR LISTA COMPLETA</small>
-		</a>-->
+	<a type="button" class="btn btn-fullList pull-right" name="exportfullList" href="tmp/listajugadores.csv"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>EXPORTAR LISTA COMLPETA</a>
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#Preb">Pre-Benjamín</a></li>
@@ -378,7 +374,7 @@ echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
 												if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
 											  {
 											  echo "
-						            <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>[EDITAR]</a></button></td>
+						            <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
 						            <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
 											}echo"
 						          </tr>";
@@ -472,7 +468,7 @@ echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
 									if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
 									{
 									echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>[EDITAR]</a></button></td>
+									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
 									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
 								}echo"
 								</tr>";
@@ -564,7 +560,7 @@ echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
 									if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
 									{
 									echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>[EDITAR]</a></button></td>
+									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
 									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
 								}echo"
 								</tr>";
@@ -656,7 +652,7 @@ echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
 									if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
 									{
 									echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>[EDITAR]</a></button></td>
+									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
 									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
 								}echo"
 								</tr>";
@@ -747,7 +743,7 @@ echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
 									if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
 									{
 									echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>[EDITAR]</a></button></td>
+									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
 									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
 								}echo"
 								</tr>";
@@ -838,7 +834,7 @@ echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
 									if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
 									{
 									echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>[EDITAR]</a></button></td>
+									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
 									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
 								}echo"
 								</tr>";
@@ -929,7 +925,7 @@ echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
 									if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
 									{
 									echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>[EDITAR]</a></button></td>
+									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
 									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
 								}echo"
 								</tr>";

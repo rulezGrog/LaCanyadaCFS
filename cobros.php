@@ -410,239 +410,246 @@ echo'
 
 
 
+if (isset($arraypedidos1)){
+	foreach ($arraypedidos1 as $id){
 
-foreach ($arraypedidos1 as $id){
+		$seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
+		$resultadoModal=mysql_query($seleccionaModal,$ilink) or die (mysql_error());
+		$filaModal = mysql_fetch_array($resultadoModal);
 
-	$seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
-	$resultadoModal=mysql_query($seleccionaModal,$ilink) or die (mysql_error());
-	$filaModal = mysql_fetch_array($resultadoModal);
+		$nombre = decrypt($filaModal['nombre']);
+		$apellidos = decrypt($filaModal['apellidos']);
+		$categoria = ($filaModal['categoria']);
+		$temporada = ($filaModal['temporada']);
 
-	$nombre = decrypt($filaModal['nombre']);
-	$apellidos = decrypt($filaModal['apellidos']);
-	$categoria = ($filaModal['categoria']);
-	$temporada = ($filaModal['temporada']);
+		$cuantia = ($filaModal['primerpago']);
 
-	$cuantia = ($filaModal['primerpago']);
+	echo"
+	<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-primer' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+				<p>Si continuas con la acción <b>marcarás el primer pago de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
+				se podrá volver a poner como primer pago la cuantía deseada editando al jugador en la lista de jugadores.</p>
+	      </div>
+	      <div class='modal-footer'>
+	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
+		        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=primerpago&tipo=pagar'>PAGAR</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-echo"
-<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-primer' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-  <div class='modal-dialog' role='document'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
-      </div>
-			<div class='modal-body'>
-			<p>Si continuas con la acción <b>marcarás el primer pago de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
-			se podrá volver a poner como primer pago la cuantía deseada editando al jugador en la lista de jugadores.</p>
-      </div>
-      <div class='modal-footer'>
-        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-	        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=primerpago&tipo=pagar'>PAGAR</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class='modal fade bs-example-modal-sm' id='editarModal-$id-primer' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-  <div class='modal-dialog' role='document'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
-      </div>
-			<div class='modal-body'>
-				<div class='row'>
-				<form class='form-inline' action='pagar.php?id=$id&plazo=primerpago&tipo=cambiar' method='post'>
-					<div class='form-group col-md-offset-1'>
-						<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
-						<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+	<div class='modal fade bs-example-modal-sm' id='editarModal-$id-primer' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+					<div class='row'>
+					<form class='form-inline' action='pagar.php?id=$id&plazo=primerpago&tipo=cambiar' method='post'>
+						<div class='form-group col-md-offset-1'>
+							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
+							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+						</div>
+						<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
+					</form>
 					</div>
-					<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
-				</form>
-				</div>
-      </div>
-      <div class='modal-footer'>
-      </div>
-    </div>
-  </div>
-</div>
+	      </div>
+	      <div class='modal-footer'>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-";
+	";
+	}
 }
 
-foreach ($arraypedidos2 as $id){
+if (isset($arraypedidos2)){
+	foreach ($arraypedidos2 as $id){
 
-	$seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
-	$resultadoModal=mysql_query($seleccionaModal,$ilink) or die (mysql_error());
-	$filaModal = mysql_fetch_array($resultadoModal);
+		$seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
+		$resultadoModal=mysql_query($seleccionaModal,$ilink) or die (mysql_error());
+		$filaModal = mysql_fetch_array($resultadoModal);
 
-	$nombre = decrypt($filaModal['nombre']);
-	$apellidos = decrypt($filaModal['apellidos']);
-	$categoria = ($filaModal['categoria']);
-	$temporada = ($filaModal['temporada']);
+		$nombre = decrypt($filaModal['nombre']);
+		$apellidos = decrypt($filaModal['apellidos']);
+		$categoria = ($filaModal['categoria']);
+		$temporada = ($filaModal['temporada']);
 
-echo"
-<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-segundo' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-  <div class='modal-dialog' role='document'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
-      </div>
-			<div class='modal-body'>
-        <p>Si continuas con la acción <b>marcarás el segundo pago de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
-				se podrá volver a poner como segundo pago la cuantía deseada editando al jugador en la lista de jugadores.</p>
-      </div>
-      <div class='modal-footer'>
-        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-	        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=segundopago&tipo=pagar'>PAGAR</a>
-      </div>
-    </div>
-  </div>
-</div>
+	echo"
+	<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-segundo' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+	        <p>Si continuas con la acción <b>marcarás el segundo pago de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
+					se podrá volver a poner como segundo pago la cuantía deseada editando al jugador en la lista de jugadores.</p>
+	      </div>
+	      <div class='modal-footer'>
+	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
+		        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=segundopago&tipo=pagar'>PAGAR</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-<div class='modal fade bs-example-modal-sm' id='editarModal-$id-segundo' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-  <div class='modal-dialog' role='document'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
-      </div>
-			<div class='modal-body'>
-				<div class='row'>
-				<form class='form-inline' action='pagar.php?id=$id&plazo=segundopago&tipo=cambiar' method='post'>
-					<div class='form-group col-md-offset-1'>
-						<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
-						<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+	<div class='modal fade bs-example-modal-sm' id='editarModal-$id-segundo' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+					<div class='row'>
+					<form class='form-inline' action='pagar.php?id=$id&plazo=segundopago&tipo=cambiar' method='post'>
+						<div class='form-group col-md-offset-1'>
+							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
+							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+						</div>
+						<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
+					</form>
 					</div>
-					<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
-				</form>
-				</div>
-      </div>
-      <div class='modal-footer'>
-      </div>
-    </div>
-  </div>
-</div>
+	      </div>
+	      <div class='modal-footer'>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-";
+	";
+	}
 }
 
-foreach ($arraypedidos3 as $id){
+if (isset($arraypedidos3)){
+	foreach ($arraypedidos3 as $id){
 
-	$seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
-	$resultadoModal=mysql_query($seleccionaModal,$ilink) or die (mysql_error());
-	$filaModal = mysql_fetch_array($resultadoModal);
+		$seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
+		$resultadoModal=mysql_query($seleccionaModal,$ilink) or die (mysql_error());
+		$filaModal = mysql_fetch_array($resultadoModal);
 
-	$nombre = decrypt($filaModal['nombre']);
-	$apellidos = decrypt($filaModal['apellidos']);
-	$categoria = ($filaModal['categoria']);
-	$temporada = ($filaModal['temporada']);
+		$nombre = decrypt($filaModal['nombre']);
+		$apellidos = decrypt($filaModal['apellidos']);
+		$categoria = ($filaModal['categoria']);
+		$temporada = ($filaModal['temporada']);
 
-echo"
-<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-tercer' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-  <div class='modal-dialog' role='document'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
-      </div>
-			<div class='modal-body'>
-			<p>Si continuas con la acción <b>marcarás el tercer pago de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
-			se podrá volver a poner como tercer pago la cuantía deseada editando al jugador en la lista de jugadores.</p>
-      </div>
-      <div class='modal-footer'>
-        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-	        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=tercerpago&tipo=pagar'>PAGAR</a>
-      </div>
-    </div>
-  </div>
-</div>
+	echo"
+	<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-tercer' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+				<p>Si continuas con la acción <b>marcarás el tercer pago de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
+				se podrá volver a poner como tercer pago la cuantía deseada editando al jugador en la lista de jugadores.</p>
+	      </div>
+	      <div class='modal-footer'>
+	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
+		        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=tercerpago&tipo=pagar'>PAGAR</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-<div class='modal fade bs-example-modal-sm' id='editarModal-$id-tercer' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-  <div class='modal-dialog' role='document'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
-      </div>
-			<div class='modal-body'>
-				<div class='row'>
-				<form class='form-inline' action='pagar.php?id=$id&plazo=tercerpago&tipo=cambiar' method='post'>
-					<div class='form-group col-md-offset-1'>
-						<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
-						<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+	<div class='modal fade bs-example-modal-sm' id='editarModal-$id-tercer' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+					<div class='row'>
+					<form class='form-inline' action='pagar.php?id=$id&plazo=tercerpago&tipo=cambiar' method='post'>
+						<div class='form-group col-md-offset-1'>
+							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
+							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+						</div>
+						<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
+					</form>
 					</div>
-					<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
-				</form>
-				</div>
-      </div>
-      <div class='modal-footer'>
-      </div>
-    </div>
-  </div>
-</div>
+	      </div>
+	      <div class='modal-footer'>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-";
+	";
+	}
 }
 
-foreach ($arraypedidos4 as $id){
+if (isset($arraypedidos4)){
+	foreach ($arraypedidos4 as $id){
 
-	$seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
-	$resultadoModal=mysql_query($seleccionaModal,$ilink) or die (mysql_error());
-	$filaModal = mysql_fetch_array($resultadoModal);
+		$seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
+		$resultadoModal=mysql_query($seleccionaModal,$ilink) or die (mysql_error());
+		$filaModal = mysql_fetch_array($resultadoModal);
 
-	$nombre = decrypt($filaModal['nombre']);
-	$apellidos = decrypt($filaModal['apellidos']);
-	$categoria = ($filaModal['categoria']);
-	$temporada = ($filaModal['temporada']);
+		$nombre = decrypt($filaModal['nombre']);
+		$apellidos = decrypt($filaModal['apellidos']);
+		$categoria = ($filaModal['categoria']);
+		$temporada = ($filaModal['temporada']);
 
-echo"
-<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-extra' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-  <div class='modal-dialog' role='document'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
-      </div>
-			<div class='modal-body'>
-			<p>Si continuas con la acción <b>marcarás el pago extra de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
-			se podrá volver a poner como pago extra la cuantía deseada editando al jugador en la lista de jugadores.</p>
-      </div>
-      <div class='modal-footer'>
-        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-	        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=pagoextra&tipo=pagar'>PAGAR</a>
-      </div>
-    </div>
-  </div>
-</div>
+	echo"
+	<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-extra' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+				<p>Si continuas con la acción <b>marcarás el pago extra de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
+				se podrá volver a poner como pago extra la cuantía deseada editando al jugador en la lista de jugadores.</p>
+	      </div>
+	      <div class='modal-footer'>
+	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
+		        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=pagoextra&tipo=pagar'>PAGAR</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-<div class='modal fade bs-example-modal-sm' id='editarModal-$id-extra' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-  <div class='modal-dialog' role='document'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
-      </div>
-			<div class='modal-body'>
-				<div class='row'>
-				<form class='form-inline' action='pagar.php?id=$id&plazo=pagoextra&tipo=cambiar' method='post'>
-					<div class='form-group col-md-offset-1'>
-						<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
-						<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+	<div class='modal fade bs-example-modal-sm' id='editarModal-$id-extra' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+					<div class='row'>
+					<form class='form-inline' action='pagar.php?id=$id&plazo=pagoextra&tipo=cambiar' method='post'>
+						<div class='form-group col-md-offset-1'>
+							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
+							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+						</div>
+						<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
+					</form>
 					</div>
-					<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
-				</form>
-				</div>
-      </div>
-      <div class='modal-footer'>
-      </div>
-    </div>
-  </div>
-</div>
+	      </div>
+	      <div class='modal-footer'>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
-";
+	";
+	}
 }
 
 include("sidebar.php");

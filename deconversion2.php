@@ -1,6 +1,6 @@
 <?php  include("header.php");
 
-$selecciona= "SELECT * FROM jugadores";
+$selecciona= "SELECT * FROM jugadores3";
 
 mysql_query ("set character_set_results='utf8'");
 $resultadosd=mysql_query($selecciona,$ilink) or die (mysql_error());
@@ -10,33 +10,33 @@ while ($filaModal = mysql_fetch_array($resultadosd))	{
 
     $pedido = $filaModal['pedido'];
     if ($filaModal['nom_tutor'] != ''){
-      $nombretut = newdecrypt($filaModal['nom_tutor']); //isset OK OK
+      $nombretut = decrypt($filaModal['nom_tutor']); //isset OK OK
     }else{
       $nombretut = '';
     }
 
     if ($filaModal['ape_tutor'] != ''){
-      $apellidostut = newdecrypt($filaModal['ape_tutor']); //isset OK OK
+      $apellidostut = decrypt($filaModal['ape_tutor']); //isset OK OK
     }else{
       $apellidostut = '';
     }
 
     if ($filaModal['nombre'] != ''){
-      $nombre = newdecrypt($filaModal['nombre']);
+      $nombre = decrypt($filaModal['nombre']);
     }else{
       $nombre = '';
     }
 
 
     if ($filaModal['apellidos'] != ''){
-      $apellidos = newdecrypt($filaModal['apellidos']);
+      $apellidos = decrypt($filaModal['apellidos']);
     }else{
       $apellidos = '';
     }
 
 
     if ($filaModal['dni'] != 'dni'){
-      $dni = newdecrypt($filaModal['dni']);
+      $dni = decrypt($filaModal['dni']);
     }else{
       $dni = '';
     }
@@ -44,14 +44,14 @@ while ($filaModal = mysql_fetch_array($resultadosd))	{
 
 
     if ($filaModal['tlf'] != ''){
-      $telefono = newdecrypt($filaModal['tlf']);
+      $telefono = decrypt($filaModal['tlf']);
     }else{
       $telefono = '';
     }
 
 
     if ($filaModal['email'] != ''){
-      $email = newdecrypt($filaModal['email']);
+      $email = decrypt($filaModal['email']);
     }else{
       $email = '';
     }
@@ -59,21 +59,21 @@ while ($filaModal = mysql_fetch_array($resultadosd))	{
 
 
     if ($filaModal['direccion'] != ''){
-      $direccion = newdecrypt($filaModal['direccion']);
+      $direccion = decrypt($filaModal['direccion']);
     }else{
       $direccion = '';
     }
 
 
     if ($filaModal['poblacion'] != ''){
-      $poblacion = newdecrypt($filaModal['poblacion']);
+      $poblacion = decrypt($filaModal['poblacion']);
     }else{
       $poblacion = '';
     }
 
 
     if ($filaModal['provincia'] != ''){
-      $provincia = newdecrypt($filaModal['provincia']);
+      $provincia = decrypt($filaModal['provincia']);
     }else{
       $provincia = '';
     }
@@ -84,21 +84,21 @@ while ($filaModal = mysql_fetch_array($resultadosd))	{
 
 
     if ($filaModal['titular_cuenta'] != ''){
-      $titularcuenta = newdecrypt($filaModal['titular_cuenta']);
+      $titularcuenta = decrypt($filaModal['titular_cuenta']);
     }else{
       $titularcuenta = '';
     } //isset OK OK
 
 
     if ($filaModal['ape_cuenta'] != ''){
-      $apellidoscuenta = newdecrypt($filaModal['ape_cuenta']);
+      $apellidoscuenta = decrypt($filaModal['ape_cuenta']);
     }else{
       $apellidoscuenta = '';
     } //isset OK OK
 
 
     if ($filaModal['num_cuenta'] != ''){
-      $numerocuenta = newdecrypt($filaModal['num_cuenta']);
+      $numerocuenta = decrypt($filaModal['num_cuenta']);
     }else{
       $numerocuenta = '';
     } //isset OK OK

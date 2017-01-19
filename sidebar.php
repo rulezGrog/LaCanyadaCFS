@@ -1,10 +1,10 @@
 <div class="main-sidebar" id="accordion">
-  <div class="logo-header">
+  <!-- <div class="logo-header">
     <div class="logo">
       <span class="canyadaIcon"></span>
       <a class="logo-brand" href="index.php">La Canyada C.F.S.</a>
     </div>
-  </div>
+  </div> -->
 
 
   <div class="">

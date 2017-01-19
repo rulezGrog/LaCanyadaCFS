@@ -283,7 +283,7 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 
 echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
 	<br>
-	<a type="button" class="btn btn-fullList pull-right" name="exportfullList" href="tmp/listajugadores.csv"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>EXPORTAR LISTA COMLPETA</a>
+	<a type="button" class="btn btn-f pull-right fullList" name="exportfullList" href="tmp/listajugadores.csv"><b>EXPORTAR LISTA COMLPETA</b></a>
 	<!--<a class="color-2 radius puerto-btn-2 pull-right" href="tmp/listajugadores.csv">
 			<span><i class="fa fa-cloud-download"></i></span>
 			<small>EXPORTAR LISTA COMPLETA</small>

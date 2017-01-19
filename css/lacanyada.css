@@ -16,7 +16,7 @@ html,body {
   position:relative; /* needed for footer positioning*/
   margin:0 auto; /* center, not in IE5 */
   /*width:950px;*/
-  /*background:#f0f0f0;*/
+  background-color: #ecf0f5;
   height:auto !important; /* real browsers */
   height:100%; /* IE6: treaded as min-height*/
   min-height:100%; /* real browsers */
@@ -24,31 +24,37 @@ html,body {
 #contenido{
   padding:1em 1em 5em;
   margin-left: 230px;
+  /*background-color: #ecf0f5;*/
 }
 
-button a{
-  font-weight: bold;
-  color: #fff;
+@media (max-width: 767px) {
+  #contenido {
+    margin-left: 0;
+  }
 }
-
-.navbar, .logo-header{
-  height: 50px;
-  background-color: #FF8C00;
-  border: none !important;
-  border-radius: 0;
-  /*z-index: 1000;*/
+.main-header {
+  position: relative;
+  max-height: 50px;
+  z-index: 1030;
+}
+.nav-bar{
+  min-height:50px;
+  background-color: rgb(255, 140, 0) !important;
+  margin-left: 230px;
 }
 
 .navbar, .navbar-brand, .logo-brand {
   color: #eee !important;
 }
-.logo-header{
-  background-color: rgba(255, 140, 0, 0.9) !important;
-  vertical-align: middle;
-}
 
 .logo{
-  margin-left: 10px !important;
+  width: 230px;
+  float: left;
+  height:50px;
+  background-color: rgb(215, 118, 0) !important;
+}
+.logoSbox{
+  margin-left: 10px;
 }
 .canyadaIcon{
   margin-top:3px;
@@ -57,24 +63,52 @@ button a{
   width: 37px;
   height: 42px;
 }
-a.logo-brand {
+.logo-brand {
   font-size: 18px;
-  margin-left: 15px;
+  margin-left: 10px;
   line-height: 50px;
 }
-.navbar-inverse .navbar-nav > li > a{
-    color: #000;
+
+button a{
+  font-weight: bold;
+  color: #fff;
 }
+
+
+@media (max-width: 767px) {
+  .nav-bar {
+    display: none;
+  }
+  .logo{
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    /*margin-bottom: 30px;*/
+  }
+  .logo-brand {
+    margin-left: 509px;;
+  }
+  .logoSbox{
+    text-align: center;
+    width: 100%;
+  }
+}
+
+
 /***********************************************************************
                   SIDEBAR
 ***********************************************************************/
+@media (max-width: 767px) {
+  .main-sidebar {
+    display: none;
+  }
+}
 .main-sidebar{
-  /*background: #995c00;*/
   background: #222d32;
   position: absolute;
   top: 0;
   left: 0;
-  /*padding-top: 50px;*/
   min-height: 100%;
   z-index: 810;
   height:auto;
@@ -88,6 +122,7 @@ a.logo-brand {
 .sidebar-menu{
   list-style: none;
   margin: 0;
+  margin-top: 50px;
   padding: 0;
 }
 .sidebar-menu li{

@@ -3,17 +3,17 @@
 
 		//LOCAL******************
 
-		// define ('DB_HOST_AG', 'localhost');
-		// define ('DB_USER_AG', 'root');
-		// define ('DB_PASS_AG', '');
-		// define ('DB_NAME_AG', 'lacanyada');
+		define ('DB_HOST_AG', 'localhost');
+		define ('DB_USER_AG', 'root');
+		define ('DB_PASS_AG', '');
+		define ('DB_NAME_AG', 'lacanyada');
 
 		//ONLINE******************
 
-		define ('DB_HOST_AG', 'db630685183.db.1and1.com');
-		define ('DB_USER_AG', 'dbo630685183');
-		define ('DB_PASS_AG', 'Lacanyada12');
-		define ('DB_NAME_AG', 'db630685183');
+		// define ('DB_HOST_AG', 'db630685183.db.1and1.com');
+		// define ('DB_USER_AG', 'dbo630685183');
+		// define ('DB_PASS_AG', 'Lacanyada12');
+		// define ('DB_NAME_AG', 'db630685183');
 
 		//ONLINE---PRUEBAS------******************
 

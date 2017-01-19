@@ -1,18 +1,7 @@
 <?php
 
 require_once('fig.php'); //incluimos el config.php que contiene los datos de la conexión a la db
-
-//*********** FUNCIONES DE ENCRIPTACION ****************//
-define ('ENCRYPT_KEY',"ZUH+nKZkaBb8tho");
-function encrypt($in)
-{
-    $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-    $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-    $enc = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, ENCRYPT_KEY, $in, MCRYPT_MODE_ECB, $iv);
-    $enc = base64_encode($enc);
-    return $enc;
-}
-//*********** "FIN" FUNCIONES DE ENCRIPTACION ****************//
+require_once('funciones.php');
 
 $operacion = $_GET['op'];
 $id = $_GET['id'];

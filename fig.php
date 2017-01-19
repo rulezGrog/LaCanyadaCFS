@@ -6,7 +6,7 @@
 		define ('DB_HOST_AG', 'localhost');
 		define ('DB_USER_AG', 'root');
 		define ('DB_PASS_AG', '');
-		define ('DB_NAME_AG', 'lacanyada');
+		define ('DB_NAME_AG', 'lacanyada2');
 
 		//ONLINE******************
 

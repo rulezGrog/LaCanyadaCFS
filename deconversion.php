@@ -1,12 +1,5 @@
 <?php  include("header.php");
 
-function Clean88($string)
-{
-    $string = iconv('UTF-8', 'UTF-8//IGNORE', $string);
-    return preg_replace('~\p{C}+~u', '', $string);
-    return preg_replace(array('~\r\n?~', '~[^\P{C}\t\n]+~u'), array("\n", ''), $string);
-}
-
 $selecciona= "SELECT * FROM jugadores";
 
 mysql_query ("set character_set_results='utf8'");

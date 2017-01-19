@@ -1,29 +1,7 @@
 <?php
 require_once('fig.php'); //incluimos el config.php que contiene los datos de la conexión a la db
+require_once('funciones.php');
 
-//*********** FUNCIONES DE ENCRIPTACION ****************//
-define ('ENCRYPT_KEY',"ZUH+nKZkaBb8tho");
-function encrypt($in)
-{
-    $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-    $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-    $enc = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, ENCRYPT_KEY, $in, MCRYPT_MODE_ECB, $iv);
-    $enc = base64_encode($enc);
-    return $enc;
-}
-//*********** "FIN" FUNCIONES DE ENCRIPTACION ****************//
-
-
-function nextCount($value) {
-  $intNum = intval($value) + 1;
-  $strNum = strval($intNum);
-  while(strlen($strNum) < 12) {
-    $strNum = "0" . $strNum;
-  }
-  return $strNum;
-}
-
-//*********** "FIN" FUNCION ***************************//
 
 // $temporadaAct = $_SESSION["temporada"];
 
@@ -187,7 +165,7 @@ if ($temporadaAct == $temporadaReg){ //*****************************************
 
 } //endIF**************************************
 
-if ($temporadaAct > $temporadaReg){ //*******************************************
+if ($temporadaAct > $temporadaReg){ 
 
   $inserta="INSERT INTO old_temporada (pedido,nombre,apellidos,nom_tutor,ape_tutor,dni,tipo_calle,direccion,poblacion,provincia,cp,email,tlf,mensaje,categoria,temporada,birthdate,termsimage1,termsimage2,termsimage3,termsimage4) VALUES ('$pedido','$nombre','$apellidos','$tutor','$tutorapellidos','$dni','$via','$direccion','$poblacion','$provincia','$cp','$email','$telefono','$mensaje','$categoria','$temporadaReg','$nacimiento','$imagenes1','$imagenes2','$imagenes3','$imagenes4')";
 	$resultado=mysql_query($inserta,$ilink) or die (mysql_error());

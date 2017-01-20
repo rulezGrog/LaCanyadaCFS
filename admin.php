@@ -71,8 +71,8 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
          <tbody>';
 				 while ($fila = mysql_fetch_array($resultado2))
 				 {
-					 $idadmin = ($fila['idadmin']);
-					 $nombreAdmin = ($fila['nombre']);
+					 $idadmin = utf8_encode($fila['idadmin']);  //LOS utf8_encode HAY QUE ARREGLARLO, DEBE FUNCIONAR LA PAGINA ENTERA CON UTF8 SIN PROBLEMAS
+					 $nombreAdmin = utf8_encode($fila['nombre']);
 					 $emailAdmin = ($fila['email']);
 					 $level = ($fila['level']);
 

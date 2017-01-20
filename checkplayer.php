@@ -35,22 +35,22 @@ $temporadaReg = $_POST['temporada'];
   }
 
   if ($_POST['nombretut'] <> ''){
-    $tutor = encrypt($_POST['nombretut']);
-    $tutorapellidos = encrypt($_POST['apellidostut']);
+    $tutor = encrypt(ucwords(strtolower($_POST['nombretut'])));
+    $tutorapellidos = encrypt(ucwords(strtolower($_POST['apellidostut'])));
   }else{
     $tutor = '';
     $tutorapellidos = '';
   }
 
-  $nombre = encrypt($_POST['nombre']);
-  $apellidos = encrypt($_POST['apellidos']);
+  $nombre = encrypt(ucwords(strtolower($_POST['nombre'])));
+  $apellidos = encrypt(ucwords(strtolower($_POST['apellidos'])));
   $dni = encrypt($_POST['dni']);
   $telefono = encrypt($_POST['telefono']);
   $email = encrypt($_POST['email']);
   $via = $_POST['via'];
-  $direccion = encrypt($_POST['direccion']);
-  $poblacion = encrypt($_POST['poblacion']);
-  $provincia = encrypt($_POST['provincia']);
+  $direccion = encrypt(ucwords(strtolower($_POST['direccion'])));
+  $poblacion = encrypt(ucwords(strtolower($_POST['poblacion'])));
+  $provincia = encrypt(ucwords(strtolower($_POST['provincia'])));
   $cp = $_POST['cp'];
 
   if ($_POST['message'] <> '' ){
@@ -117,8 +117,8 @@ if ($temporadaAct == $temporadaReg){ //*****************************************
 
   if ($_POST['fracc'] == 'SI' ){
     $fraccionado = 1;
-    $titularcuenta = encrypt($_POST['bancname']);
-    $apellidoscuenta = encrypt($_POST['bancsurname']);
+    $titularcuenta = encrypt(ucwords(strtolower($_POST['bancname'])));
+    $apellidoscuenta = encrypt(ucwords(strtolower($_POST['bancsurname'])));
     $numerocuenta = encrypt($_POST['bancnum']);
     $primerpago = $_POST['importe1'];
     $segundopago = $_POST['importe2'];
@@ -165,7 +165,7 @@ if ($temporadaAct == $temporadaReg){ //*****************************************
 
 } //endIF**************************************
 
-if ($temporadaAct > $temporadaReg){ 
+if ($temporadaAct > $temporadaReg){
 
   $inserta="INSERT INTO old_temporada (pedido,nombre,apellidos,nom_tutor,ape_tutor,dni,tipo_calle,direccion,poblacion,provincia,cp,email,tlf,mensaje,categoria,temporada,birthdate,termsimage1,termsimage2,termsimage3,termsimage4) VALUES ('$pedido','$nombre','$apellidos','$tutor','$tutorapellidos','$dni','$via','$direccion','$poblacion','$provincia','$cp','$email','$telefono','$mensaje','$categoria','$temporadaReg','$nacimiento','$imagenes1','$imagenes2','$imagenes3','$imagenes4')";
 	$resultado=mysql_query($inserta,$ilink) or die (mysql_error());

@@ -8,7 +8,15 @@
 		define ('DB_PASS_AG', '');
 		define ('DB_NAME_AG', 'lacanyada2');
 
-		//ONLINE******************
+		//ONLINE NUEVA******************
+
+		// define ('DB_HOST_AG', 'db665957498.db.1and1.com');
+		// define ('DB_USER_AG', 'dbo665957498');
+		// define ('DB_PASS_AG', 'Lacanyada12');
+		// define ('DB_NAME_AG', 'db665957498');
+
+
+		//ONLINE VIEJA******************
 
 		// define ('DB_HOST_AG', 'db630685183.db.1and1.com');
 		// define ('DB_USER_AG', 'dbo630685183');

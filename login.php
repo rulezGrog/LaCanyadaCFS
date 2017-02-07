@@ -1,8 +1,8 @@
-<?php  include("header.php"); ?>
+
   <body>
 
-
-
+<?php  include("headmenu.php"); ?>
+<!--
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -10,7 +10,7 @@
         <span class="navbar-brand" href="#">La Canyada - Administración de Jugadores</span>
     </div>
   </div>
-  </nav>
+  </nav> -->
 
       <?php
       if($_SESSION["regNOT"] == 1){

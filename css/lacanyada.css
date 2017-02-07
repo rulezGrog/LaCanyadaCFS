@@ -213,6 +213,7 @@ button a{
   background: #FF8C00;
   border-top-left-radius:2em;
   border-top-right-radius:2em;
+  box-shadow: 0px 1px 5px 1px rgb(168, 168, 168);
 }
 
 .titLog h2{
@@ -226,6 +227,7 @@ button a{
   background: #eee;
   border-bottom-right-radius:2em;
   border-bottom-left-radius:2em;
+  box-shadow: 0px 1px 5px 1px rgb(168, 168, 168);
 }
 
 .boxInfo{

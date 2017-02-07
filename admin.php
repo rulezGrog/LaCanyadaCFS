@@ -189,6 +189,7 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 			</div>";
 			};
 
+			echo "</div>";
 			include("sidebar.php");
 			include("footer.php");
   }//----------------------BIG-ENDIF----------------------

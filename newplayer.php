@@ -9,18 +9,14 @@ include("header.php");
 // 		$numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
 
 
-if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
-{
+if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
+} else {
+    if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+        $temporada = $_SESSION["temporada"];
 
-}else{
-
-	if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
-  {
-		$temporada = $_SESSION["temporada"];
-
-    echo '<div ng-app="app">';
-		require_once('funcionesJS.php');
-		echo"
+        echo '<div ng-app="app">';
+        require_once('funcionesJS.php');
+        echo"
 <div ng-controller='formController' class='container' id='container'>
 
   <h1 class='text-center'>ALTA NUEVO JUGADOR</h1>
@@ -275,9 +271,9 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 
 ";
 
-include("sidebar.php");
-include("footer.php");
-  }//-------------BIG-ENDIF------------------------------------
+        include("sidebar.php");
+        include("footer.php");
+    }//-------------BIG-ENDIF------------------------------------
 }
 
 ?>

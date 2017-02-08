@@ -2,18 +2,14 @@
 
 $selecciona2= "SELECT * FROM admins";
 
-		$resultado2=mysql_query($selecciona2,$ilink) or die (mysql_error());
-		$numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
+        $resultado2=mysql_query($selecciona2, $ilink) or die(mysql_error());
+        $numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
 
 
-if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
-{
-
-}else{
-
-	if($_SESSION['level'] == 2 or $_SESSION['level'] == 1 or $_SESSION['level'] == 0)
-  {
-    echo '
+if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
+} else {
+    if ($_SESSION['level'] == 2 or $_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+        echo '
 <div class="container">
 
 <h1 class="text-center">COBROS POR REALIZAR</h1>
@@ -68,6 +64,5 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 </div>
 
 </div>';
-  }
+    }
 }
-?>

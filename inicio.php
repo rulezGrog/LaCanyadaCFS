@@ -5,58 +5,53 @@ include("header.php");
 
 $selecciona2= "SELECT * FROM admins";
 
-		$resultado2=mysql_query($selecciona2,$ilink) or die (mysql_error());
-		$numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
+        $resultado2=mysql_query($selecciona2, $ilink) or die(mysql_error());
+        $numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
 
 
-if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
-{
+if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
+} else {
+    if ($_SESSION['level'] == 2 or $_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+        if ($_SESSION['INFO'] == 1) {
+            $selectUltimos = "SELECT * FROM jugadores ORDER BY pedido DESC limit 10";
+            $resultadoUltimos = mysql_query($selectUltimos, $ilink) or die(mysql_error());
+            $numfilasUltimos = mysql_num_rows($resultadoUltimos);
 
-}else{
+            $Jugadores = "SELECT pedido FROM jugadores";
+            $resulJuga = mysql_query($Jugadores, $ilink) or die(mysql_error());
+            $rowsJuga = mysql_num_rows($resulJuga);
+            $numJugaPre = "SELECT categoria FROM jugadores WHERE categoria='prebenjamin'";
+            $numJugaBenja = "SELECT categoria FROM jugadores WHERE categoria='benjamin'";
+            $numJugaAle = "SELECT categoria FROM jugadores WHERE categoria='alevin'";
+            $numJugaInfa = "SELECT categoria FROM jugadores WHERE categoria='infantil'";
+            $numJugaCade = "SELECT categoria FROM jugadores WHERE categoria='cadete'";
+            $numJugaJuv = "SELECT categoria FROM jugadores WHERE categoria='juvenil'";
+            $numJugaSen = "SELECT categoria FROM jugadores WHERE categoria='senior'";
 
-	if($_SESSION['level'] == 2 or $_SESSION['level'] == 1 or $_SESSION['level'] == 0)
-  {
-		if ( $_SESSION['INFO'] == 1 ) {
+            $JugadoresNE = "SELECT pedido FROM jugadores WHERE equipacion ='SI'";
+            $resulJugaNE = mysql_query($JugadoresNE, $ilink) or die(mysql_error());
+            $rowsJugaNE = mysql_num_rows($resulJugaNE);
 
-			$selectUltimos = "SELECT * FROM jugadores ORDER BY pedido DESC limit 10";
-			$resultadoUltimos = mysql_query($selectUltimos,$ilink) or die (mysql_error());
-			$numfilasUltimos = mysql_num_rows($resultadoUltimos);
+            $JugadoresPP = "SELECT pedido FROM jugadores WHERE primerpago<>'0'";
+            $resulJugaPP = mysql_query($JugadoresPP, $ilink) or die(mysql_error());
+            $rowsJugaPP = mysql_num_rows($resulJugaPP);
+            $JugadoresSP = "SELECT pedido FROM jugadores WHERE segundopago<>'0'";
+            $resulJugaSP = mysql_query($JugadoresSP, $ilink) or die(mysql_error());
+            $rowsJugaSP = mysql_num_rows($resulJugaSP);
+            $JugadoresTP = "SELECT pedido FROM jugadores WHERE tercerpago<>'0'";
+            $resulJugaTP = mysql_query($JugadoresTP, $ilink) or die(mysql_error());
+            $rowsJugaTP = mysql_num_rows($resulJugaTP);
+            $JugadoresPE = "SELECT pedido FROM jugadores WHERE pagoextra<>'0'";
+            $resulJugaPE = mysql_query($JugadoresPE, $ilink) or die(mysql_error());
+            $rowsJugaPE = mysql_num_rows($resulJugaPE);
 
-			$Jugadores = "SELECT pedido FROM jugadores";
-			$resulJuga = mysql_query($Jugadores,$ilink) or die (mysql_error());
-			$rowsJuga = mysql_num_rows($resulJuga);
-				$numJugaPre = "SELECT categoria FROM jugadores WHERE categoria='prebenjamin'";
-				$numJugaBenja = "SELECT categoria FROM jugadores WHERE categoria='benjamin'";
-				$numJugaAle = "SELECT categoria FROM jugadores WHERE categoria='alevin'";
-				$numJugaInfa = "SELECT categoria FROM jugadores WHERE categoria='infantil'";
-				$numJugaCade = "SELECT categoria FROM jugadores WHERE categoria='cadete'";
-				$numJugaJuv = "SELECT categoria FROM jugadores WHERE categoria='juvenil'";
-				$numJugaSen = "SELECT categoria FROM jugadores WHERE categoria='senior'";
-
-		$JugadoresNE = "SELECT pedido FROM jugadores WHERE equipacion ='SI'";
-		$resulJugaNE = mysql_query($JugadoresNE,$ilink) or die (mysql_error());
-		$rowsJugaNE = mysql_num_rows($resulJugaNE);
-
-		$JugadoresPP = "SELECT pedido FROM jugadores WHERE primerpago<>'0'";
-		$resulJugaPP = mysql_query($JugadoresPP,$ilink) or die (mysql_error());
-		$rowsJugaPP = mysql_num_rows($resulJugaPP);
-		$JugadoresSP = "SELECT pedido FROM jugadores WHERE segundopago<>'0'";
-		$resulJugaSP = mysql_query($JugadoresSP,$ilink) or die (mysql_error());
-		$rowsJugaSP = mysql_num_rows($resulJugaSP);
-		$JugadoresTP = "SELECT pedido FROM jugadores WHERE tercerpago<>'0'";
-		$resulJugaTP = mysql_query($JugadoresTP,$ilink) or die (mysql_error());
-		$rowsJugaTP = mysql_num_rows($resulJugaTP);
-		$JugadoresPE = "SELECT pedido FROM jugadores WHERE pagoextra<>'0'";
-		$resulJugaPE = mysql_query($JugadoresPE,$ilink) or die (mysql_error());
-		$rowsJugaPE = mysql_num_rows($resulJugaPE);
-
-		$rowsJugaTOTAL = $rowsJugaPP + $rowsJugaSP + $rowsJugaTP + $rowsJugaPE;
+            $rowsJugaTOTAL = $rowsJugaPP + $rowsJugaSP + $rowsJugaTP + $rowsJugaPE;
 
 
-		 //OR segundopago<>'0' OR tercerpago<>'0' OR pagoextra<>'0'
+         //OR segundopago<>'0' OR tercerpago<>'0' OR pagoextra<>'0'
 
 
-	echo '
+    echo '
 	<!-- AUTOLUCH MODAL INFO DEL ESTADO DEL DESARROLLO
 	<script type="text/javascript">
 	    $(window).load(function(){
@@ -90,15 +85,18 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 	</div> -->
 
 	';
+        }; // endif
 
-}; // endif
 
-
-		echo '
+        echo '
 <div class="container">
 		<br>
-		<h1 class="text-center">Temporada: '; echo $temporada; echo' - '; echo $temporada+1; echo'</h1>';
-    echo "
+		<h1 class="text-center">Temporada: ';
+        echo $temporada;
+        echo' - ';
+        echo $temporada+1;
+        echo'</h1>';
+        echo "
 		<br>
 		<br>
 
@@ -144,19 +142,18 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 					</tr>
 				</thead>
 				<tbody>";
-					while ($filaUltimos = mysql_fetch_array($resultadoUltimos))	{
-						$nombreUlt = decrypt($filaUltimos['nombre']);
-						$apellidoUlt = decrypt($filaUltimos['apellidos']);
-						$categoriaUlt =  ($filaUltimos['categoria']);
+        while ($filaUltimos = mysql_fetch_array($resultadoUltimos)) {
+            $nombreUlt = decrypt($filaUltimos['nombre']);
+            $apellidoUlt = decrypt($filaUltimos['apellidos']);
+            $categoriaUlt =  ($filaUltimos['categoria']);
 
-			 echo"<tr>
+            echo"<tr>
 							<td>$nombreUlt $apellidoUlt</td>
 							<td>$categoriaUlt</td>
 						</tr>
 						";
-
-					}
-				echo '
+        }
+        echo '
 				</tbody>
 				</table>
 		</div>
@@ -187,10 +184,9 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 </div><!--container-->
   </body>
 </html>';
-
-  }
-	include("sidebar.php");
-	include("footer.php");
+    }
+    include("sidebar.php");
+    include("footer.php");
 }
 
 ?>

@@ -1,14 +1,10 @@
 <?php  include("header.php");
 
 
-if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
-{
-
-}else{
-
-	if($_SESSION['level'] == 0)
-  {
-    echo '<div class="container">
+if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
+} else {
+    if ($_SESSION['level'] == 0) {
+        echo '<div class="container">
 
             <h1 class="text-center">CREAR NUEVA TEMPORADA</h1>
 
@@ -67,6 +63,4 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 
     include("sidebar.php");
     include("footer.php");
-
-  } //--------------BIG-ENDIF------------------------------
-?>
+} //--------------BIG-ENDIF------------------------------;

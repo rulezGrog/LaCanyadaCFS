@@ -14,9 +14,8 @@
     <li class="tree"><a type="button" data-parent="#accordion" data-toggle="collapse" href="#incidencias"><span class="glyphicon glyphicon-fire preicon" aria-hidden="true"></span>INCIDENCIAS</a>
      <ul id="incidencias" class="panel-collapse collapse">
        <?php
-         if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
-         {
-         echo '
+         if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+             echo '
          <li><a href="cobros.php">COBROS A REALIZAR</a></li>';
          }
        ?>
@@ -27,9 +26,8 @@
      <ul id="jugadores" class="panel-collapse collapse">
        <li><a href="categorias.php">LISTA DE JUGADORES</a></li>
        <?php
-       if($_SESSION['level'] == 1 or $_SESSION['level'] == 0)
-       {
-       echo '
+       if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+           echo '
        <li><a href="newplayer.php">ALTA NUEVO JUGADOR</a></li>';
        }
        ?>
@@ -39,18 +37,17 @@
      <ul id="gestTemp" class="panel-collapse collapse">
          <li><a href="#">[Temporadas anteriores]</a></li>
          <?php
-         if($_SESSION['level'] == 0)
-         {
-         echo '
+         if ($_SESSION['level'] == 0) {
+             echo '
           <li><a href="newseason.php">CREAR NUEVA TEMPORADA</a></li>
-         ';} ?>
+         ';
+         } ?>
      </ul>
    </li>
    <li class="side-header">ADMINISTRACIÓN</li>
         <?php
-        if($_SESSION['level'] == 0)
-        {
-        echo '
+        if ($_SESSION['level'] == 0) {
+            echo '
         <li class="tree"><a type="button" data-parent="#accordion" data-toggle="collapse" href="#usuarios"><span class="glyphicon glyphicon-cog preicon" aria-hidden="true"></span>USUARIOS</a>
           <ul id="usuarios" class="panel-collapse collapse">
             <li><a href="admin.php">LISTA USUARIOS</a></li>
@@ -61,9 +58,8 @@
         ?>
         <li><a href="logout.php"><span class="glyphicon glyphicon-log-out preicon" aria-hidden="true"></span>Salir</a></li>
         <?php
-        if($_SESSION['level'] == 0)
-        {
-        echo '
+        if ($_SESSION['level'] == 0) {
+            echo '
         <!--<li><a href="pruebas.php">Pruebas</a></li>-->';
         }
         ?>

@@ -3,9 +3,10 @@
 
                 //*********** FUNCIONES NUEVAS DE ENCRIPTACION-DESENCRIPTACION ****************//
 
-                define ('ENCRYPT_KEY2',"bRuD5WYw5wd0rdHR9yLlM6wt2vteuiniQBqE70nAuhU=");
+                define('ENCRYPT_KEY2', "bRuD5WYw5wd0rdHR9yLlM6wt2vteuiniQBqE70nAuhU=");
 
-                function encrypt($data) {
+                function encrypt($data)
+                {
                     // Remove the base64 encoding from our key
                     $encryption_key = base64_decode(ENCRYPT_KEY2);
                     // Generate an initialization vector
@@ -16,7 +17,8 @@
                     return base64_encode($encrypted . '::' . $iv);
                 }
 
-                function decrypt($data) {
+                function decrypt($data)
+                {
                     // Remove the base64 encoding from our key
                     $encryption_key = base64_decode(ENCRYPT_KEY2);
                     // To decrypt, split the encrypted data from our IV - our unique separator used was "::"
@@ -38,13 +40,14 @@
                 }
 
                 //FUNCIÓNQ QUE SUMA +1 AL CONTADOR DE PEDIDOS PARA LOS REGISTROS INTERNOS DE JUGADORES
-                function nextCount($value) {
-                  $intNum = intval($value) + 1;
-                  $strNum = strval($intNum);
-                  while(strlen($strNum) < 12) {
-                    $strNum = "0" . $strNum;
-                  }
-                  return $strNum;
+                function nextCount($value)
+                {
+                    $intNum = intval($value) + 1;
+                    $strNum = strval($intNum);
+                    while (strlen($strNum) < 12) {
+                        $strNum = "0" . $strNum;
+                    }
+                    return $strNum;
                 }
 
 
@@ -94,7 +97,4 @@
                                 //     $enc = base64_encode($enc);
                                 //     return $enc;
                                 // }
-                                //*********** "FIN" FUNCIONES VIEJAS DE ENCRIPTACION-DESENCRIPTACION ****************//
-
-
-?>
+                                //*********** "FIN" FUNCIONES VIEJAS DE ENCRIPTACION-DESENCRIPTACION ****************//;

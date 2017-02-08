@@ -2,39 +2,32 @@
 
 $selecciona2= "SELECT * FROM admins";
 
-		$resultado2=mysql_query($selecciona2,$ilink) or die (mysql_error());
-		$numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
+        $resultado2=mysql_query($selecciona2, $ilink) or die(mysql_error());
+        $numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
 
 
-if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
-{
+if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
+} else {
+    if ($_SESSION['level'] == 0) {
+        echo '<div class="container">';
+        if ($_SESSION["regOK"] == 1) {
+            echo'<div class="alert alert-info"><strong>Se ha itroducido correctamemte el nuevo usuario del sitio.</strong></div>';
+            $_SESSION["regOK"] = 0;
+        }
 
-}else{
+        if ($_SESSION["regOK"] == 2) {
+            echo'<div class="alert alert-info"><strong>Se ha actualziado los datos del usuario correctamente.</strong></div>';
+            $_SESSION["regOK"] = 0;
+        }
 
-	if($_SESSION['level'] == 0)
-  {
-    echo '<div class="container">';
-			if($_SESSION["regOK"] == 1)
-			{
-					echo'<div class="alert alert-info"><strong>Se ha itroducido correctamemte el nuevo usuario del sitio.</strong></div>';
-					$_SESSION["regOK"] = 0;
-			}
-
-			if($_SESSION["regOK"] == 2)
-			{
-					echo'<div class="alert alert-info"><strong>Se ha actualziado los datos del usuario correctamente.</strong></div>';
-					$_SESSION["regOK"] = 0;
-			}
-
-			if($_SESSION["regOK"] == -2){
-
-				echo"
+        if ($_SESSION["regOK"] == -2) {
+            echo"
 				<span id='dom-target-v1' style='display: none;'>";
 
-        $outputID = $_GET['id']; //Again, do some operation, get the output.
+            $outputID = $_GET['id']; //Again, do some operation, get the output.
         echo htmlspecialchars($outputID); /* You have to escape because the result
                                            will not be valid HTML otherwise. */
-    		echo"
+            echo"
 				</span>
 
 				<script type='text/javascript'>
@@ -46,15 +39,14 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 					        $(direccion).modal('show');
 					    });
 				</script>";
-			}
+        }
 
-			if($_SESSION["delOK"] == 1)
-			{
-					echo'<div class="alert alert-danger"><strong>Se ha borrado al usuario correctamente</strong></div>';
-					$_SESSION["delOK"] = 0;
-			}
+        if ($_SESSION["delOK"] == 1) {
+            echo'<div class="alert alert-danger"><strong>Se ha borrado al usuario correctamente</strong></div>';
+            $_SESSION["delOK"] = 0;
+        }
 
-			echo'
+        echo'
 			<h1 class="text-center">Lista de usuarios</h1>
 			<br>
 			<div class="table-responsive">
@@ -69,41 +61,43 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
          </tr>
          </thead>
          <tbody>';
-				 while ($fila = mysql_fetch_array($resultado2))
-				 {
-					 $idadmin = utf8_encode($fila['idadmin']);  //LOS utf8_encode HAY QUE ARREGLARLO, DEBE FUNCIONAR LA PAGINA ENTERA CON UTF8 SIN PROBLEMAS
-					 $nombreAdmin = utf8_encode($fila['nombre']);
-					 $emailAdmin = ($fila['email']);
-					 $level = ($fila['level']);
+        while ($fila = mysql_fetch_array($resultado2)) {
+            $idadmin = utf8_encode($fila['idadmin']);  //LOS utf8_encode HAY QUE ARREGLARLO, DEBE FUNCIONAR LA PAGINA ENTERA CON UTF8 SIN PROBLEMAS
+                     $nombreAdmin = utf8_encode($fila['nombre']);
+            $emailAdmin = ($fila['email']);
+            $level = ($fila['level']);
 
-					 if($level == 1){
-						 $tipoUser = 'Gestor';
-					 }else{
-						 if($level == 2){
-							 $tipoUser = 'Invitado';
-						 }else{
-							 if($level == 0){
-								 $tipoUser = 'Administrador';
-							 }
-						 }
-					 }
+            if ($level == 1) {
+                $tipoUser = 'Gestor';
+            } else {
+                if ($level == 2) {
+                    $tipoUser = 'Invitado';
+                } else {
+                    if ($level == 0) {
+                        $tipoUser = 'Administrador';
+                    }
+                }
+            }
 
-					 $arrayAdmins [] = $idadmin;
-          echo"
+            $arrayAdmins [] = $idadmin;
+            echo"
 					<tr>
             <td>$nombreAdmin</td>
             <td>$emailAdmin</td>
 						<td>$tipoUser</td>
 						<td>";
-						if ($level != 0) { echo"
+            if ($level != 0) {
+                echo"
 						<button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$idadmin'><a href='#'>EDITAR</a></button>";
-					} echo "
+            }
+            echo "
 						</td>
 						<td>";
-						if ($level != 0) { echo"
+            if ($level != 0) {
+                echo"
             <button type='button' class='btn btn-danger btn-xs' data-toggle='modal' data-target='#delModal-$idadmin'>ELIMINAR</button>";
-					};
-						echo"</td>
+            };
+            echo"</td>
           </tr>
 
 
@@ -116,10 +110,11 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 					      </div>
 								<div class='modal-body'>
 								";
-								if($_SESSION["regOK"] == -2 && $idadmin == $outputID){
-										echo'<div class="alert alert-danger"><strong>Las contaseñas son diferentes</strong></div>';
-										$_SESSION["regOK"] = 0;
-							}; echo "
+            if ($_SESSION["regOK"] == -2 && $idadmin == $outputID) {
+                echo'<div class="alert alert-danger"><strong>Las contaseñas son diferentes</strong></div>';
+                $_SESSION["regOK"] = 0;
+            };
+            echo "
 								<form action='checkadmin.php?op=edit&op2=pass&id=$idadmin' method='post'>
 											<div class='form-group'>
 												<label class='control-label' for='pwd'>Password:</label>
@@ -131,7 +126,8 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 											</div>
 											<button type='submit' class='btn btn-info pull-right'>Editar contraseña</button>
 									</form>";
-											if ($level != 0) { echo"
+            if ($level != 0) {
+                echo"
 													<br>
 													<hr>
 													<form action='checkadmin.php?op=edit&op2=tipo&id=$idadmin' method='post'>
@@ -145,7 +141,8 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 															<button type='submit' class='btn btn-info pull-right'>Editar Tipo Usuario</button>
 															<br><br>
 													</form>";
-										}; echo"
+            };
+            echo"
 					      </div>
 					      <div class='modal-footer'>
 					        	<button type='button' class='btn btn-warning btn-sm' data-dismiss='modal'>CANCELAR</button>
@@ -154,11 +151,8 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 					    </div>
 					  </div>
 					</div>";
-
-
-
-				}
-				echo'
+        }
+        echo'
 				</tbody>
        </table>
       </div>
@@ -166,9 +160,8 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 
 
 
-			foreach ($arrayAdmins as $id){
-
-			echo "
+        foreach ($arrayAdmins as $id) {
+            echo "
 
 			<div class='modal fade bs-example-modal-sm' id='delModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
 			  <div class='modal-dialog' role='document'>
@@ -187,12 +180,10 @@ if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir
 			    </div>
 			  </div>
 			</div>";
-			};
+        };
 
-			echo "</div>";
-			include("sidebar.php");
-			include("footer.php");
-  }//----------------------BIG-ENDIF----------------------
+        echo "</div>";
+        include("sidebar.php");
+        include("footer.php");
+    }//----------------------BIG-ENDIF----------------------
 }
-
-?>

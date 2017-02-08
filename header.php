@@ -24,10 +24,10 @@
 
 <?php
 $mesactual = date('n');
-if ($mesactual < 7){
-  $temporada = date('Y')-1;
-}else{
-  $temporada = date('Y');
+if ($mesactual < 7) {
+    $temporada = date('Y')-1;
+} else {
+    $temporada = date('Y');
 }
 $_SESSION["temporada"] = $temporada;
 
@@ -35,27 +35,23 @@ require_once('fig.php'); //incluimos el config.php que contiene los datos de la 
 // session_start();
 
 
-        if(!isset($_SESSION['admin']) ) //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
-        {
+        if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
 
             require_once('login.php');
-
-        }else{
+        } else {
 
             //SI se ha logeado, mostramos el nick y la opción de deslogearse
             //Este sería el menú que saldría a la gente que esta logeada, se puede modificar y añadir cosas
             // echo 'Bienvenido '.$_SESSION['usuario']; //ej Bienvenido Juan
             // echo '<br>Tu level es '.$_SESSION['level']; //mostramos el level del user
-            if($_SESSION['level'] == 2 or $_SESSION['level'] == 1 or $_SESSION['level'] == 0)
-            {
-            //mostramos el link para ir a la pagina privada porque el user tiene level 1 (*Nota: el level por defecto es 2, por lo tanto no se le mostrará)
+            if ($_SESSION['level'] == 2 or $_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                //mostramos el link para ir a la pagina privada porque el user tiene level 1 (*Nota: el level por defecto es 2, por lo tanto no se le mostrará)
             //*Nota2: para cambiar el level a 1, se tiene k hacer manualmente por phpmyadmin
 
                 require_once('funciones.php');
 
                 require_once('headmenu.php');
             }
-
         }
 
 ?>

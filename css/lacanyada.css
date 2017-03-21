@@ -36,7 +36,7 @@ html, body {
 
 @media (max-width: 767px) {
     #contenido {
-        margin-left: 0;
+        margin-left: 50px;
     }
 }
 
@@ -112,11 +112,13 @@ button a {
                   SIDEBAR
 ***********************************************************************/
 
+
+/*
 @media (max-width: 767px) {
     .main-sidebar {
         display: none;
     }
-}
+}*/
 
 .main-sidebar {
     background: #222d32;
@@ -126,12 +128,26 @@ button a {
     min-height: 100%;
     z-index: 810;
     height: auto;
-    width: 230px;
     -webkit-transition: -webkit-transform .3s ease-in-out, width .3s ease-in-out;
     -moz-transition: -moz-transform .3s ease-in-out, width .3s ease-in-out;
     -o-transition: -o-transform .3s ease-in-out, width .3s ease-in-out;
     transition: transform .3s ease-in-out, width .3s ease-in-out;
     color: #fff;
+}
+
+@media (min-width: 768px) {
+    .main-sidebar {
+        width: 230px;
+    }
+}
+
+@media (max-width: 767px) {
+    .main-sidebar {
+        width: 55px;
+    }
+    .textMenu {
+        display: none;
+    }
 }
 
 .sidebar-menu {
@@ -141,7 +157,8 @@ button a {
     padding: 0;
 }
 
-.sidebar-menu li {
+.tree {
+    height: 100%;
     z-index: 2;
 }
 
@@ -174,11 +191,25 @@ button a {
     padding: 0;
 }
 
+@media (max-width: 767px) {
+    .sidebar-menu>li>ul {
+        width: 250px;
+        border: solid 4px #222d32;
+        border-radius: 2px;
+    }
+}
+
 .sidebar-menu>li>ul>li {
     /*width: 100%;
   background: #804d00;*/
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+    .sidebar-menu>li>ul>li {
+        /*margin-left: 50px;*/
+    }
 }
 
 .sidebar-menu>li>ul>li>a {
@@ -244,7 +275,6 @@ button a {
 .titLog h2 {
     text-align: center;
     padding-top: 15px;
-    tet
 }
 
 .loging form {

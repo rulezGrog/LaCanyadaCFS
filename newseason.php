@@ -36,7 +36,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                   </div>
                 	<div class="modal-body">
                     <button type="button" name="newseasonBut2" class="btn btn-primary pull-center" data-dismiss="modal">No</button>
-                    <button type="button" name="newseasonBut2" class="btn btn-danger pull-right">Sí</button>
+                    <a href="pagar.php?temp=2016&tipo=newtemp"><button type="button" name="newseasonBut2" class="btn btn-danger pull-right">Sí</button></a>
                     <br><br>
                   </div>
                 </div>

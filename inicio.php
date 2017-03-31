@@ -112,17 +112,16 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
 
         echo '
-<div class="container">
-		<br>
-		<h1 class="text-center">Temporada: ';
+    <div class="headTitle">
+    		<span class="headTitleText"><h2>
+          > TEMPORADA " ';
         echo $temporada;
         echo' - ';
         echo $temporada+1;
-        echo'</h1>';
         echo "
-		<br>
-		<br>
-
+        \"</h2></span>
+		</div>
+    <div class='container'>
 		<div class='col-md-4'>
 		<div class='panel panel-info'>
 				<div class='panel-heading'>Número de Jugadores</div>

@@ -155,6 +155,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
 
     echo '
+<div class="headTitle">
+  <span class="headTitleText"><h2> > COBROS POR REALIZAR </h2></span>
+</div>
 <div class="container">';
 
         if ($_SESSION["pagaOK"] == 1) {
@@ -163,8 +166,6 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         }
 
         echo'
-<h1 class="text-center">COBROS POR REALIZAR</h1>
-
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#oct">1er PLAZO</a></li>
   <li><a data-toggle="tab" href="#dici">2º PLAZO</a></li>

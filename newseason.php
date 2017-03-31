@@ -4,11 +4,13 @@
 if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
 } else {
     if ($_SESSION['level'] == 0) {
-        echo '<div class="container">
+        echo '
+        
+        <div class="headTitle">
+          <span class="headTitleText"><h2> > CREAR NUEVA TEMPORADA </h2></span>
+        </div>
 
-            <h1 class="text-center">CREAR NUEVA TEMPORADA</h1>
-
-            <br><br>
+        <div class="container">
 
             <div class="panel panel-warning">
               <div class="panel-heading">

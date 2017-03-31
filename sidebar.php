@@ -35,7 +35,7 @@
    </li>
    <li class="tree"><a type="button" data-parent="#accordion" data-toggle="collapse" href="#gestTemp"><span class="glyphicon glyphicon-globe preicon" aria-hidden="true"></span><span class="textMenu">GESTIÓN TEMPORADAS</span></a>
      <ul id="gestTemp" class="panel-collapse collapse">
-         <li><a href="#">[Temporadas anteriores]</a></li>
+         <li><a href="oldseasons.php">TEMPORADAS ANTERIORES</a></li>
          <?php
          if ($_SESSION['level'] == 0) {
              echo '

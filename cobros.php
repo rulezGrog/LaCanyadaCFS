@@ -1,8 +1,5 @@
 <?php  include("header.php");
 
-
-
-
 if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
 } else {
     if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {

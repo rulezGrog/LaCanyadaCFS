@@ -132,6 +132,50 @@ button a {
     margin-left: 30px;
 }
 
+.tempBox {
+    color: white;
+    height: 200px;
+    /*min-width: 230px;*/
+    /*max-width: 900px;*/
+    margin: 15px;
+}
+
+.titleTempBox {
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    height: 140px;
+    line-height: 140px;
+    /*border: solid 1px #bbb;*/
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: #ff9e28;
+}
+
+.buttonTempBox {
+    height: 60px;
+    line-height: 60px;
+    text-align: right;
+    font-weight: bold;
+    /*border: solid 1px blue;*/
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #2e4a56;
+    padding-right: 25px;
+}
+
+.buttonTempBox:hover {
+    -webkit-box-shadow: 0px 5px 5px -1px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 5px 5px -1px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 5px 5px -1px rgba(0, 0, 0, 0.7);
+    color: #aaa;
+}
+
+.tempBox a {
+    color: white;
+    text-decoration: none;
+}
+
 
 /***********************************************************************
                   SIDEBAR
@@ -623,6 +667,57 @@ button a {
     /*border-top: 1px solid  #222d32;*/
 }
 
+.textfooter {
+    float: right;
+    color: #222d32;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+op 300ms ease-in-out;
+animation: move_from_top 300ms ease-in-out;
+
+}
+*/
+/*.puerto-btn-1: small, .puerto-btn-2: small, .puerto-btn-3: small, .puerto-btn-4: small {
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	transition: all .5s ease;
+}
+.puerto-btn-1:hover small, .puerto-btn-2:hover small, .puerto-btn-3:hover small, .puerto-btn-4:hover small {
+	-webkit-animation: move_from_left 300ms ease-in-out;
+	-moz-animation: move_from_left 300ms ease-in-out;
+	-ms-animation: move_from_left 300ms ease-in-out;
+	-o-animation: move_from_left 300ms ease-in-out;
+	animation: move_from_left 300ms ease-in-out;
+}*/
+
+/*
+ * BORDER RADIUS
+ */
+.radius {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.radius:before, .radius span {
+    border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px 0 0 3px;
+}
+#footer {
+    position: absolute;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    /*background: #FF8C00;*/
+
+    background: #fff4e6;
+    border-top: 1px solid #ffe8cc;
+    /*border-top: 1px solid  #222d32;*/
+}
 .textfooter {
     float: right;
     color: #222d32;

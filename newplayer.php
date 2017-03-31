@@ -41,7 +41,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 					<div class='form-group col-sm-3 pull-right no-padding-right'>
 						<label class='control-label col-sm-5' for='temporada'>Temporada:</label>
 						<div class='form-group col-sm-7'>
-							<input type='text' class='form-control' id='temporada' name='temporada' placeholder='$temporada' required>
+							<input type='text' class='form-control' id='temporada' name='temporada' placeholder='2016' required>
 						</div>
 					</div>
 			</div>

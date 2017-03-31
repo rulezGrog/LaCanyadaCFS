@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 } else {
     if ($_SESSION['level'] == 0) {
         echo '
-        
+
         <div class="headTitle">
           <span class="headTitleText"><h2> > CREAR NUEVA TEMPORADA </h2></span>
         </div>
@@ -38,7 +38,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                   </div>
                 	<div class="modal-body">
                     <button type="button" name="newseasonBut2" class="btn btn-primary pull-center" data-dismiss="modal">No</button>
-                    <a href="pagar.php?temp=2016&tipo=newtemp"><button type="button" name="newseasonBut2" class="btn btn-danger pull-right">Sí</button></a>
+                    <a href="operaciones.php?temp=2016&oper=newtemp"><button type="button" name="newseasonBut2" class="btn btn-danger pull-right">Sí</button></a>
                     <br><br>
                   </div>
                 </div>

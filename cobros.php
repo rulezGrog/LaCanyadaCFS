@@ -389,9 +389,6 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 </div>
 
 </div>';
-
-
-
         if (isset($arraypedidos1)) {
             foreach ($arraypedidos1 as $id) {
                 $seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
@@ -419,7 +416,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	      </div>
 	      <div class='modal-footer'>
 	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-		        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=primerpago&tipo=pagar'>PAGAR</a>
+		        <a type='button' class='btn btn-success btn-sm' href='operaciones.php?id=$id&plazo=primerpago&oper=pagar'>PAGAR</a>
 	      </div>
 	    </div>
 	  </div>
@@ -434,7 +431,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	      </div>
 				<div class='modal-body'>
 					<div class='row'>
-					<form class='form-inline' action='pagar.php?id=$id&plazo=primerpago&tipo=cambiar' method='post'>
+					<form class='form-inline' action='operaciones.php?id=$id&plazo=primerpago&oper=cambiarpago' method='post'>
 						<div class='form-group col-md-offset-1'>
 							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
 							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
@@ -464,6 +461,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $categoria = ($filaModal['categoria']);
                 $temporada = ($filaModal['temporada']);
 
+                $cuantia = ($filaModal['segundopago']);
                 echo"
 	<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-segundo' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
 	  <div class='modal-dialog' role='document'>
@@ -478,7 +476,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	      </div>
 	      <div class='modal-footer'>
 	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-		        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=segundopago&tipo=pagar'>PAGAR</a>
+		        <a type='button' class='btn btn-success btn-sm' href='operaciones.php?id=$id&plazo=segundopago&oper=pagar'>PAGAR</a>
 	      </div>
 	    </div>
 	  </div>
@@ -493,7 +491,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	      </div>
 				<div class='modal-body'>
 					<div class='row'>
-					<form class='form-inline' action='pagar.php?id=$id&plazo=segundopago&tipo=cambiar' method='post'>
+					<form class='form-inline' action='operaciones.php?id=$id&plazo=segundopago&oper=cambiarpago' method='post'>
 						<div class='form-group col-md-offset-1'>
 							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
 							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
@@ -523,6 +521,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $categoria = ($filaModal['categoria']);
                 $temporada = ($filaModal['temporada']);
 
+                $cuantia = ($filaModal['tercerpago']);
                 echo"
 	<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-tercer' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
 	  <div class='modal-dialog' role='document'>
@@ -537,7 +536,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	      </div>
 	      <div class='modal-footer'>
 	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-		        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=tercerpago&tipo=pagar'>PAGAR</a>
+		        <a type='button' class='btn btn-success btn-sm' href='operaciones.php?id=$id&plazo=tercerpago&oper=pagar'>PAGAR</a>
 	      </div>
 	    </div>
 	  </div>
@@ -552,7 +551,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	      </div>
 				<div class='modal-body'>
 					<div class='row'>
-					<form class='form-inline' action='pagar.php?id=$id&plazo=tercerpago&tipo=cambiar' method='post'>
+					<form class='form-inline' action='operaciones.php?id=$id&plazo=tercerpago&oper=cambiarpago' method='post'>
 						<div class='form-group col-md-offset-1'>
 							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
 							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
@@ -582,6 +581,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $categoria = ($filaModal['categoria']);
                 $temporada = ($filaModal['temporada']);
 
+                $cuantia = ($filaModal['pagoextra']);
                 echo"
 	<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-extra' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
 	  <div class='modal-dialog' role='document'>
@@ -596,7 +596,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	      </div>
 	      <div class='modal-footer'>
 	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-		        <a type='button' class='btn btn-success btn-sm' href='pagar.php?id=$id&plazo=pagoextra&tipo=pagar'>PAGAR</a>
+		        <a type='button' class='btn btn-success btn-sm' href='operaciones.php?id=$id&plazo=pagoextra&oper=pagar'>PAGAR</a>
 	      </div>
 	    </div>
 	  </div>
@@ -611,7 +611,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	      </div>
 				<div class='modal-body'>
 					<div class='row'>
-					<form class='form-inline' action='pagar.php?id=$id&plazo=pagoextra&tipo=cambiar' method='post'>
+					<form class='form-inline' action='operaciones.php?id=$id&plazo=pagoextra&oper=cambiarpago' method='post'>
 						<div class='form-group col-md-offset-1'>
 							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
 							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>

@@ -1247,7 +1247,7 @@ echo'
 				      </div>
 				      <div class='modal-footer'>
 				        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
-					        <a type='button' class='btn btn-danger btn-sm' href='bajaplayer.php?id=$id'>SI</a>
+					        <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?id=$id&oper=baja'>SI</a>
 				      </div>
 				    </div>
 				  </div>

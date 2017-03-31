@@ -13,8 +13,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 <div class="headTitle">
   <span class="headTitleText"><h2> > REGISTRAR NUEVO USUARIO </h2></span>
 </div>
-    <div class="container">    
-      <form class="form-horizontal" role="form" action="checkadmin.php?op=reg" method="POST">
+    <div class="container">
+      <form class="form-horizontal" role="form" action="operaciones.php?oper=regAdmin" method="POST">
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="nombre">Nombre:</label>
 				<div class="col-sm-8">

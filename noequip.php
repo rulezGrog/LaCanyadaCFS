@@ -124,7 +124,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 						      </div>
 						      <div class='modal-footer'>
 						        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-							        <a type='button' class='btn btn-success btn-sm' href='equipar.php?id=$id'>EQUIPAR</a>
+							        <a type='button' class='btn btn-success btn-sm' href='operaciones.php?oper=equip&id=$id'>EQUIPAR</a>
 						      </div>
 						    </div>
 						  </div>

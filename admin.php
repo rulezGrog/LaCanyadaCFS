@@ -117,7 +117,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $_SESSION["regOK"] = 0;
             };
             echo "
-								<form action='checkadmin.php?op=edit&op2=pass&id=$idadmin' method='post'>
+								<form action='operaciones.php?oper=editAdminPass&id=$idadmin' method='post'>
 											<div class='form-group'>
 												<label class='control-label' for='pwd'>Password:</label>
 												<input type='password' class='form-control' id='pwd' name='pwd' placeholder='Introduzca nueva contraseña'>
@@ -130,19 +130,19 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 									</form>";
             if ($level != 0) {
                 echo"
-													<br>
-													<hr>
-													<form action='checkadmin.php?op=edit&op2=tipo&id=$idadmin' method='post'>
-															<div class='form-group'>
-																<label class='control-label' for='tipouser'>Tipo de usuario:</label>
-																		<select name='tipouser' id='tipouser' class='form-control' placeholder='$tipoUser'>
-																			<option value='2'>Invitado</option>
-																			<option value='1'>Gestor</option>
-																		</select>
-															</div>
-															<button type='submit' class='btn btn-info pull-right'>Editar Tipo Usuario</button>
-															<br><br>
-													</form>";
+								<br>
+									<hr>
+									<form action='operaciones.php?oper=editAdminTipo&id=$idadmin' method='post'>
+										<div class='form-group'>
+										<label class='control-label' for='tipouser'>Tipo de usuario:</label>
+											<select name='tipouser' id='tipouser' class='form-control' placeholder='$tipoUser'>
+												<option value='2'>Invitado</option>
+													<option value='1'>Gestor</option>
+														</select>
+											</div>
+											<button type='submit' class='btn btn-info pull-right'>Editar Tipo Usuario</button>
+											<br><br>
+									</form>";
             };
             echo"
 					      </div>
@@ -177,7 +177,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 			      </div>
 			      <div class='modal-footer'>
 			        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
-				        <a type='button' class='btn btn-danger btn-sm' href='elimadmin.php?id=$id'> SI </a>
+				        <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?oper=bajaAdmin&id=$id'> SI </a>
 			      </div>
 			    </div>
 			  </div>

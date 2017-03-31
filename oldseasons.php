@@ -34,10 +34,11 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             }
         } else {
             #no exite ninguna temporada anterior
-              echo'<h1>NO EXISTE NINGUNA TEMPORADA ANTERIOR</h1>';
+              echo'
+              <div class="alert alert-warning text-center">
+                <span class="glyphicon glyphicon-info-sign"></span><strong> NO EXISTE NINGUNA TEMPORADA ANTERIOR.</strong>
+              </div>';
         }
-
-
 
         echo' </div>';
         include("sidebar.php");

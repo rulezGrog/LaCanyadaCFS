@@ -51,32 +51,6 @@
                 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 //*********** FUNCIONES VIEJAS DE ENCRIPTACION-DESENCRIPTACION ****************//
                                 // define ('ENCRYPT_KEY',"ZUH+nKZkaBb8tho");
 

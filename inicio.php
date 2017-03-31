@@ -4,9 +4,8 @@
 include("header.php");
 
 $selecciona2= "SELECT * FROM admins";
-
-        $resultado2=mysql_query($selecciona2, $ilink) or die(mysql_error());
-        $numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
+$resultado2=mysql_query($selecciona2, $ilink) or die(mysql_error());
+$numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
 
 
 if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
@@ -50,14 +49,38 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
          //OR segundopago<>'0' OR tercerpago<>'0' OR pagoextra<>'0'
 
+            $mesactual = date('n');
+            if ($mesactual >= 7) {
+                $oldTable = 'temp'.($temporada-1);
+                // echo $oldTable;
+                $oldTempResult = mysql_query("SHOW TABLES LIKE '$oldTable'");
+                // echo $oldTempResult.' <--> ';
+                $existen = mysql_num_rows($oldTempResult);
+                // echo $existen.' <--> ';
 
-    echo '
-	<!-- AUTOLUCH MODAL INFO DEL ESTADO DEL DESARROLLO
+                /* Si no existe la tabla */
+                if ($existen == 0) {
+                    $_SESSION["newTemp"] = 'SI';
+                    echo '
+                  <script type="text/javascript">
+                      $(window).load(function(){
+                          $("#ModalINFO").modal("show");
+                      });
+                  </script>';
+                } else {
+                    $_SESSION["newTemp"] = 'NO';
+                }
+            } else {
+                $_SESSION["newTemp"] = 'NO';
+            }
+
+            echo '
+	<!--AUTOLUCH MODAL INFO DEL ESTADO DEL DESARROLLO
 	<script type="text/javascript">
 	    $(window).load(function(){
 	        $("#ModalINFO").modal("show");
 	    });
-	</script>
+	</script>-->
 
 	<div class="modal fade bs-example-modal-sm" id="ModalINFO" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
@@ -82,24 +105,23 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	      </div>
 	    </div>
 	  </div>
-	</div> -->
+	</div>
 
 	';
         }; // endif
 
 
         echo '
-<div class="container">
-		<br>
-		<h1 class="text-center">Temporada: ';
+    <div class="headTitle">
+    		<span class="headTitleText"><h2>
+          > TEMPORADA " ';
         echo $temporada;
         echo' - ';
         echo $temporada+1;
-        echo'</h1>';
         echo "
-		<br>
-		<br>
-
+        \"</h2></span>
+		</div>
+    <div class='container'>
 		<div class='col-md-4'>
 		<div class='panel panel-info'>
 				<div class='panel-heading'>Número de Jugadores</div>

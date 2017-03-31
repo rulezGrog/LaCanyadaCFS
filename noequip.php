@@ -46,7 +46,11 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 //-----------------------------------------//
 
 
-        echo'<div class="container">';
+        echo'
+        <div class="headTitle">
+            <span class="headTitleText"><h2> > JUGADORES SIN EQUIPACIÓN </h2></span>
+        </div>
+        <div class="container">';
 
         if ($_SESSION["delOK"] == 1) {
             echo'<div class="alert alert-info"><strong>Se ha equipado correctamente al Jugador.</strong></div>';
@@ -61,13 +65,6 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<br /><div class="alert alert-succes"><strong>TODOS LOS JUGADORES DE TODAS LAS CATEORIAS POSEEN EQUIPACION.</strong></div>';
         } else {
             echo"
-							<br />
-
-
-							<h1 class='text-center'>JUGADORES SIN EQUIPACIÓN</h1>
-
-							<br />
-
 							<div class='table-responsive'>
 							 <table class='table table-striped'>
 							   <thead>

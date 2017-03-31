@@ -9,7 +9,11 @@ $selecciona2= "SELECT * FROM admins";
 if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
 } else {
     if ($_SESSION['level'] == 0) {
-        echo '<div class="container">';
+        echo '
+        <div class="headTitle">
+          <span class="headTitleText"><h2> > LISTA DE USUARIOS </h2></span>
+        </div>
+        <div class="container">';
         if ($_SESSION["regOK"] == 1) {
             echo'<div class="alert alert-info"><strong>Se ha itroducido correctamemte el nuevo usuario del sitio.</strong></div>';
             $_SESSION["regOK"] = 0;
@@ -47,8 +51,6 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         }
 
         echo'
-			<h1 class="text-center">Lista de usuarios</h1>
-			<br>
 			<div class="table-responsive">
        <table class="table table-striped">
          <thead>

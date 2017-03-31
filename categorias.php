@@ -4,7 +4,11 @@
 if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
 } else {
     if ($_SESSION['level'] == 2 or $_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-        echo '<div class="container">';
+        echo '
+        <div class="headTitle">
+            <span class="headTitleText"><h2> > LISTA DE JUGADORES </h2></span>
+        </div>
+        <div class="container">';
 
         if ($_SESSION["regOK"] == 1) {
             echo'<div class="alert alert-info"><strong>Se ha introducido correctamente el nuevo Jugador.</strong></div>';
@@ -273,8 +277,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
             //------OTRO------//
 
-echo'<h1 class="text-center">LISTA DE JUGADORES</h1>
-	<br>
+echo'
 	<a type="button" class="btn btn-fullList pull-right" name="exportfullList" href="tmp/listajugadores.csv"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>EXPORTAR LISTA COMLPETA</a>
 
   <ul class="nav nav-tabs">

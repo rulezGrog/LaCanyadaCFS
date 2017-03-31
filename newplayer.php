@@ -17,14 +17,10 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         echo '<div ng-app="app">';
         require_once('funcionesJS.php');
         echo"
+<div class='headTitle'>
+  <span class='headTitleText'><h2> > ALTA NUEVO JUGADOR </h2></span>
+</div>
 <div ng-controller='formController' class='container' id='container'>
-
-  <h1 class='text-center'>ALTA NUEVO JUGADOR</h1>
-
-	<br>
-	<hr>
-	<br>
-
 		<form role='form' action='checkplayer.php' method='POST'>
 
 			<div style='margin-bottom: -20px;' class='row form-group'>
@@ -45,7 +41,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 					<div class='form-group col-sm-3 pull-right no-padding-right'>
 						<label class='control-label col-sm-5' for='temporada'>Temporada:</label>
 						<div class='form-group col-sm-7'>
-							<input type='text' class='form-control' id='temporada' name='temporada' placeholder='2016$temporada' required>
+							<input type='text' class='form-control' id='temporada' name='temporada' placeholder='$temporada' required>
 						</div>
 					</div>
 			</div>

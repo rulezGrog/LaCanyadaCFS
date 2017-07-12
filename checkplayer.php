@@ -122,7 +122,9 @@ if ($temporadaAct == $temporadaReg) { //****************************************
         $primerpago = $_POST['importe1'];
         $segundopago = $_POST['importe2'];
         $tercerpago = $_POST['importe3'];
-        $pagoextra = $_POST['importe4'];
+        $cuartopago = $_POST['importe4'];
+        $quintopago = $_POST['importe5'];
+        $pagoextra = $_POST['importeExtra'];
     } else {
         $fraccionado = 0;
         $bancname = '';
@@ -154,7 +156,7 @@ if ($temporadaAct == $temporadaReg) { //****************************************
         $imagenes4 = 1;
     }
 
-    $inserta="INSERT INTO jugadores (pedido,nombre,apellidos,nom_tutor,ape_tutor,dni,tipo_calle,direccion,poblacion,provincia,cp,email,tlf,antiguedad,mensaje,importe,titular_cuenta,ape_cuenta,num_cuenta,fraccionada,categoria,temporada,birthdate,equipacion,termsimage1,termsimage2,termsimage3,termsimage4,primerpago,segundopago,tercerpago,pagoextra) VALUES ('$operacion','$nombre','$apellidos','$tutor','$tutorapellidos','$dni','$via','$direccion','$poblacion','$provincia','$cp','$email','$telefono','$antiquity','$mensaje','$tpv','$titularcuenta','$apellidoscuenta','$numerocuenta','$fraccionado','$categoria','$temporadaReg','$nacimiento','$equipacion','$imagenes1','$imagenes2','$imagenes3','$imagenes4','$primerpago','$segundopago','$tercerpago','$pagoextra')";
+    $inserta="INSERT INTO jugadores (pedido,nombre,apellidos,nom_tutor,ape_tutor,dni,tipo_calle,direccion,poblacion,provincia,cp,email,tlf,antiguedad,mensaje,importe,titular_cuenta,ape_cuenta,num_cuenta,fraccionada,categoria,temporada,birthdate,equipacion,termsimage1,termsimage2,termsimage3,termsimage4,primerpago,segundopago,tercerpago,cuartopago,quintopago,pagoextra) VALUES ('$operacion','$nombre','$apellidos','$tutor','$tutorapellidos','$dni','$via','$direccion','$poblacion','$provincia','$cp','$email','$telefono','$antiquity','$mensaje','$tpv','$titularcuenta','$apellidoscuenta','$numerocuenta','$fraccionado','$categoria','$temporadaReg','$nacimiento','$equipacion','$imagenes1','$imagenes2','$imagenes3','$imagenes4','$primerpago','$segundopago','$tercerpago','$cuartopago','$quintopago','$pagoextra')";
     $resultado=mysql_query($inserta, $ilink) or die(mysql_error());
 
 
@@ -163,7 +165,7 @@ if ($temporadaAct == $temporadaReg) { //****************************************
 } //endIF**************************************
 
 if ($temporadaAct > $temporadaReg) {
-    $inserta="INSERT INTO old_temporada (pedido,nombre,apellidos,nom_tutor,ape_tutor,dni,tipo_calle,direccion,poblacion,provincia,cp,email,tlf,mensaje,categoria,temporada,birthdate,termsimage1,termsimage2,termsimage3,termsimage4) VALUES ('$pedido','$nombre','$apellidos','$tutor','$tutorapellidos','$dni','$via','$direccion','$poblacion','$provincia','$cp','$email','$telefono','$mensaje','$categoria','$temporadaReg','$nacimiento','$imagenes1','$imagenes2','$imagenes3','$imagenes4')";
+    $inserta="INSERT INTO '$temporadaReg' (pedido,nombre,apellidos,nom_tutor,ape_tutor,dni,tipo_calle,direccion,poblacion,provincia,cp,email,tlf,mensaje,categoria,temporada,birthdate,termsimage1,termsimage2,termsimage3,termsimage4) VALUES ('$pedido','$nombre','$apellidos','$tutor','$tutorapellidos','$dni','$via','$direccion','$poblacion','$provincia','$cp','$email','$telefono','$mensaje','$categoria','$temporadaReg','$nacimiento','$imagenes1','$imagenes2','$imagenes3','$imagenes4')";
     $resultado=mysql_query($inserta, $ilink) or die(mysql_error());
 
     $_SESSION["regOK"]= 1;

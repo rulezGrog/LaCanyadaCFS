@@ -77,7 +77,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                         while ($headerarray0 = mysql_fetch_assoc($export0)) {
                             $headerarray0['nombre'] = decrypt($headerarray0['nombre']).' '.decrypt($headerarray0['apellidos']);
                             $headerarray0['dni'] = decrypt($headerarray0['dni']);
-                            $headerarray0['nom_tutor'] = decrypt($headerarray0['nom_tutor']).' '.decrypt($headerarray0['ape_tutor']);
+                            if ($headerarray0['nom_tutor'] != "") {
+                              $headerarray0['nom_tutor'] = decrypt($headerarray0['nom_tutor']).' '.decrypt($headerarray0['ape_tutor']);
+                            }
                             $headerarray0['email'] = decrypt($headerarray0['email']);
                             $headerarray0['tlf'] = decrypt($headerarray0['tlf']);
                             $headerarray0['direccion'] = $headerarray0['tipo_calle'].' '.decrypt($headerarray0['direccion']).' - '.$headerarray0['cp'].', '.decrypt($headerarray0['poblacion']).', '.decrypt($headerarray0['provincia']);
@@ -103,7 +105,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             while ($headerarray1 = mysql_fetch_assoc($export1)) {
                 $headerarray1['nombre'] = decrypt($headerarray1['nombre']).' '.decrypt($headerarray1['apellidos']);
                 $headerarray1['dni'] = decrypt($headerarray1['dni']);
-                $headerarray1['nom_tutor'] = decrypt($headerarray1['nom_tutor']).' '.decrypt($headerarray1['ape_tutor']);
+                if ($headerarray1['nom_tutor'] != "") {
+                  $headerarray1['nom_tutor'] = decrypt($headerarray1['nom_tutor']).' '.decrypt($headerarray1['ape_tutor']);
+                }
                 $headerarray1['email'] = decrypt($headerarray1['email']);
                 $headerarray1['tlf'] = decrypt($headerarray1['tlf']);
                 $headerarray1['direccion'] = $headerarray1['tipo_calle'].' '.decrypt($headerarray1['direccion']).' - '.$headerarray1['cp'].', '.decrypt($headerarray1['poblacion']).', '.decrypt($headerarray1['provincia']);
@@ -130,7 +134,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             while ($headerarray2 = mysql_fetch_assoc($export2)) {
                 $headerarray2['nombre'] = decrypt($headerarray2['nombre']).' '.decrypt($headerarray2['apellidos']);
                 $headerarray2['dni'] = decrypt($headerarray2['dni']);
-                $headerarray2['nom_tutor'] = decrypt($headerarray2['nom_tutor']).' '.decrypt($headerarray2['ape_tutor']);
+                if ($headerarray2['nom_tutor'] != "") {
+                  $headerarray2['nom_tutor'] = decrypt($headerarray2['nom_tutor']).' '.decrypt($headerarray2['ape_tutor']);
+                }
                 $headerarray2['email'] = decrypt($headerarray2['email']);
                 $headerarray2['tlf'] = decrypt($headerarray2['tlf']);
                 $headerarray2['direccion'] = $headerarray2['tipo_calle'].' '.decrypt($headerarray2['direccion']).' - '.$headerarray2['cp'].', '.decrypt($headerarray2['poblacion']).', '.decrypt($headerarray2['provincia']);
@@ -157,7 +163,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             while ($headerarray3 = mysql_fetch_assoc($export3)) {
                 $headerarray3['nombre'] = decrypt($headerarray3['nombre']).' '.decrypt($headerarray3['apellidos']);
                 $headerarray3['dni'] = decrypt($headerarray3['dni']);
-                $headerarray3['nom_tutor'] = decrypt($headerarray3['nom_tutor']).' '.decrypt($headerarray3['ape_tutor']);
+                if ($headerarray3['nom_tutor'] != "") {
+                  $headerarray3['nom_tutor'] = decrypt($headerarray3['nom_tutor']).' '.decrypt($headerarray3['ape_tutor']);
+                }
                 $headerarray3['email'] = decrypt($headerarray3['email']);
                 $headerarray3['tlf'] = decrypt($headerarray3['tlf']);
                 $headerarray3['direccion'] = $headerarray3['tipo_calle'].' '.decrypt($headerarray3['direccion']).' - '.$headerarray3['cp'].', '.decrypt($headerarray3['poblacion']).', '.decrypt($headerarray3['provincia']);
@@ -184,7 +192,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             while ($headerarray4 = mysql_fetch_assoc($export4)) {
                 $headerarray4['nombre'] = decrypt($headerarray4['nombre']).' '.decrypt($headerarray4['apellidos']);
                 $headerarray4['dni'] = decrypt($headerarray4['dni']);
-                $headerarray4['nom_tutor'] = decrypt($headerarray4['nom_tutor']).' '.decrypt($headerarray4['ape_tutor']);
+                if ($headerarray4['nom_tutor'] != "") {
+                  $headerarray4['nom_tutor'] = decrypt($headerarray4['nom_tutor']).' '.decrypt($headerarray4['ape_tutor']);
+                }
                 $headerarray4['email'] = decrypt($headerarray4['email']);
                 $headerarray4['tlf'] = decrypt($headerarray4['tlf']);
                 $headerarray4['direccion'] = $headerarray4['tipo_calle'].' '.decrypt($headerarray4['direccion']).' - '.$headerarray4['cp'].', '.decrypt($headerarray4['poblacion']).', '.decrypt($headerarray4['provincia']);
@@ -211,7 +221,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             while ($headerarray5 = mysql_fetch_assoc($export5)) {
                 $headerarray5['nombre'] = decrypt($headerarray5['nombre']).' '.decrypt($headerarray5['apellidos']);
                 $headerarray5['dni'] = decrypt($headerarray5['dni']);
-                $headerarray5['nom_tutor'] = decrypt($headerarray5['nom_tutor']).' '.decrypt($headerarray5['ape_tutor']);
+                if ($headerarray5['nom_tutor'] != "") {
+                  $headerarray5['nom_tutor'] = decrypt($headerarray5['nom_tutor']).' '.decrypt($headerarray5['ape_tutor']);
+                }
                 $headerarray5['email'] = decrypt($headerarray5['email']);
                 $headerarray5['tlf'] = decrypt($headerarray5['tlf']);
                 $headerarray5['direccion'] = $headerarray5['tipo_calle'].' '.decrypt($headerarray5['direccion']).' - '.$headerarray5['cp'].', '.decrypt($headerarray5['poblacion']).', '.decrypt($headerarray5['provincia']);
@@ -238,7 +250,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             while ($headerarray6 = mysql_fetch_assoc($export6)) {
                 $headerarray6['nombre'] = decrypt($headerarray6['nombre']).' '.decrypt($headerarray6['apellidos']);
                 $headerarray6['dni'] = decrypt($headerarray6['dni']);
-                $headerarray6['nom_tutor'] = decrypt($headerarray6['nom_tutor']).' '.decrypt($headerarray6['ape_tutor']);
+                if ($headerarray6['nom_tutor'] != "") {
+                  $headerarray6['nom_tutor'] = decrypt($headerarray6['nom_tutor']).' '.decrypt($headerarray6['ape_tutor']);
+                }
                 $headerarray6['email'] = decrypt($headerarray6['email']);
                 $headerarray6['tlf'] = decrypt($headerarray6['tlf']);
                 $headerarray6['direccion'] = $headerarray6['tipo_calle'].' '.decrypt($headerarray6['direccion']).' - '.$headerarray6['cp'].', '.decrypt($headerarray6['poblacion']).', '.decrypt($headerarray6['provincia']);
@@ -265,7 +279,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             while ($headerarray7 = mysql_fetch_assoc($export7)) {
                 $headerarray7['nombre'] = decrypt($headerarray7['nombre']).' '.decrypt($headerarray7['apellidos']);
                 $headerarray7['dni'] = decrypt($headerarray7['dni']);
-                $headerarray7['nom_tutor'] = decrypt($headerarray7['nom_tutor']).' '.decrypt($headerarray7['ape_tutor']);
+                if ($headerarray7['nom_tutor'] != "") {
+                  $headerarray7['nom_tutor'] = decrypt($headerarray7['nom_tutor']).' '.decrypt($headerarray7['ape_tutor']);
+                }
                 $headerarray7['email'] = decrypt($headerarray7['email']);
                 $headerarray7['tlf'] = decrypt($headerarray7['tlf']);
                 $headerarray7['direccion'] = $headerarray7['tipo_calle'].' '.decrypt($headerarray7['direccion']).' - '.$headerarray7['cp'].', '.decrypt($headerarray7['poblacion']).', '.decrypt($headerarray7['provincia']);
@@ -915,10 +931,13 @@ echo'
 
             $resultadoModal=mysql_query($seleccionaModal, $ilink) or die(mysql_error());
             $filaModal = mysql_fetch_array($resultadoModal);
-
-            $nombretut = decrypt($filaModal['nom_tutor']); //isset OK OK
-                    $apellidostut = decrypt($filaModal['ape_tutor']); //isset OK OK
-                    $nombre = decrypt($filaModal['nombre']);
+            if ($filaModal['nom_tutor'] != ""){
+                $nombretut = decrypt($filaModal['nom_tutor']); //isset OK OK
+            }
+            if ($filaModal['ape_tutor'] != ""){
+                $apellidostut = decrypt($filaModal['ape_tutor']); //isset OK OK
+            }
+            $nombre = decrypt($filaModal['nombre']);
             $apellidos = decrypt($filaModal['apellidos']);
             $dni = decrypt($filaModal['dni']);
             $birthdate = ($filaModal['birthdate']);
@@ -930,17 +949,25 @@ echo'
             $provincia = decrypt($filaModal['provincia']);
             $cp = ($filaModal['cp']);
             $mensaje = ($filaModal['mensaje']); //isset OK OK
-                    $importe = ($filaModal['importe']);
+            $importe = ($filaModal['importe']);
             $fraccionado = ($filaModal['fraccionada']);
-            $nombrecuenta = decrypt($filaModal['titular_cuenta']); //isset OK OK
-                    $apecuenta = decrypt($filaModal['ape_cuenta']); //isset OK OK
-                    $numcuenta = decrypt($filaModal['num_cuenta']); //isset OK OK
-                    $categoria = ($filaModal['categoria']);
+            if ($filaModal['titular_cuenta'] != ""){
+                $nombrecuenta = decrypt($filaModal['titular_cuenta']); //isset OK OK
+            }
+            if ($filaModal['ape_cuenta'] != ""){
+                $apecuenta = decrypt($filaModal['ape_cuenta']); //isset OK OK
+            }
+            if ($filaModal['num_cuenta'] != ""){
+                $numcuenta = decrypt($filaModal['num_cuenta']); //isset OK OK
+            }
+            $categoria = ($filaModal['categoria']);
             $temporada = ($filaModal['temporada']);
 
             $primerpago = $filaModal['primerpago'];
             $segundopago = $filaModal['segundopago'];
             $tercerpago = $filaModal['tercerpago'];
+            $cuartopago = $filaModal['cuartopago'];
+            $quintopago = $filaModal['quintopago'];
             $pagoextra = $filaModal['pagoextra'];
 
             $lopd1 = ($filaModal['termsimage1']);
@@ -1079,21 +1106,29 @@ echo'
 													</div>
 											</div>
 
-											<div class='form-group col-sm-3' ng-hide='user.fracc'>
+											<div class='form-group col-sm-2' ng-hide='user.fracc'>
 													<label class='control-label' for='importe1'>Primer Pago:</label>
 													<input class='form-control' type='text' name='importe1' placeholder='000€' value='$primerpago'/>
 											</div>
-											<div class='form-group col-sm-3' ng-hide='user.fracc'>
-													<label class='control-label' for='importe2'>Segundo Pago:</label>
+											<div class='form-group col-sm-2' ng-hide='user.fracc'>
+													<label class='control-label' for='importe2'>Segundo Pago</label>
 													<input class='form-control' type='text' name='importe2' placeholder='000€' value='$segundopago'/>
 											</div>
-											<div class='form-group col-sm-3' ng-hide='user.fracc'>
+											<div class='form-group col-sm-2' ng-hide='user.fracc'>
 													<label class='control-label' for='importe3'>Tercer Pago:</label>
 													<input class='form-control' type='text' name='importe3' placeholder='000€' value='$tercerpago'/>
 											</div>
-											<div class='form-group col-sm-3' ng-hide='user.fracc'>
-													<label class='control-label' for='importe4'>Pago Extra:</label>
-													<input class='form-control' type='text' name='importe4' placeholder='000€' value='$pagoextra'/>
+											<div class='form-group col-sm-2' ng-hide='user.fracc'>
+													<label class='control-label' for='importe4'>Cuarto Pago:</label>
+													<input class='form-control' type='text' name='importe4' placeholder='000€' value='$cuartopago'/>
+											</div>
+											<div class='form-group col-sm-2' ng-hide='user.fracc'>
+													<label class='control-label' for='importe5'>Quinto Pago:</label>
+													<input class='form-control' type='text' name='importe5' placeholder='000€' value='$quintopago'/>
+											</div>
+											<div class='form-group col-sm-2' ng-hide='user.fracc'>
+													<label class='control-label' for='importeExtra'>Pago Extra:</label>
+													<input class='form-control' type='text' name='importeExtra' placeholder='000€' value='$pagoextra'/>
 											</div>
 									</div>
 									<br>

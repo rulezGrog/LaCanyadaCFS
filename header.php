@@ -23,13 +23,6 @@
 </head>
 
 <?php
-$mesactual = date('n');
-if ($mesactual < 7) {
-    $temporada = date('Y')-1;
-} else {
-    $temporada = date('Y');
-}
-$_SESSION["temporada"] = $temporada;
 
 require_once('fig.php'); //incluimos el config.php que contiene los datos de la conexión a la db y la sesión
 // session_start();
@@ -47,6 +40,14 @@ require_once('fig.php'); //incluimos el config.php que contiene los datos de la 
             if ($_SESSION['level'] == 2 or $_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                 //mostramos el link para ir a la pagina privada porque el user tiene level 1 (*Nota: el level por defecto es 2, por lo tanto no se le mostrará)
             //*Nota2: para cambiar el level a 1, se tiene k hacer manualmente por phpmyadmin
+
+            $mesactual = date('n');
+            if ($mesactual < 7) {
+                $temporada = date('Y')-1;
+            } else {
+                $temporada = date('Y');
+            }
+            $_SESSION["temporada"] = $temporada;
 
                 require_once('funciones.php');
 

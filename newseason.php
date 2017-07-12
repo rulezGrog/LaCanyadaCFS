@@ -46,20 +46,6 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>';
     };
 

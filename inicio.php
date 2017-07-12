@@ -74,40 +74,6 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $_SESSION["newTemp"] = 'NO';
             }
 
-            echo '
-	<!--AUTOLUCH MODAL INFO DEL ESTADO DEL DESARROLLO
-	<script type="text/javascript">
-	    $(window).load(function(){
-	        $("#ModalINFO").modal("show");
-	    });
-	</script>-->
-
-	<div class="modal fade bs-example-modal-sm" id="ModalINFO" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title text-center" id="myModalLabel">COSAS AUN POR TERMINAR EN LA BASE DE DATOS</h4>
-	      </div>
-				<div class="modal-body">
-
-				<ul class="list-group">
-					<li class="list-group-item list-group-item-success"><strong>EL FORMULARIO DE REGISTRO INTERNO DE JUGADORES ESTA EN FASE DE DESARROLLO, NO LOCALIZA ENTRADAS INCORRECTAS, PERO ES FUNCIONAL.</strong></li>
-				</ul>
-				<ul class="list-group">
-					<li class="list-group-item list-group-item-info">Botones EXPORTAR Y EDITAR de las categorías</li>
-					<li class="list-group-item list-group-item-warning">Sección Temporadas Anteriores</li>
-					<li class="list-group-item list-group-item-danger">TERMINAR CORRECTAMNETE EL FORMULARIO INTERNO DE NUEVO JUGADOR</li>
-				</ul>
-      	</div>
-	      <div class="modal-footer">
-	        	<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">[CERRAR]</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
-	';
         }; // endif
 
 

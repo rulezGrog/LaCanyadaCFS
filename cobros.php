@@ -6,10 +6,12 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         //---------------------CREACION DE ARCHIVOs A EXPORTAR---------------------//
 
-                    $nombrearchivo1 = './tmp/primer_plazo.csv';
+        $nombrearchivo1 = './tmp/primer_plazo.csv';
         $nombrearchivo2 = './tmp/segundo_plazo.csv';
         $nombrearchivo3 = './tmp/tercer_plazo.csv';
-        $nombrearchivo4 = './tmp/plazo_extra.csv';
+        $nombrearchivo4 = './tmp/cuarto_plazo.csv';
+        $nombrearchivo5 = './tmp/quinto_plazo.csv';
+        $nombrearchivoExtra = './tmp/plazo_extra.csv';
 
         if (file_exists($nombrearchivo1)) {
             unlink("./tmp/primer_plazo.csv");
@@ -21,6 +23,12 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             unlink("./tmp/tercer_plazo.csv");
         }
         if (file_exists($nombrearchivo4)) {
+            unlink("./tmp/cuarto_plazo.csv");
+        }
+        if (file_exists($nombrearchivo5)) {
+            unlink("./tmp/quinto_plazo.csv");
+        }
+        if (file_exists($nombrearchivoExtra)) {
             unlink("./tmp/plazo_extra.csv");
         }
                     // header('Content-Type: text/csv; charset=utf-8');
@@ -107,16 +115,16 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
                     //------OTRO------//
 
-                    $fp4 = fopen('./tmp/plazo_extra.csv', 'w');
+                    $fp4 = fopen('./tmp/cuarto_plazo.csv', 'w');
 
                     // output the column headings
                     $headerarray4 = array('Nombre;Apellidos;DNI;Telefono;Categoria;Cuantia;NombreTitularCuenta;ApellidosTitularCuenta;NumeroDeCuenta');
 
-        fputcsv($fp4, $headerarray4);
+                    fputcsv($fp4, $headerarray4);
 
-        $selectexport4 = "SELECT nombre,apellidos,dni,tlf,categoria,pagoextra,titular_cuenta,ape_cuenta,num_cuenta  FROM jugadores WHERE pagoextra <> 0";
+                    $selectexport4 = "SELECT nombre,apellidos,dni,tlf,categoria,segundopago,titular_cuenta,ape_cuenta,num_cuenta  FROM jugadores WHERE cuartopago <> 0";
 
-        $export4 = mysql_query($selectexport4) or die("Sql error : " . mysql_error());
+                    $export4 = mysql_query($selectexport4) or die("Sql error : " . mysql_error());
 
                     // loop over the rows, outputting them
                     while ($headerarray4 = mysql_fetch_assoc($export4)) {
@@ -130,7 +138,61 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                         $headerarray4 = array_map("utf8_decode", $headerarray4);
                         fputcsv($fp4, $headerarray4, ';');
                     }
-        fclose($fp4);
+                    fclose($fp4);
+
+                    //------OTRO------//
+                    $fp5 = fopen('./tmp/quinto_plazo.csv', 'w');
+
+                    // output the column headings
+                    $headerarray5 = array('Nombre;Apellidos;DNI;Telefono;Categoria;Cuantia;NombreTitularCuenta;ApellidosTitularCuenta;NumeroDeCuenta');
+
+                    fputcsv($fp5, $headerarray5);
+
+                    $selectexport5 = "SELECT nombre,apellidos,dni,tlf,categoria,segundopago,titular_cuenta,ape_cuenta,num_cuenta  FROM jugadores WHERE quintopago <> 0";
+
+                    $export5 = mysql_query($selectexport5) or die("Sql error : " . mysql_error());
+
+                    // loop over the rows, outputting them
+                    while ($headerarray5 = mysql_fetch_assoc($export5)) {
+                        $headerarray5['nombre'] = decrypt($headerarray5['nombre']);
+                        $headerarray5['apellidos'] = decrypt($headerarray5['apellidos']);
+                        $headerarray5['dni'] = decrypt($headerarray5['dni']);
+                        $headerarray5['tlf'] = decrypt($headerarray5['tlf']);
+                        $headerarray5['titular_cuenta'] = decrypt($headerarray5['titular_cuenta']);
+                        $headerarray5['ape_cuenta'] = decrypt($headerarray5['ape_cuenta']);
+                        $headerarray5['num_cuenta'] = decrypt($headerarray5['num_cuenta']);
+                        $headerarray5 = array_map("utf8_decode", $headerarray5);
+                        fputcsv($fp5, $headerarray5, ';');
+                    }
+                    fclose($fp5);
+
+                    //------OTRO------//
+
+
+                    $fpExtra = fopen('./tmp/plazo_extra.csv', 'w');
+
+                    // output the column headings
+                    $headerarrayExtra = array('Nombre;Apellidos;DNI;Telefono;Categoria;Cuantia;NombreTitularCuenta;ApellidosTitularCuenta;NumeroDeCuenta');
+
+        fputcsv($fpExtra, $headerarrayExtra);
+
+        $selectexportExtra = "SELECT nombre,apellidos,dni,tlf,categoria,pagoextra,titular_cuenta,ape_cuenta,num_cuenta  FROM jugadores WHERE pagoextra <> 0";
+
+        $exportExtra = mysql_query($selectexportExtra) or die("Sql error : " . mysql_error());
+
+                    // loop over the rows, outputting them
+                    while ($headerarrayExtra = mysql_fetch_assoc($exportExtra)) {
+                        $headerarrayExtra['nombre'] = decrypt($headerarrayExtra['nombre']);
+                        $headerarrayExtra['apellidos'] = decrypt($headerarrayExtra['apellidos']);
+                        $headerarrayExtra['dni'] = decrypt($headerarrayExtra['dni']);
+                        $headerarrayExtra['tlf'] = decrypt($headerarrayExtra['tlf']);
+                        $headerarrayExtra['titular_cuenta'] = decrypt($headerarrayExtra['titular_cuenta']);
+                        $headerarrayExtra['ape_cuenta'] = decrypt($headerarrayExtra['ape_cuenta']);
+                        $headerarrayExtra['num_cuenta'] = decrypt($headerarrayExtra['num_cuenta']);
+                        $headerarrayExtra = array_map("utf8_decode", $headerarrayExtra);
+                        fputcsv($fpExtra, $headerarrayExtra, ';');
+                    }
+        fclose($fpExtra);
 
 //-----------------------------------------//
 
@@ -164,15 +226,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         echo'
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#oct">1er PLAZO</a></li>
-  <li><a data-toggle="tab" href="#dici">2º PLAZO</a></li>
-  <li><a data-toggle="tab" href="#ener">3er PLAZO</a></li>
-  <li><a data-toggle="tab" href="#extra">PLAZO EXTRA</a></li>
+  <li class="active"><a data-toggle="tab" href="#primerPla">1er PLAZO</a></li>
+  <li><a data-toggle="tab" href="#segunPla">2º PLAZO</a></li>
+  <li><a data-toggle="tab" href="#tercerPla">3er PLAZO</a></li>
+  <li><a data-toggle="tab" href="#cuartoPla">4º PLAZO</a></li>
+  <li><a data-toggle="tab" href="#quintoPla">5º PLAZO</a></li>
+  <li><a data-toggle="tab" href="#extraPla">PLAZO EXTRA</a></li>
   <!--<li><a data-toggle="tab" href="#todos">LISTADO COMPLETO</a></li>-->
 </ul>
 
 <div class="tab-content">
-  <div id="oct" class="tab-pane fade in active">
+  <div id="primerPla" class="tab-pane fade in active">
     <h3>1er PLAZO</h3>';
 
         $seleccionacobros = "SELECT * FROM jugadores WHERE primerpago <> 0";
@@ -223,7 +287,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         };
         echo'
   </div>
-  <div id="dici" class="tab-pane fade">
+  <div id="segunPla" class="tab-pane fade">
     <h3>2º PLAZO</h3>';
 
         $seleccionacobros = "SELECT * FROM jugadores WHERE segundopago <> 0";
@@ -276,7 +340,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
   </div>
 
 
-  <div id="ener" class="tab-pane fade">
+  <div id="tercerPla" class="tab-pane fade">
     <h3>3er PLAZO</h3>';
 
         $seleccionacobros = "SELECT * FROM jugadores WHERE tercerpago <> 0";
@@ -304,7 +368,6 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $nombre = decrypt($filacobros['nombre']);
                 $apellido = decrypt($filacobros['apellidos']);
                 $numpedido = ($filacobros['pedido']);
-
                 $primerpago = ($filacobros['tercerpago']);
                 $categoriapago = ($filacobros['categoria']);
                 $arraypedidos3 [] = $numpedido;
@@ -328,7 +391,109 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         echo'
   </div>
 
-	<div id="extra" class="tab-pane fade">
+  <div id="cuartoPla" class="tab-pane fade">
+    <h3>4º PLAZO</h3>';
+
+        $seleccionacobros = "SELECT * FROM jugadores WHERE cuartopago <> 0";
+        $resultadocobros =mysql_query($seleccionacobros, $ilink) or die(mysql_error());
+        $numfilascobros = mysql_num_rows($resultadocobros); // obtenemos el número de filas
+
+        if ($numfilascobros < 1) {
+            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
+        } else {
+            echo'
+    <div class="table-responsive">
+     <table class="table table-striped">
+       <thead>
+       <tr>
+         <th>Nombre</th>
+         <th>Apellidos</th>
+         <th>Categoría</th>
+         <th>Cuantía</th>
+				 <th> </th>
+       </tr>
+       </thead>
+       <tbody>';
+
+            while ($filacobros = mysql_fetch_array($resultadocobros)) {
+                $nombre = decrypt($filacobros['nombre']);
+                $apellido = decrypt($filacobros['apellidos']);
+                $numpedido = ($filacobros['pedido']);
+                $primerpago = ($filacobros['cuartopago']);
+                $categoriapago = ($filacobros['categoria']);
+                $arraypedidos4 [] = $numpedido;
+                echo"
+		        <tr>
+		          <td>$nombre</td>
+		          <td>$apellido</td>
+		          <td>$categoriapago</td>
+		          <td><b>$primerpago €</b></td>
+							<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#pagarModal-$numpedido-cuarto'><a href='#'>PAGAR</a></button></td>
+							<td><button type='button' class='btn btn-danger btn-xs' name='equiparbut' data-toggle='modal' data-target='#editarModal-$numpedido-cuarto'><a href='#'>EDITAR PAGO</a></button></td>
+						</tr>";
+            };
+            echo'
+			</tbody>
+     </table>
+    </div>
+
+    <a type="button" class="btn btn-warning pull-right" name="exportartercer" href="tmp/cuarto_plazo.csv"><b>EXPORTAR</b></a>';
+        };
+        echo'
+  </div>
+
+  <div id="quintoPla" class="tab-pane fade">
+    <h3>5º PLAZO</h3>';
+
+        $seleccionacobros = "SELECT * FROM jugadores WHERE quintopago <> 0";
+        $resultadocobros =mysql_query($seleccionacobros, $ilink) or die(mysql_error());
+        $numfilascobros = mysql_num_rows($resultadocobros); // obtenemos el número de filas
+
+        if ($numfilascobros < 1) {
+            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
+        } else {
+            echo'
+    <div class="table-responsive">
+     <table class="table table-striped">
+       <thead>
+       <tr>
+         <th>Nombre</th>
+         <th>Apellidos</th>
+         <th>Categoría</th>
+         <th>Cuantía</th>
+				 <th> </th>
+       </tr>
+       </thead>
+       <tbody>';
+
+            while ($filacobros = mysql_fetch_array($resultadocobros)) {
+                $nombre = decrypt($filacobros['nombre']);
+                $apellido = decrypt($filacobros['apellidos']);
+                $numpedido = ($filacobros['pedido']);
+                $primerpago = ($filacobros['quintopago']);
+                $categoriapago = ($filacobros['categoria']);
+                $arraypedidos5 [] = $numpedido;
+                echo"
+		        <tr>
+		          <td>$nombre</td>
+		          <td>$apellido</td>
+		          <td>$categoriapago</td>
+		          <td><b>$primerpago €</b></td>
+							<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#pagarModal-$numpedido-quinto'><a href='#'>PAGAR</a></button></td>
+							<td><button type='button' class='btn btn-danger btn-xs' name='equiparbut' data-toggle='modal' data-target='#editarModal-$numpedido-quinto'><a href='#'>EDITAR PAGO</a></button></td>
+						</tr>";
+            };
+            echo'
+			</tbody>
+     </table>
+    </div>
+
+    <a type="button" class="btn btn-warning pull-right" name="exportartercer" href="tmp/quinto_plazo.csv"><b>EXPORTAR</b></a>';
+        };
+        echo'
+  </div>
+
+	<div id="extraPla" class="tab-pane fade">
     <h3>PLAZO EXTRA</h3>';
 
         $seleccionacobros = "SELECT * FROM jugadores WHERE pagoextra <> 0";
@@ -356,10 +521,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $nombre = decrypt($filacobros['nombre']);
                 $apellido = decrypt($filacobros['apellidos']);
                 $numpedido = ($filacobros['pedido']);
-
                 $primerpago = ($filacobros['pagoextra']);
                 $categoriapago = ($filacobros['categoria']);
-                $arraypedidos4 [] = $numpedido;
+                $arraypedidosExtra [] = $numpedido;
                 echo"
 		        <tr>
 		          <td>$nombre</td>
@@ -566,12 +730,132 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	  </div>
 	</div>
 
-	";
+  ";
             }
         }
 
         if (isset($arraypedidos4)) {
             foreach ($arraypedidos4 as $id) {
+                $seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
+                $resultadoModal=mysql_query($seleccionaModal, $ilink) or die(mysql_error());
+                $filaModal = mysql_fetch_array($resultadoModal);
+
+                $nombre = decrypt($filaModal['nombre']);
+                $apellidos = decrypt($filaModal['apellidos']);
+                $categoria = ($filaModal['categoria']);
+                $temporada = ($filaModal['temporada']);
+
+                $cuantia = ($filaModal['cuartopago']);
+                echo"
+	<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-cuarto' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+				<p>Si continuas con la acción <b>marcarás el cuarto pago de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
+				se podrá volver a poner como cuarto pago la cuantía deseada editando al jugador en la lista de jugadores.</p>
+	      </div>
+	      <div class='modal-footer'>
+	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
+		        <a type='button' class='btn btn-success btn-sm' href='operaciones.php?id=$id&plazo=cuartopago&oper=pagar'>PAGAR</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class='modal fade bs-example-modal-sm' id='editarModal-$id-cuarto' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+					<div class='row'>
+					<form class='form-inline' action='operaciones.php?id=$id&plazo=cuartopago&oper=cambiarpago' method='post'>
+						<div class='form-group col-md-offset-1'>
+							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
+							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+						</div>
+						<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
+					</form>
+					</div>
+	      </div>
+	      <div class='modal-footer'>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+  ";
+            }
+        }
+
+        if (isset($arraypedidos5)) {
+            foreach ($arraypedidos5 as $id) {
+                $seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
+                $resultadoModal=mysql_query($seleccionaModal, $ilink) or die(mysql_error());
+                $filaModal = mysql_fetch_array($resultadoModal);
+
+                $nombre = decrypt($filaModal['nombre']);
+                $apellidos = decrypt($filaModal['apellidos']);
+                $categoria = ($filaModal['categoria']);
+                $temporada = ($filaModal['temporada']);
+
+                $cuantia = ($filaModal['quintopago']);
+                echo"
+	<div class='modal fade bs-example-modal-sm' id='pagarModal-$id-quinto' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Pagar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+				<p>Si continuas con la acción <b>marcarás el quinto pago de este jugador como cobrado</b>. Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
+				se podrá volver a poner como quinto pago la cuantía deseada editando al jugador en la lista de jugadores.</p>
+	      </div>
+	      <div class='modal-footer'>
+	        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
+		        <a type='button' class='btn btn-success btn-sm' href='operaciones.php?id=$id&plazo=quintopago&oper=pagar'>PAGAR</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class='modal fade bs-example-modal-sm' id='editarModal-$id-quinto' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+	  <div class='modal-dialog' role='document'>
+	    <div class='modal-content'>
+	      <div class='modal-header'>
+	        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+	        <h4 class='modal-title' id='myModalLabel'>Editar cuota al jugador $nombre $apellidos</h4>
+	      </div>
+				<div class='modal-body'>
+					<div class='row'>
+					<form class='form-inline' action='operaciones.php?id=$id&plazo=quintopago&oper=cambiarpago' method='post'>
+						<div class='form-group col-md-offset-1'>
+							<label for='nuevopago'><strong>Nueva cuantía:</strong></label>
+							<input type='number' class='form-control' id='nuevopago' name='cuantia' placeholder='$cuantia'>
+						</div>
+						<button type='submit' class='btn btn-danger btn-sm'>CAMBIAR PAGO</button>
+					</form>
+					</div>
+	      </div>
+	      <div class='modal-footer'>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	";
+            }
+        }
+
+        if (isset($arraypedidosExtra)) {
+            foreach ($arraypedidosExtra as $id) {
                 $seleccionaModal= "SELECT * FROM jugadores WHERE pedido = '$id'";
                 $resultadoModal=mysql_query($seleccionaModal, $ilink) or die(mysql_error());
                 $filaModal = mysql_fetch_array($resultadoModal);

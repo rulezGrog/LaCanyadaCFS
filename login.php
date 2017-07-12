@@ -13,12 +13,11 @@
   </nav> -->
 
       <?php
-      if ($_SESSION["regNOT"] == 1) {
+      if (isset($_SESSION["regNOT"]) &&  $_SESSION["regNOT"] == 1) {
           echo'<div class="container"><div class="alert alert-danger" style="margin:0 auto;"><strong>¡¡¡eMail y/0 contraseña incorrectos!!!!.</strong></div></div>';
           $_SESSION["regNOT"] = 0;
       }
       ?>
-
 
 <div class="loging">
   <div class="titLog">
@@ -54,11 +53,7 @@
     </div>
   </form>
 
-
 </div>
-
-
-
 
 
   </body>

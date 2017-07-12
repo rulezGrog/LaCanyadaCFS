@@ -12,11 +12,12 @@ include("header.php");
 if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
 } else {
     if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-        $temporada = $_SESSION["temporada"];
+        $temporada = $_SESSION['temporada'];
 
         echo '<div ng-app="app">';
         require_once('funcionesJS.php');
         echo"
+
 <div class='headTitle'>
   <span class='headTitleText'><h2> > ALTA NUEVO JUGADOR </h2></span>
 </div>
@@ -41,7 +42,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 					<div class='form-group col-sm-3 pull-right no-padding-right'>
 						<label class='control-label col-sm-5' for='temporada'>Temporada:</label>
 						<div class='form-group col-sm-7'>
-							<input type='text' class='form-control' id='temporada' name='temporada' placeholder='2016' required>
+							<input type='text' class='form-control' id='temporada' name='temporada' placeholder='2017' required>
 						</div>
 					</div>
 			</div>
@@ -195,21 +196,29 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 							</div>
 					</div>
 
-					<div class='form-group col-sm-3' ng-hide='user.fracc'>
+					<div class='form-group col-sm-2' ng-hide='user.fracc'>
 							<label class='control-label' for='importe1'>Primer Pago:</label>
 							<input class='form-control' type='text' name='importe1' placeholder='000€'/>
 					</div>
-					<div class='form-group col-sm-3' ng-hide='user.fracc'>
+					<div class='form-group col-sm-2' ng-hide='user.fracc'>
 							<label class='control-label' for='importe2'>Segundo Pago:</label>
 							<input class='form-control' type='text' name='importe2' placeholder='000€'/>
 					</div>
-					<div class='form-group col-sm-3' ng-hide='user.fracc'>
+					<div class='form-group col-sm-2' ng-hide='user.fracc'>
 							<label class='control-label' for='importe3'>Tercer Pago:</label>
 							<input class='form-control' type='text' name='importe3' placeholder='000€'/>
 					</div>
-					<div class='form-group col-sm-3' ng-hide='user.fracc'>
-							<label class='control-label' for='importe4'>Pago Extra:</label>
+          <div class='form-group col-sm-2' ng-hide='user.fracc'>
+							<label class='control-label' for='importe4'>Cuarto Pago:</label>
 							<input class='form-control' type='text' name='importe4' placeholder='000€'/>
+					</div>
+          <div class='form-group col-sm-2' ng-hide='user.fracc'>
+							<label class='control-label' for='importe5'>Qiunto Pago:</label>
+							<input class='form-control' type='text' name='importe5' placeholder='000€'/>
+					</div>
+					<div class='form-group col-sm-2' ng-hide='user.fracc'>
+							<label class='control-label' for='importeExtra'>Pago Extra:</label>
+							<input class='form-control' type='text' name='importeExtra' placeholder='000€'/>
 					</div>
 			</div>
 

@@ -1,15 +1,11 @@
 <body>
 <div id="container">
-
-
     <header class="main-header">
-
       <!-- Logo -->
       <a href="index.php" class="logo">
           <span class="canyadaIcon"></span>
           <span class="navbar-brand">La Canyada C.F.S.</span>
       </a>
-
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="nav-bar navbar-static-top">
         <!-- Sidebar toggle button-->
@@ -17,8 +13,6 @@
           <span class="sr-only">Toggle navigation</span>
         </a>
       </nav>
-
-
     </header>
 
   <!-- <nav class="navbar">
@@ -37,7 +31,7 @@
 
 <div id="contenido" style="min-height: 922px;">
 <?php
-  if ($_SESSION["newTemp"] == 'SI') {
+  if (isset($_SESSION["newTemp"]) && $_SESSION["newTemp"] == 'SI') {
       echo '
     <div class="alert alert-danger">
       <strong>¡PELIGRO!</strong> Desde Julio estamos ya en una nueva Temporada, pero aún seguimos usando la base de datos de la Temporada pasada. Porfavor, <strong>cree una nueva temporada</strong> en la sección <strong>"Gestión de Temporadas</strong>". <br>
@@ -45,6 +39,4 @@
     </div>
     ';
   }
-
-
 ?>

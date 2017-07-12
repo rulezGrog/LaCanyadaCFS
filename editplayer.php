@@ -86,9 +86,11 @@ if ($operacion == 'edit3') { // edición del Tercer Panel
     $primerpago = $_POST['importe1'];
     $segundopago = $_POST['importe2'];
     $tercerpago = $_POST['importe3'];
-    $pagoextra = $_POST['importe4'];
+    $cuartopago = $_POST['importe4'];
+    $quintopago = $_POST['importe5'];
+    $pagoextra = $_POST['importeExtra'];
 
-    $update3 = "UPDATE jugadores SET titular_cuenta = '$nombrecuenta', ape_cuenta = '$apecuenta', num_cuenta = '$numcuenta', primerpago = '$primerpago', segundopago = '$segundopago', tercerpago = '$tercerpago', pagoextra = '$pagoextra' WHERE pedido = '$id'";
+    $update3 = "UPDATE jugadores SET titular_cuenta = '$nombrecuenta', ape_cuenta = '$apecuenta', num_cuenta = '$numcuenta', primerpago = '$primerpago', segundopago = '$segundopago', tercerpago = '$tercerpago', cuartopago = '$cuartopago', quintopago = '$quintopago', pagoextra = '$pagoextra' WHERE pedido = '$id'";
     $resultado = mysql_query($update3, $ilink) or die(mysql_error());
 
     $_SESSION["editOK"]= 1;

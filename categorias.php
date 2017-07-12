@@ -932,10 +932,14 @@ echo'
             $resultadoModal=mysql_query($seleccionaModal, $ilink) or die(mysql_error());
             $filaModal = mysql_fetch_array($resultadoModal);
             if ($filaModal['nom_tutor'] != ""){
-                $nombretut = decrypt($filaModal['nom_tutor']); //isset OK OK
+              $nombretut = decrypt($filaModal['nom_tutor']); //isset OK OK
+            }else{
+              $nombretut = "";
             }
             if ($filaModal['ape_tutor'] != ""){
-                $apellidostut = decrypt($filaModal['ape_tutor']); //isset OK OK
+              $apellidostut = decrypt($filaModal['ape_tutor']); //isset OK OK
+            }else{
+              $apellidostut = "";
             }
             $nombre = decrypt($filaModal['nombre']);
             $apellidos = decrypt($filaModal['apellidos']);
@@ -952,13 +956,19 @@ echo'
             $importe = ($filaModal['importe']);
             $fraccionado = ($filaModal['fraccionada']);
             if ($filaModal['titular_cuenta'] != ""){
-                $nombrecuenta = decrypt($filaModal['titular_cuenta']); //isset OK OK
+              $nombrecuenta = decrypt($filaModal['titular_cuenta']); //isset OK OK
+            }else{
+              $nombrecuenta = "";
             }
             if ($filaModal['ape_cuenta'] != ""){
-                $apecuenta = decrypt($filaModal['ape_cuenta']); //isset OK OK
+              $apecuenta = decrypt($filaModal['ape_cuenta']); //isset OK OK
+            }else{
+              $apecuenta = "";
             }
             if ($filaModal['num_cuenta'] != ""){
-                $numcuenta = decrypt($filaModal['num_cuenta']); //isset OK OK
+              $numcuenta = decrypt($filaModal['num_cuenta']); //isset OK OK
+            }else{
+              $numcuenta = "";
             }
             $categoria = ($filaModal['categoria']);
             $temporada = ($filaModal['temporada']);

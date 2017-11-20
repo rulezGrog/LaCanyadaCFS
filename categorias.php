@@ -20,10 +20,12 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             $_SESSION["delOK"] = 0;
         }
 
-        if (isset($_SESSION["editOK"]) && $_SESSION["editOK"] == 1) {
+        if (($_SESSION["editOK"] == 1) || ($_SESSION["upOK"] == 1)) {
             echo'<div class="alert alert-info"><strong>Se han actualizado los datos del jugador correctamente</strong></div>';
             $_SESSION["editOK"] = 0;
+            $_SESSION["upOK"] = 0;
         }
+
 
         $nombrearchivo0 = './tmp/listajugadores.csv';
         $nombrearchivo1 = './tmp/prebenjamin.csv';
@@ -297,12 +299,12 @@ echo'
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#Preb">Pre-Benjamín</a></li>
-    <li><a data-toggle="tab" href="#benja">Benjamín</a></li>
-    <li><a data-toggle="tab" href="#alev">Alevín</a></li>
-    <li><a data-toggle="tab" href="#infa">Infantil</a></li>
-    <li><a data-toggle="tab" href="#cadet">Cadete</a></li>
-    <li><a data-toggle="tab" href="#juve">Juvenil</a></li>
-    <li><a data-toggle="tab" href="#seni">Senior</a></li>
+    <li><a data-toggle="tab" href="#Benjamin">Benjamín</a></li>
+    <li><a data-toggle="tab" href="#Alevin">Alevín</a></li>
+    <li><a data-toggle="tab" href="#Infantil">Infantil</a></li>
+    <li><a data-toggle="tab" href="#Cadete">Cadete</a></li>
+    <li><a data-toggle="tab" href="#Juvenil">Juvenil</a></li>
+    <li><a data-toggle="tab" href="#Senior">Senior</a></li>
   </ul>
 
   <div class="tab-content">
@@ -331,7 +333,8 @@ echo'
                             if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                                 echo "
 						           <th> </th>
-						           <th> </th>";
+						           <th> </th>
+                       <th> </th>";
                             };
                             echo'
 						         </tr>
@@ -387,7 +390,9 @@ echo'
                                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                                     echo "
 						            <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-						            <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+						            <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
+                        <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
+                        ";
                                 }
                                 echo"
 						          </tr>";
@@ -401,7 +406,7 @@ echo'
                         };
         echo'
     </div>
-    <div id="benja" class="tab-pane fade">
+    <div id="Benjamin" class="tab-pane fade">
       <h3>Benjamín</h3>';
 
         $seleccionaBenja= "SELECT * FROM jugadores WHERE categoria = 'benjamin'";
@@ -426,7 +431,8 @@ echo'
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
 								 <th> </th>
-								 <th> </th>";
+								 <th> </th>
+                 <th> </th>";
                 };
                 echo'
 			         </tr>
@@ -478,12 +484,13 @@ echo'
 
 
                     echo" </td>
-									<td> </td>
 									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
                     if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                         echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
+                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
+                  ";
                     }
                     echo"
 								</tr>";
@@ -497,7 +504,7 @@ echo'
             };
         echo'
     </div>
-    <div id="alev" class="tab-pane fade">
+    <div id="Alevin" class="tab-pane fade">
       <h3>Alevín</h3>';
 
         $seleccionaAle = "SELECT * FROM jugadores WHERE categoria = 'alevin'";
@@ -522,7 +529,8 @@ echo'
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
 								 <th> </th>
-								 <th> </th>";
+								 <th> </th>
+                 <th> </th>";
                 };
                 echo'
 			         </tr>
@@ -578,7 +586,9 @@ echo'
                     if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                         echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
+                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
+                  ";
                     }
                     echo"
 								</tr>";
@@ -592,7 +602,7 @@ echo'
             };
         echo'
     </div>
-    <div id="infa" class="tab-pane fade">
+    <div id="Infantil" class="tab-pane fade">
       <h3>Infantil</h3>';
 
         $seleccionaInfa= "SELECT * FROM jugadores WHERE categoria = 'infantil'";
@@ -617,7 +627,8 @@ echo'
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
 								 <th> </th>
-								 <th> </th>";
+								 <th> </th>
+                 <th> </th>";
                 };
                 echo'
 			         </tr>
@@ -673,7 +684,9 @@ echo'
                     if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                         echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
+                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
+                  ";
                     }
                     echo"
 								</tr>";
@@ -686,7 +699,7 @@ echo'
 			      <a type="button" class="btn btn-warning pull-right" name="exportinfa" href="tmp/infantil.csv"><b>EXPORTAR</b></a>';
             };
         echo'
-    </div><div id="cadet" class="tab-pane fade">
+    </div><div id="Cadete" class="tab-pane fade">
       <h3>Cadete</h3>';
 
         $seleccionaCade= "SELECT * FROM jugadores WHERE categoria = 'cadete'";
@@ -711,7 +724,8 @@ echo'
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
 								 <th> </th>
-								 <th> </th>";
+								 <th> </th>
+                 <th> </th>";
                 };
                 echo'
 			         </tr>
@@ -767,7 +781,9 @@ echo'
                     if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                         echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
+                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
+                  ";
                     }
                     echo"
 								</tr>";
@@ -780,7 +796,7 @@ echo'
 			      <a type="button" class="btn btn-warning pull-right" name="exportcade" href="tmp/cadete.csv"><b>EXPORTAR</b></a>';
             };
         echo'
-    </div><div id="juve" class="tab-pane fade">
+    </div><div id="Juvenil" class="tab-pane fade">
       <h3>Juvenil</h3>';
 
         $seleccionaJuve= "SELECT * FROM jugadores WHERE categoria = 'juvenil'";
@@ -805,7 +821,8 @@ echo'
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
 								 <th> </th>
-								 <th> </th>";
+								 <th> </th>
+                 <th> </th>";
                 };
                 echo'
 			         </tr>
@@ -861,7 +878,9 @@ echo'
                     if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                         echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
+                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
+                  ";
                     }
                     echo"
 								</tr>";
@@ -874,7 +893,7 @@ echo'
 			      <a type="button" class="btn btn-warning pull-right" name="exportjuve" href="tmp/juvenil.csv"><b>EXPORTAR</b></a>';
             };
         echo'
-    </div><div id="seni" class="tab-pane fade">
+    </div><div id="Senior" class="tab-pane fade">
       <h3>Senior</h3>';
 
         $seleccionaSenior= "SELECT * FROM jugadores WHERE categoria = 'senior'";
@@ -1034,6 +1053,13 @@ echo'
             $lopd4 = ($filaModal['termsimage4']);
 
                     // $vb = iconv("UTF-8", "ISO-8859-1", $nombretut);
+
+
+                    //***************************************************//
+                    //********************* MODALS **********************//
+                    //***************************************************//
+
+//**** EDITAR MODAL ****//
 
                 echo "
 				<div class='modal fade bs-example-modal-lg alto' id='editarModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
@@ -1261,6 +1287,8 @@ echo'
 					</div>
 				</div>
 
+<!-- **** INFO MODAL **** -->
+
 				<div class='modal fade bs-example-modal-lg alto' id='infoModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
 					<div class='modal-dialog modal-lg' role='document'>
 						<div class='modal-content'>
@@ -1328,6 +1356,8 @@ echo'
 					</div>
 				</div>
 
+<!-- **** BAJA MODAL **** -->
+
 				<div class='modal fade bs-example-modal-sm' id='bajaModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
 				  <div class='modal-dialog' role='document'>
 				    <div class='modal-content'>
@@ -1344,7 +1374,60 @@ echo'
 				      </div>
 				    </div>
 				  </div>
-				</div>";
+				</div>
+
+<!-- **** ASCENSO MODAL **** -->
+
+				<div class='modal fade bs-example-modal-sm' id='ascensoModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+				  <div class='modal-dialog' role='document'>
+				    <div class='modal-content'>
+				      <div class='modal-header'>";
+
+                switch (strtolower($categoria)) {
+                  case 'prebenjamin':
+                    $newCat = 'Benjamin';
+                    break;
+
+                  case 'benjamin':
+                    $newCat = 'Alevin';
+                    break;
+
+                  case 'alevin':
+                    $newCat = 'Infantil';
+                    break;
+
+                  case 'infantil':
+                    $newCat = 'Cadete';
+                    break;
+
+                  case 'cadete':
+                    $newCat = 'Juvenil';
+                    break;
+
+                  case 'juvenil':
+                    $newCat = 'Senior';
+                    break;
+
+                  default:
+                    $newCat = '"ERRRORRR, no continuar"';
+                    break;
+                }
+
+				        echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+				        <h4 class='modal-title' id='myModalLabel'>¿Estás seguro de ascender al Jugador a la categoria de $newCat ?</h4>
+				      </div>
+							<div class='modal-body'>
+				        <p>Esta acción provocará que $nombre $apellidos ascienda a la categoría de <strong>$newCat</strong>, ¿es correcto?.</p>
+				      </div>
+				      <div class='modal-footer'>
+				        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
+					        <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?id=$id&oper=ascenso&newcategoria=$newCat'>SI</a>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+        ";
         };
 
         include("sidebar.php");

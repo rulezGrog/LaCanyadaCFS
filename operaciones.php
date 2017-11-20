@@ -61,7 +61,6 @@ if ($tipoOperacion == 'newtemp') {
 }
 
 //*********************DAMOS DE BAJA A UN JUGADOR*************************//
-
 if ($tipoOperacion == 'baja') {
     $id = $_GET['id'];
     if ($id <> "") {
@@ -73,6 +72,18 @@ if ($tipoOperacion == 'baja') {
     }
 }
 
+//**********************ASCENDEMOS A UN JUGADOR**************************//
+if ($tipoOperacion == 'ascenso'){
+    $id = $_GET['id'];
+    $categoria = $_GET['newcategoria'];
+    if ($id <> "") {
+        require_once('fig.php');
+        $inserta= "UPDATE jugadores SET categoria='$categoria' WHERE pedido='$id'";
+        $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
+        $_SESSION["upOK"] = 1;
+        Header("Location: categorias.php");
+    }
+}
 
 //*********************DAMOS DE BAJA A UN ADMIN*************************//
 if ($tipoOperacion == 'bajaAdmin') {
@@ -88,7 +99,6 @@ if ($tipoOperacion == 'bajaAdmin') {
 
 
 //************************* AGREGAMOS UN ADMIN *************************//
-
 if ($tipoOperacion == 'regAdmin') {
     if (($_POST['nombre'] == ' ') or ($_POST['email'] == ' ') or ($_POST['pwd'] == ' ') or ($_POST['tipouser'] == ' ') or ($_POST['pwd2'] == ' ') and ($_POST['pwd'] == $_POST['pwd2'])) {//comprobamos que las variables enviadas por el form de login.php tienen contenido
         Header("Location: admin.php"); //estan vacías, volvemos al index
@@ -135,3 +145,4 @@ if ($tipoOperacion == 'editAdminTipo') {
     Header("Location: admin.php");
 };
  //endIF edición Admin;
+?>

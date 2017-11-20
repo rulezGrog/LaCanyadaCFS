@@ -25,7 +25,6 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             $_SESSION["editOK"] = 0;
         }
 
-
         $nombrearchivo0 = './tmp/listajugadores.csv';
         $nombrearchivo1 = './tmp/prebenjamin.csv';
         $nombrearchivo2 = './tmp/benjamin.csv';
@@ -310,9 +309,11 @@ echo'
     <div id="Preb" class="tab-pane fade in active">
       <h3>Pre-Benjamín</h3>';
 
-        $seleccionaPre= "SELECT * FROM jugadores WHERE categoria = 'prebenjamin'";
-        $resultadoPre=mysql_query($seleccionaPre, $ilink) or die(mysql_error());
+        $seleccionaPre = "SELECT * FROM jugadores WHERE categoria = 'prebenjamin'";
+        $resultadoPre = mysql_query($seleccionaPre, $ilink) or die(mysql_error());
         $numfilasPre = mysql_num_rows($resultadoPre); // obtenemos el número de filas
+
+        $numPre = 1;
 
                         if ($numfilasPre < 1) {
                             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
@@ -322,6 +323,7 @@ echo'
 						       <table class="table table-striped">
 						         <thead>
 						         <tr>
+                      <th class="celdaNumJugador">#</th>
 						           <th>Nombre</th>
 						           <th>Apellidos</th>
 											 <th>LOPD</th>
@@ -347,32 +349,36 @@ echo'
                                 $termsimage4Pre = ($filaPre['termsimage4']);
                                 echo"
 						          <tr>
+                        <td class='celdaNumJugador'><span class='numJugador'>";
+                        echo $numPre;
+                        $numPre = $numPre + 1;
+                        echo"</span></td>
 						            <td>$nombrePre</td>
 						            <td>$apellidoPre</td>
 												<td>";
 
                                 if ($termsimage1Pre == 1) {
-                                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success label-as-badge'>1</span> ";
+                                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
                                 } else {
-                                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger label-as-badge'>1</span> ";
+                                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
                                 }
 
                                 if ($termsimage2Pre == 1) {
-                                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success label-as-badge'>2</span> ";
+                                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
                                 } else {
-                                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger label-as-badge'>2</span> ";
+                                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
                                 }
 
                                 if ($termsimage3Pre == 1) {
-                                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success label-as-badge'>3</span> ";
+                                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
                                 } else {
-                                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger label-as-badge'>3</span> ";
+                                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
                                 }
 
                                 if ($termsimage4Pre == 1) {
-                                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success label-as-badge'>4</span>";
+                                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
                                 } else {
-                                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger label-as-badge'>4</span> ";
+                                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
                                 }
 
 
@@ -402,6 +408,8 @@ echo'
         $resultadoBenja=mysql_query($seleccionaBenja, $ilink) or die(mysql_error());
         $numfilasBenja = mysql_num_rows($resultadoBenja); // obtenemos el número de filas
 
+        $numBenja = 1;
+
             if ($numfilasBenja < 1) {
                 echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
             } else {
@@ -410,6 +418,7 @@ echo'
 			       <table class="table table-striped">
 			         <thead>
 			         <tr>
+                 <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
 								 <th>LOPD</th>
@@ -435,32 +444,36 @@ echo'
                     $termsimage4Benja = ($filaBenja['termsimage4']);
                     echo"
 			          <tr>
+                  <td class='celdaNumJugador'><span class='numJugador'>";
+                  echo $numBenja;
+                  $numBenja = $numBenja + 1;
+                  echo"</span></td>
 			            <td>$nombreBenja</td>
 			            <td>$apellidoBenja</td>
 									<td>";
 
                     if ($termsimage1Benja == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success label-as-badge'>1</span> ";
+                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
                     } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger label-as-badge'>1</span> ";
+                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
                     }
 
                     if ($termsimage2Benja == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success label-as-badge'>2</span> ";
+                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
                     } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger label-as-badge'>2</span> ";
+                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
                     }
 
                     if ($termsimage3Benja == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success label-as-badge'>3</span> ";
+                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
                     } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger label-as-badge'>3</span> ";
+                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
                     }
 
                     if ($termsimage4Benja == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success label-as-badge'>4</span>";
+                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
                     } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger label-as-badge'>4</span> ";
+                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
                     }
 
 
@@ -491,6 +504,8 @@ echo'
         $resultadoAle = mysql_query($seleccionaAle, $ilink) or die(mysql_error());
         $numfilasAle = mysql_num_rows($resultadoAle); // obtenemos el número de filas
 
+        $numAle = 1;
+
             if ($numfilasAle < 1) {
                 echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
             } else {
@@ -499,6 +514,7 @@ echo'
 			       <table class="table table-striped">
 			         <thead>
 			         <tr>
+                 <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
 								 <th>LOPD</th>
@@ -524,32 +540,36 @@ echo'
                     $termsimage4Ale = ($filaAle['termsimage4']);
                     echo"
 			          <tr>
+                  <td class='celdaNumJugador'><span class='numJugador'>";
+                  echo $numAle;
+                  $numAle = $numAle + 1;
+                  echo"</span></td>
 			            <td>$nombreAle</td>
 			            <td>$apellidoAle</td>
 									<td>";
 
                     if ($termsimage1Ale == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success label-as-badge'>1</span> ";
+                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
                     } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger label-as-badge'>1</span> ";
+                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
                     }
 
                     if ($termsimage2Ale == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success label-as-badge'>2</span> ";
+                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
                     } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger label-as-badge'>2</span> ";
+                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
                     }
 
                     if ($termsimage3Ale == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success label-as-badge'>3</span> ";
+                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
                     } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger label-as-badge'>3</span> ";
+                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
                     }
 
                     if ($termsimage4Ale == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success label-as-badge'>4</span>";
+                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
                     } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger label-as-badge'>4</span> ";
+                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
                     }
 
 
@@ -579,6 +599,8 @@ echo'
         $resultadoInfa=mysql_query($seleccionaInfa, $ilink) or die(mysql_error());
         $numfilasInfa = mysql_num_rows($resultadoInfa); // obtenemos el número de filas
 
+        $numInfa = 1;
+
             if ($numfilasInfa < 1) {
                 echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
             } else {
@@ -587,6 +609,7 @@ echo'
 			       <table class="table table-striped">
 			         <thead>
 			         <tr>
+                 <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
 								 <th>LOPD</th>
@@ -612,32 +635,36 @@ echo'
                     $termsimage4Infa = ($filaInfa['termsimage4']);
                     echo"
 			          <tr>
+                  <td class='celdaNumJugador'><span class='numJugador'>";
+                  echo $numInfa;
+                  $numInfa = $numInfa + 1;
+                  echo"</span></td>
 			            <td>$nombreInfa</td>
 			            <td>$apellidoInfa</td>
 									<td>";
 
                     if ($termsimage1Infa == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success label-as-badge'>1</span> ";
+                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
                     } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger label-as-badge'>1</span> ";
+                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
                     }
 
                     if ($termsimage2Infa == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success label-as-badge'>2</span> ";
+                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
                     } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger label-as-badge'>2</span> ";
+                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
                     }
 
                     if ($termsimage3Infa == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success label-as-badge'>3</span> ";
+                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
                     } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger label-as-badge'>3</span> ";
+                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
                     }
 
                     if ($termsimage4Infa == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success label-as-badge'>4</span>";
+                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
                     } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger label-as-badge'>4</span> ";
+                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
                     }
 
 
@@ -666,6 +693,8 @@ echo'
         $resultadoCade=mysql_query($seleccionaCade, $ilink) or die(mysql_error());
         $numfilasCade = mysql_num_rows($resultadoCade); // obtenemos el número de filas
 
+        $numCade = 1;
+
             if ($numfilasCade < 1) {
                 echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
             } else {
@@ -674,6 +703,7 @@ echo'
 			       <table class="table table-striped">
 			         <thead>
 			         <tr>
+                 <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
 								 <th>LOPD</th>
@@ -699,32 +729,36 @@ echo'
                     $termsimage4Cade = ($filaCade['termsimage4']);
                     echo"
 			          <tr>
+                  <td class='celdaNumJugador'><span class='numJugador'>";
+                  echo $numCade;
+                  $numCade = $numCade + 1;
+                  echo"</span></td>
 			            <td>$nombreCade</td>
 			            <td>$apellidoCade</td>
 									<td>";
 
                     if ($termsimage1Cade == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success label-as-badge'>1</span> ";
+                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
                     } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger label-as-badge'>1</span> ";
+                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
                     }
 
                     if ($termsimage2Cade == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success label-as-badge'>2</span> ";
+                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
                     } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger label-as-badge'>2</span> ";
+                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
                     }
 
                     if ($termsimage3Cade == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success label-as-badge'>3</span> ";
+                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
                     } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger label-as-badge'>3</span> ";
+                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
                     }
 
                     if ($termsimage4Cade == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success label-as-badge'>4</span>";
+                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
                     } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger label-as-badge'>4</span> ";
+                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
                     }
 
 
@@ -753,6 +787,8 @@ echo'
         $resultadoJuve=mysql_query($seleccionaJuve, $ilink) or die(mysql_error());
         $numfilasJuve = mysql_num_rows($resultadoJuve); // obtenemos el número de filas
 
+        $numJuve = 1;
+
             if ($numfilasJuve < 1) {
                 echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
             } else {
@@ -761,6 +797,7 @@ echo'
 			       <table class="table table-striped">
 			         <thead>
 			         <tr>
+                 <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
 								 <th>LOPD</th>
@@ -786,32 +823,36 @@ echo'
                     $termsimage4Juve = ($filaJuve['termsimage4']);
                     echo"
 			          <tr>
+                  <td class='celdaNumJugador'><span class='numJugador'>";
+                  echo $numJuve;
+                  $numJuve = $numJuve + 1;
+                  echo"</span></td>
 			            <td>$nombreJuve</td>
 			            <td>$apellidoJuve</td>
 									<td>";
 
                     if ($termsimage1Juve == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success label-as-badge'>1</span> ";
+                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
                     } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger label-as-badge'>1</span> ";
+                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
                     }
 
                     if ($termsimage2Juve == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success label-as-badge'>2</span> ";
+                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
                     } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger label-as-badge'>2</span> ";
+                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
                     }
 
                     if ($termsimage3Juve == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success label-as-badge'>3</span> ";
+                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
                     } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger label-as-badge'>3</span> ";
+                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
                     }
 
                     if ($termsimage4Juve == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success label-as-badge'>4</span>";
+                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
                     } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger label-as-badge'>4</span> ";
+                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
                     }
 
 
@@ -840,6 +881,8 @@ echo'
         $resultadoSenior=mysql_query($seleccionaSenior, $ilink) or die(mysql_error());
         $numfilasSenior = mysql_num_rows($resultadoSenior); // obtenemos el número de filas
 
+        $numSenior = 1;
+
             if ($numfilasSenior < 1) {
                 echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
             } else {
@@ -848,6 +891,7 @@ echo'
 			       <table class="table table-striped">
 			         <thead>
 			         <tr>
+                 <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
 								 <th>LOPD</th>
@@ -873,32 +917,36 @@ echo'
                     $termsimage4Senior = ($filaSenior['termsimage4']);
                     echo"
 			          <tr>
+                  <td class='celdaNumJugador'><span class='numJugador'>";
+                  echo $numSenior;
+                  $numSenior = $numSenior + 1;
+                  echo"</span></td>
 			            <td>$nombreSenior</td>
 			            <td>$apellidoSenior</td>
 									<td>";
 
                     if ($termsimage1Senior == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success label-as-badge'>1</span> ";
+                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
                     } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger label-as-badge'>1</span> ";
+                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
                     }
 
                     if ($termsimage2Senior == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success label-as-badge'>2</span> ";
+                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
                     } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger label-as-badge'>2</span> ";
+                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
                     }
 
                     if ($termsimage3Senior == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success label-as-badge'>3</span> ";
+                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
                     } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger label-as-badge'>3</span> ";
+                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
                     }
 
                     if ($termsimage4Senior == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success label-as-badge'>4</span>";
+                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
                     } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger label-as-badge'>4</span> ";
+                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
                     }
 
 

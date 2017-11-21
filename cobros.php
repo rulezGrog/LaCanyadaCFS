@@ -246,11 +246,13 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         if ($numfilascobros < 1) {
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
+            $numPre = 1;            
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
        <thead>
        <tr>
+         <th class="celdaNumJugador">#</th>
          <th>Nombre</th>
          <th>Apellidos</th>
          <th>Categoría</th>
@@ -270,6 +272,10 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $arraypedidos1 [] = $numpedido;
                 echo"
 		        <tr>
+              <td class='celdaNumJugador'><span class='numJugador'>";
+              echo $numPre;
+              $numPre = $numPre + 1;
+              echo"</span></td>
 		          <td>$nombre</td>
 		          <td>$apellido</td>
 		          <td>$categoriapago</td>
@@ -297,11 +303,13 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         if ($numfilascobros < 1) {
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
+            $numPre = 1;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
        <thead>
        <tr>
+         <th class="celdaNumJugador">#</th>
          <th>Nombre</th>
          <th>Apellidos</th>
          <th>Categoría</th>
@@ -321,6 +329,10 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $arraypedidos2 [] = $numpedido;
                 echo"
 		        <tr>
+              <td class='celdaNumJugador'><span class='numJugador'>";
+              echo $numPre;
+              $numPre = $numPre + 1;
+              echo"</span></td>
 		          <td>$nombre</td>
 		          <td>$apellido</td>
 		          <td>$categoriapago</td>
@@ -350,11 +362,13 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         if ($numfilascobros < 1) {
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
+            $numPre = 1;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
        <thead>
        <tr>
+         <th class="celdaNumJugador">#</th>
          <th>Nombre</th>
          <th>Apellidos</th>
          <th>Categoría</th>
@@ -373,6 +387,10 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $arraypedidos3 [] = $numpedido;
                 echo"
 		        <tr>
+              <td class='celdaNumJugador'><span class='numJugador'>";
+              echo $numPre;
+              $numPre = $numPre + 1;
+              echo"</span></td>
 		          <td>$nombre</td>
 		          <td>$apellido</td>
 		          <td>$categoriapago</td>
@@ -401,11 +419,13 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         if ($numfilascobros < 1) {
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
+            $numPre = 1;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
        <thead>
        <tr>
+         <th class="celdaNumJugador">#</th>
          <th>Nombre</th>
          <th>Apellidos</th>
          <th>Categoría</th>
@@ -424,6 +444,10 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $arraypedidos4 [] = $numpedido;
                 echo"
 		        <tr>
+              <td class='celdaNumJugador'><span class='numJugador'>";
+              echo $numPre;
+              $numPre = $numPre + 1;
+              echo"</span></td>
 		          <td>$nombre</td>
 		          <td>$apellido</td>
 		          <td>$categoriapago</td>
@@ -452,11 +476,13 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         if ($numfilascobros < 1) {
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
+            $numPre = 1;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
        <thead>
        <tr>
+         <th class="celdaNumJugador">#</th>
          <th>Nombre</th>
          <th>Apellidos</th>
          <th>Categoría</th>
@@ -475,6 +501,10 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $arraypedidos5 [] = $numpedido;
                 echo"
 		        <tr>
+              <td class='celdaNumJugador'><span class='numJugador'>";
+              echo $numPre;
+              $numPre = $numPre + 1;
+              echo"</span></td>
 		          <td>$nombre</td>
 		          <td>$apellido</td>
 		          <td>$categoriapago</td>
@@ -503,11 +533,13 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         if ($numfilascobros < 1) {
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
+            $numPre = 1;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
        <thead>
        <tr>
+         <th class="celdaNumJugador">#</th>
          <th>Nombre</th>
          <th>Apellidos</th>
          <th>Categoría</th>
@@ -526,6 +558,10 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $arraypedidosExtra [] = $numpedido;
                 echo"
 		        <tr>
+              <td class='celdaNumJugador'><span class='numJugador'>";
+              echo $numPre;
+              $numPre = $numPre + 1;
+              echo"</span></td>
 		          <td>$nombre</td>
 		          <td>$apellido</td>
 		          <td>$categoriapago</td>

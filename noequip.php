@@ -64,11 +64,15 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         if ($numfilasEquip < 1) {
             echo'<br /><div class="alert alert-succes"><strong>TODOS LOS JUGADORES DE TODAS LAS CATEORIAS POSEEN EQUIPACION.</strong></div>';
         } else {
+
+            $numPre = '1';
+
             echo"
 							<div class='table-responsive'>
 							 <table class='table table-striped'>
 							   <thead>
 							   <tr>
+                   <th class='celdaNumJugador'>#</th>
 							     <th>Nombre</th>
 							     <th>Apellidos</th>
 							     <th>Categoría</th>";
@@ -89,6 +93,10 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $arraypedidos [] = $numpedido;
                 echo"
 											<tr>
+                        <td class='celdaNumJugador'><span class='numJugador'>";
+                        echo $numPre;
+                        $numPre = $numPre + 1;
+                        echo"</span></td>
 									      <td>$nombreEquip</td>
 									      <td>$apellidoEquip</td>
 									      <td>$categoriaEquip</td>";

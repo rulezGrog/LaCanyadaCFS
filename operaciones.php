@@ -37,7 +37,20 @@ if ($tipoOperacion == 'equip') {
         $inserta= "UPDATE jugadores SET equipacion='NO' WHERE pedido='$id'";
 
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
-        $_SESSION["delOK"] = 1;
+        $_SESSION["equipOK"] = 1;
+        Header("Location: noequip.php");
+    }
+}
+
+//*********************EQUIPAMOS A VARIOS JUGADORES*************************//
+if ($tipoOperacion == 'fullequip') {
+    $ids = $_POST['imputer'];
+    if ($ids <> "") {
+        require_once('fig.php');
+        $inserta= "UPDATE jugadores SET equipacion='NO' WHERE pedido IN ($ids)";
+
+        $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
+        $_SESSION["equip2OK"] = 1;
         Header("Location: noequip.php");
     }
 }

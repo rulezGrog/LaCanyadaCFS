@@ -52,17 +52,23 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         </div>
         <div class="container">';
 
-        if ($_SESSION["delOK"] == 1) {
+        if (isset($_SESSION["equipOK"]) && ($_SESSION["equipOK"]) == 1) {
             echo'<div class="alert alert-info"><strong>Se ha equipado correctamente al Jugador.</strong></div>';
-            $_SESSION["delOK"] = 0;
+            $_SESSION["equipOK"] = 0;
         }
+        if (isset($_SESSION["equip2OK"]) && ($_SESSION["equip2OK"]) == 1) {
+            echo'<div class="alert alert-info"><strong>Se han equipado correctamente a los jugadores selecionados.</strong></div>';
+            $_SESSION["equip2OK"] = 0;
+        }
+
 
         $seleccionaEquip = "SELECT * FROM jugadores WHERE equipacion = 'SI'";
         $resultadoEquip = mysql_query($seleccionaEquip, $ilink) or die(mysql_error());
         $numfilasEquip = mysql_num_rows($resultadoEquip); // obtenemos el número de filas
 
         if ($numfilasEquip < 1) {
-            echo'<br /><div class="alert alert-succes"><strong>TODOS LOS JUGADORES DE TODAS LAS CATEORIAS POSEEN EQUIPACION.</strong></div>';
+            echo'<br /><div class="alert alert-warning text-center"><strong>TODOS LOS JUGADORES DE TODAS LAS CATEORIAS POSEEN EQUIPACION.</strong></div>
+            </div> <!-- container -->';
         } else {
 
             $numPre = '1';
@@ -78,7 +84,15 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 							     <th>Categoría</th>";
             if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                 echo "
-									 <th> </th>";
+									 <th> </th>
+                   <script type='text/javascript'>
+                    $('document').ready(function(){
+                      $('#checkTodos').change(function () {
+                        $('input:checkbox').prop('checked', $(this).prop('checked'));
+                       });
+                    });
+                   </script>
+   								 <th><label><input value='NO' type='checkbox' id='checkTodos'/></label></th>";
             };
             echo"
 							   </tr>
@@ -102,7 +116,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 									      <td>$categoriaEquip</td>";
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
-												<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#equipModal-$numpedido'><a href='#'>EQUIPAR</a></button></td>";
+												<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#equipModal-$numpedido'><a href='#'>EQUIPAR</a></button></td>
+                        <td><input class='form-check-input' type='checkbox' value='$numpedido' name='equipar' id='equipar'></td>";
                 }
                 echo"
 											</tr>";
@@ -112,32 +127,81 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 							 </table>
 							</div>
 
-							<a type='button' class='btn btn-warning pull-right' name='exportarequip' href='tmp/noequipados.csv'><b>EXPORTAR</b></a>
+              <div>
+                <a type='button' class='btn btn-info pull-right' name='equiparfullequip' style='margin-left: 10px;' href='javascript:;' onclick='enviarValorToForm();' role='button' data-toggle='modal' data-target='#fullequipModal'><b>EQUIPAR SELECIONADOS</b></a>
+  							<a type='button' class='btn btn-warning pull-right' name='exportarequip' href='tmp/noequipados.csv'><b>EXPORTAR</b></a>
+              </div>
 
-							</div>";
+              <script type='text/javascript'>
+              function enviarValorToForm() {
+                var selected = new Array();
+                $(document).ready(function() {
+                  $('input:checkbox:checked').each(function() {
+                    if ($(this).val() == 'NO') {                      
+                    } else {
+                      selected.push($(this).val());
+                      document.getElementById('imputer').value=selected;
+                    }
+
+                  });
+
+                });
+              }
+
+              var form = document.getElementById('formulario');
+              document.getElementById('submitBut').addEventListener('click', function () {
+                form.submit();
+              });
+              </script>
+
+							</div>
+
+              <div class='modal fade bs-example-modal-sm' id='fullequipModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+  						  <div class='modal-dialog' role='document'>
+  						    <div class='modal-content'>
+  						      <div class='modal-header'>
+  						        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+  						        <h4 class='modal-title' id='myModalLabel'>Equipar jugadores seleccionados</h4>
+  						      </div>
+  									<div class='modal-body'>
+  						        <p>Si continuas con la acción marcarás a todos los jugadores seleccionados jugador como \"Equipado\". Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
+  										se podrá volver a poner como \"No Equipado\" editando al jugador en la lista de jugadores.</p>
+  						      </div>
+  						      <div class='modal-footer'>
+                        <form action='operaciones.php?oper=fullequip' id='formulario' method='post' name='formulario'>
+                          <input class='invisible' name='imputer' id='imputer' type='text'/>
+                          <button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
+                          <button id='submitBut' class='btn btn-success btn-sm'>EQUIPAR SELECCIONADOS</button>
+                        </fomr>
+  						      </div>
+  						    </div>
+  						  </div>
+  						</div>
+              ";
+
+              foreach ($arraypedidos as $id) {
+                  echo"
+      						<div class='modal fade bs-example-modal-sm' id='equipModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+      						  <div class='modal-dialog' role='document'>
+      						    <div class='modal-content'>
+      						      <div class='modal-header'>
+      						        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+      						        <h4 class='modal-title' id='myModalLabel'>Equipar jugador</h4>
+      						      </div>
+      									<div class='modal-body'>
+      						        <p>Si continuas con la acción marcarás al jugador como \"Equipado\". Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
+      										se podrá volver a poner como \"No Equipado\" editando al jugador en la lista de jugadores.</p>
+      						      </div>
+      						      <div class='modal-footer'>
+      						        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
+      							        <a type='button' class='btn btn-success btn-sm' href='operaciones.php?oper=equip&id=$id'>EQUIPAR</a>
+      						      </div>
+      						    </div>
+      						  </div>
+      						</div>";
+              }
         }
 
-        foreach ($arraypedidos as $id) {
-            echo"
-						<div class='modal fade bs-example-modal-sm' id='equipModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-						  <div class='modal-dialog' role='document'>
-						    <div class='modal-content'>
-						      <div class='modal-header'>
-						        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-						        <h4 class='modal-title' id='myModalLabel'>Equipar jugador</h4>
-						      </div>
-									<div class='modal-body'>
-						        <p>Si continuas con la acción marcarás al jugador como \"Equipado\". Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
-										se podrá volver a poner como \"No Equipado\" editando al jugador en la lista de jugadores.</p>
-						      </div>
-						      <div class='modal-footer'>
-						        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
-							        <a type='button' class='btn btn-success btn-sm' href='operaciones.php?oper=equip&id=$id'>EQUIPAR</a>
-						      </div>
-						    </div>
-						  </div>
-						</div>";
-        }
 
         include("sidebar.php");
         include("footer.php");

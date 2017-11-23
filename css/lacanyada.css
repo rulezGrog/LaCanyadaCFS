@@ -684,3 +684,17 @@ button a {
   padding: 8px 0px !important;
   text-align: center;
 }
+
+.modal-header {
+  background-color: rgb(255, 140, 0);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-transform: uppercase;
+}
+
+.modal-footer {
+  background-color: #ecf0f5;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  min-height: 50px;
+}

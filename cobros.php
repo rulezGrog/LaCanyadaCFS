@@ -219,9 +219,13 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 </div>
 <div class="container">';
 
-        if ($_SESSION["pagaOK"] == 1) {
+        if (isset($_SESSION["pagaOK"]) && ($_SESSION["pagaOK"]) == 1) {
             echo'<div class="alert alert-info"><strong>Se ha actualizado el cobro pendiente correctamente.</strong></div>';
             $_SESSION["pagaOK"] = 0;
+        }
+        if (isset($_SESSION["paga2OK"]) && ($_SESSION["paga2OK"]) == 1) {
+            echo'<div class="alert alert-info"><strong>Se han actualizado el conjunto de cobros seleccionado correctamente.</strong></div>';
+            $_SESSION["paga2OK"] = 0;
         }
 
         echo'
@@ -246,7 +250,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         if ($numfilascobros < 1) {
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
-            $numPre = 1;            
+            $numPre = 1;
+            $idFullModal  = 'primerpago';
+            $arrayIdFullModal [] = $idFullModal;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
@@ -258,6 +264,19 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
          <th>Categoría</th>
          <th>Cuantía</th>
 				 <th> </th>
+         <th><label><input value="NO" type="checkbox" name="checkTodos1" id="checkTodos1"/></label></th>
+         <th> </th>
+         <script type="text/javascript">
+          $("document").ready(function(){
+            $("#checkTodos1").change(function () {
+              if ($("#checkTodos1").is(":checked")){
+                 $(document.getElementsByName("pagartodos1")).prop("checked", true);
+              }else{
+                 $(document.getElementsByName("pagartodos1")).prop("checked", false);
+              }
+             });
+          });
+         </script>
        </tr>
        </thead>
        <tbody>';
@@ -281,15 +300,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 		          <td>$categoriapago</td>
 		          <td><b>$primerpago €</b></td>
 							<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#pagarModal-$numpedido-primer'><a href='#'>PAGAR</a></button></td>
+              <td><input class='form-check-input' type='checkbox' value='$numpedido' name='pagartodos1' id='pagartodos1'></td>
 							<td><button type='button' class='btn btn-danger btn-xs' name='equiparbut' data-toggle='modal' data-target='#editarModal-$numpedido-primer'><a href='#'>EDITAR PAGO</a></button></td>
 						</tr>";
             };
-            echo'
+            echo"
 			</tbody>
      </table>
     </div>
 
-    <a type="button" class="btn btn-warning pull-right" name="exportarprimer" href="tmp/primer_plazo.csv"><b>EXPORTAR</b></a>';
+    <a type='button' class='btn btn-warning pull-right' name='exportarprimer' href='tmp/primer_plazo.csv'><b>EXPORTAR</b></a>
+    <a type='button' class='btn btn-info pull-right' name='fullcobro1' style='margin-right: 10px;' href='javascript:;' onclick='enviarValorToForm(\"$idFullModal\");' role='button' data-toggle='modal' data-target='#$idFullModal'><b>PAGAR SELECIONADOS</b></a>";
         };
         echo'
   </div>
@@ -304,6 +325,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
             $numPre = 1;
+            $idFullModal  = 'segundopago';
+            $arrayIdFullModal [] = $idFullModal;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
@@ -315,6 +338,19 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
          <th>Categoría</th>
          <th>Cuantía</th>
 				 <th> </th>
+         <th><label><input value="NO" type="checkbox" name="checkTodos2" id="checkTodos2"/></label></th>
+				 <th> </th>
+         <script type="text/javascript">
+          $("document").ready(function(){
+            $("#checkTodos2").change(function () {
+              if ($("#checkTodos2").is(":checked")){
+                 $(document.getElementsByName("pagartodos2")).prop("checked", true);
+              }else{
+                 $(document.getElementsByName("pagartodos2")).prop("checked", false);
+              }
+             });
+          });
+         </script>
        </tr>
        </thead>
        <tbody>';
@@ -338,15 +374,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 		          <td>$categoriapago</td>
 		          <td><b>$primerpago €</b></td>
 							<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#pagarModal-$numpedido-segundo'><a href='#'>PAGAR</a></button></td>
+              <td><input class='form-check-input' type='checkbox' value='$numpedido' name='pagartodos2' id='pagartodos2'></td>
 							<td><button type='button' class='btn btn-danger btn-xs' name='equiparbut' data-toggle='modal' data-target='#editarModal-$numpedido-segundo'><a href='#'>EDITAR PAGO</a></button></td>
 						</tr>";
             };
-            echo'
+            echo"
 			</tbody>
      </table>
     </div>
 
-    <a type="button" class="btn btn-warning pull-right" name="exportarsegundo" href="tmp/segundo_plazo.csv"><b>EXPORTAR</b></a>';
+    <a type='button' class='btn btn-warning pull-right' name='exportarsegundo' href='tmp/segundo_plazo.csv'><b>EXPORTAR</b></a>
+    <a type='button' class='btn btn-info pull-right' name='fullcobro1' style='margin-right: 10px;' href='javascript:;' onclick='enviarValorToForm(\"$idFullModal\");' role='button' data-toggle='modal' data-target='#$idFullModal'><b>PAGAR SELECIONADOS</b></a>";
         };
         echo'
   </div>
@@ -363,6 +401,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
             $numPre = 1;
+            $idFullModal  = 'tercerpago';
+            $arrayIdFullModal [] = $idFullModal;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
@@ -374,6 +414,19 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
          <th>Categoría</th>
          <th>Cuantía</th>
 				 <th> </th>
+         <th><label><input value="NO" type="checkbox" name="checkTodos3" id="checkTodos3"/></label></th>
+				 <th> </th>
+         <script type="text/javascript">
+          $("document").ready(function(){
+            $("#checkTodos3").change(function () {
+              if ($("#checkTodos3").is(":checked")){
+                 $(document.getElementsByName("pagartodos3")).prop("checked", true);
+              }else{
+                 $(document.getElementsByName("pagartodos3")).prop("checked", false);
+              }
+             });
+          });
+         </script>
        </tr>
        </thead>
        <tbody>';
@@ -396,15 +449,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 		          <td>$categoriapago</td>
 		          <td><b>$primerpago €</b></td>
 							<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#pagarModal-$numpedido-tercer'><a href='#'>PAGAR</a></button></td>
+              <td><input class='form-check-input' type='checkbox' value='$numpedido' name='pagartodos3' id='pagartodos3'></td>
 							<td><button type='button' class='btn btn-danger btn-xs' name='equiparbut' data-toggle='modal' data-target='#editarModal-$numpedido-tercer'><a href='#'>EDITAR PAGO</a></button></td>
 						</tr>";
             };
-            echo'
+            echo"
 			</tbody>
      </table>
     </div>
 
-    <a type="button" class="btn btn-warning pull-right" name="exportartercer" href="tmp/tercer_plazo.csv"><b>EXPORTAR</b></a>';
+    <a type='button' class='btn btn-warning pull-right' name='exportartercer' href='tmp/tercer_plazo.csv'><b>EXPORTAR</b></a>
+    <a type='button' class='btn btn-info pull-right' name='fullcobro1' style='margin-right: 10px;' href='javascript:;' onclick='enviarValorToForm(\"$idFullModal\");' role='button' data-toggle='modal' data-target='#$idFullModal'><b>PAGAR SELECIONADOS</b></a>";
         };
         echo'
   </div>
@@ -420,6 +475,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
             $numPre = 1;
+            $idFullModal  = 'cuartopago';
+            $arrayIdFullModal [] = $idFullModal;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
@@ -431,6 +488,19 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
          <th>Categoría</th>
          <th>Cuantía</th>
 				 <th> </th>
+         <th><label><input value="NO" type="checkbox" name="checkTodos4" id="checkTodos4"/></label></th>
+				 <th> </th>
+         <script type="text/javascript">
+          $("document").ready(function(){
+            $("#checkTodos4").change(function () {
+              if ($("#checkTodos4").is(":checked")){
+                 $(document.getElementsByName("pagartodos4")).prop("checked", true);
+              }else{
+                 $(document.getElementsByName("pagartodos4")).prop("checked", false);
+              }
+             });
+          });
+         </script>
        </tr>
        </thead>
        <tbody>';
@@ -453,15 +523,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 		          <td>$categoriapago</td>
 		          <td><b>$primerpago €</b></td>
 							<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#pagarModal-$numpedido-cuarto'><a href='#'>PAGAR</a></button></td>
+              <td><input class='form-check-input' type='checkbox' value='$numpedido' name='pagartodos4' id='pagartodos4'></td>
 							<td><button type='button' class='btn btn-danger btn-xs' name='equiparbut' data-toggle='modal' data-target='#editarModal-$numpedido-cuarto'><a href='#'>EDITAR PAGO</a></button></td>
 						</tr>";
             };
-            echo'
+            echo"
 			</tbody>
      </table>
     </div>
 
-    <a type="button" class="btn btn-warning pull-right" name="exportartercer" href="tmp/cuarto_plazo.csv"><b>EXPORTAR</b></a>';
+    <a type='button' class='btn btn-warning pull-right' name='exportcuarto' href='tmp/cuarto_plazo.csv'><b>EXPORTAR</b></a>
+    <a type='button' class='btn btn-info pull-right' name='fullcobro1' style='margin-right: 10px;' href='javascript:;' onclick='enviarValorToForm(\"$idFullModal\");' role='button' data-toggle='modal' data-target='#$idFullModal'><b>PAGAR SELECIONADOS</b></a>";
         };
         echo'
   </div>
@@ -477,6 +549,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
             $numPre = 1;
+            $idFullModal  = 'quintopago';
+            $arrayIdFullModal [] = $idFullModal;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
@@ -488,6 +562,19 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
          <th>Categoría</th>
          <th>Cuantía</th>
 				 <th> </th>
+         <th><label><input value="NO" type="checkbox" name="checkTodos5" id="checkTodos5"/></label></th>
+				 <th> </th>
+         <script type="text/javascript">
+          $("document").ready(function(){
+            $("#checkTodos5").change(function () {
+              if ($("#checkTodos5").is(":checked")){
+                 $(document.getElementsByName("pagartodos5")).prop("checked", true);
+              }else{
+                 $(document.getElementsByName("pagartodos5")).prop("checked", false);
+              }
+             });
+          });
+         </script>
        </tr>
        </thead>
        <tbody>';
@@ -510,15 +597,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 		          <td>$categoriapago</td>
 		          <td><b>$primerpago €</b></td>
 							<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#pagarModal-$numpedido-quinto'><a href='#'>PAGAR</a></button></td>
+              <td><input class='form-check-input' type='checkbox' value='$numpedido' name='pagartodos5' id='pagartodos5'></td>
 							<td><button type='button' class='btn btn-danger btn-xs' name='equiparbut' data-toggle='modal' data-target='#editarModal-$numpedido-quinto'><a href='#'>EDITAR PAGO</a></button></td>
 						</tr>";
             };
-            echo'
+            echo"
 			</tbody>
      </table>
     </div>
 
-    <a type="button" class="btn btn-warning pull-right" name="exportartercer" href="tmp/quinto_plazo.csv"><b>EXPORTAR</b></a>';
+    <a type='button' class='btn btn-warning pull-right' name='exportarquinto' href='tmp/quinto_plazo.csv'><b>EXPORTAR</b></a>
+    <a type='button' class='btn btn-info pull-right' name='fullcobro1' style='margin-right: 10px;' href='javascript:;' onclick='enviarValorToForm(\"$idFullModal\");' role='button' data-toggle='modal' data-target='#$idFullModal'><b>PAGAR SELECIONADOS</b></a>";
         };
         echo'
   </div>
@@ -534,6 +623,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores pendientes de este pago.</strong></div>';
         } else {
             $numPre = 1;
+            $idFullModal  = 'pagoextra';
+            $arrayIdFullModal [] = $idFullModal;
             echo'
     <div class="table-responsive">
      <table class="table table-striped">
@@ -543,8 +634,21 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
          <th>Nombre</th>
          <th>Apellidos</th>
          <th>Categoría</th>
-         <th>Cuantía</th>
+         <th>Cuantía</th
 				 <th> </th>
+         <th><label><input value="NO" type="checkbox" name="checkTodosExtra" id="checkTodosExtra"/></label></th>
+				 <th> </th>
+         <script type="text/javascript">
+          $("document").ready(function(){
+            $("#checkTodosExtra").change(function () {
+              if ($("#checkTodosExtra").is(":checked")){
+                 $(document.getElementsByName("pagartodosExtra")).prop("checked", true);
+              }else{
+                 $(document.getElementsByName("pagartodosExtra")).prop("checked", false);
+              }
+             });
+          });
+         </script>
        </tr>
        </thead>
        <tbody>';
@@ -567,15 +671,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 		          <td>$categoriapago</td>
 		          <td><b>$primerpago €</b></td>
 							<td><button type='button' class='btn btn-success btn-xs' name='equiparbut' data-toggle='modal' data-target='#pagarModal-$numpedido-extra'><a href='#'>PAGAR</a></button></td>
+              <td><input class='form-check-input' type='checkbox' value='$numpedido' name='pagartodosExtra' id='pagartodosExtra'></td>
 							<td><button type='button' class='btn btn-danger btn-xs' name='equiparbut' data-toggle='modal' data-target='#editarModal-$numpedido-extra'><a href='#'>EDITAR PAGO</a></button></td>
 						</tr>";
             };
-            echo'
+            echo"
 			</tbody>
      </table>
     </div>
 
-    <a type="button" class="btn btn-warning pull-right" name="exportarextra" href="tmp/plazo_extra.csv"><b>EXPORTAR</a></b>';
+    <a type='button' class='btn btn-warning pull-right' name='exportarextra' href='tmp/plazo_extra.csv'><b>EXPORTAR</b></a>
+    <a type='button' class='btn btn-info pull-right' name='fullcobro1' style='margin-right: 10px;' href='javascript:;' onclick='enviarValorToForm(\"$idFullModal\");' role='button' data-toggle='modal' data-target='#$idFullModal'><b>PAGAR SELECIONADOS</b></a>";
         };
         echo'
   </div>
@@ -945,9 +1051,60 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 	    </div>
 	  </div>
 	</div>
-
 	";
             }
+        }
+
+  echo "
+        <script type='text/javascript'>
+        function enviarValorToForm(idForm) {
+          var selected = new Array();
+          $(document).ready(function() {
+            $('input:checkbox:checked').each(function() {
+              if ($(this).val() == 'NO') {
+              } else {
+                selected.push($(this).val());
+                document.getElementById('imputeroid-'+idForm).value=selected;
+              }
+
+            });
+
+          });
+        }
+
+        function submitForm (idForm2){
+        var theForm = document.getElementById('formulario-'+idForm2);
+          theForm.submit();
+        }
+        </script>
+        ";
+
+        foreach ($arrayIdFullModal as $idF) {
+
+        echo "
+        <div class='modal fade bs-example-modal-sm' id='$idF' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+          <div class='modal-dialog' role='document'>
+            <div class='modal-content'>
+              <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                <h4 class='modal-title' id='myModalLabel'>Equipar jugadores seleccionados</h4>
+              </div>
+              <div class='modal-body'>
+                <p>Si continuas con la acción marcarás a todos los jugadores seleccionados jugador como \"Equipado\". Si por cualquier circunstacia a lo largo de la temporada este estado del jugador cambiara,
+                se podrá volver a poner como \"No Equipado\" editando al jugador en la lista de jugadores.</p>
+              </div>
+              <div class='modal-footer'>
+                  <form action='operaciones.php?oper=fullpago&plazo=$idF' id='formulario-$idF' method='post' name='formulario-$idF'>
+                    <input class='invisible' name='imputero-$idF' id='imputeroid-$idF' type='text'/>
+                    <button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>ATRÁS</button>
+                    <button id='submitBut' name='submitBut' onclick='submitForm(\"$idF\");' class='btn btn-success btn-sm'>PAGAR SELECCIONADOS</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        ";
+
         }
 
         include("sidebar.php");

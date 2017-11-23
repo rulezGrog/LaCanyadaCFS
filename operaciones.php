@@ -15,6 +15,17 @@ if ($tipoOperacion == 'pagar') {
     Header("Location: cobros.php");
 }
 
+//Función que realiza VARIOS PAGOS************************************************************//
+if ($tipoOperacion == 'fullpago') {
+    $plazo = $_GET['plazo'];
+    $ids = $_POST['imputero-'.$plazo];
+
+    $inserta= "UPDATE jugadores SET $plazo='0' WHERE pedido IN ($ids)";
+    $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
+    $_SESSION["paga2OK"] = 1;
+    Header("Location: cobros.php");
+}
+
 //Función que cambia un pago**************************************************************//
 if ($tipoOperacion == 'cambiarpago') {
     $id = $_GET['id'];
@@ -23,7 +34,6 @@ if ($tipoOperacion == 'cambiarpago') {
 
     $inserta= "UPDATE jugadores SET $plazo='$cuantia' WHERE pedido='$id'";
     $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
-
     $_SESSION["pagaOK"] = 1;
     Header("Location: cobros.php");
 }
@@ -32,10 +42,9 @@ if ($tipoOperacion == 'cambiarpago') {
 //*********************EQUIPAMOS A UN JUGADOR*************************//
 if ($tipoOperacion == 'equip') {
     $id = $_GET['id'];
-    if ($id <> "") {
-        require_once('fig.php');
-        $inserta= "UPDATE jugadores SET equipacion='NO' WHERE pedido='$id'";
 
+    if ($id <> "") {
+        $inserta= "UPDATE jugadores SET equipacion='NO' WHERE pedido='$id'";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["equipOK"] = 1;
         Header("Location: noequip.php");
@@ -45,10 +54,9 @@ if ($tipoOperacion == 'equip') {
 //*********************EQUIPAMOS A VARIOS JUGADORES*************************//
 if ($tipoOperacion == 'fullequip') {
     $ids = $_POST['imputer'];
-    if ($ids <> "") {
-        require_once('fig.php');
-        $inserta= "UPDATE jugadores SET equipacion='NO' WHERE pedido IN ($ids)";
 
+    if ($ids <> "") {
+        $inserta= "UPDATE jugadores SET equipacion='NO' WHERE pedido IN ($ids)";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["equip2OK"] = 1;
         Header("Location: noequip.php");
@@ -77,7 +85,6 @@ if ($tipoOperacion == 'newtemp') {
 if ($tipoOperacion == 'baja') {
     $id = $_GET['id'];
     if ($id <> "") {
-        require_once('fig.php');
         $inserta= "DELETE FROM jugadores WHERE pedido='$id'";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["delOK"] = 1;
@@ -90,7 +97,6 @@ if ($tipoOperacion == 'ascenso'){
     $id = $_GET['id'];
     $categoria = $_GET['newcategoria'];
     if ($id <> "") {
-        require_once('fig.php');
         $inserta= "UPDATE jugadores SET categoria='$categoria' WHERE pedido='$id'";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["upOK"] = 1;
@@ -102,7 +108,6 @@ if ($tipoOperacion == 'ascenso'){
 if ($tipoOperacion == 'bajaAdmin') {
     $id = $_GET['id'];
     if ($id <> "") {
-        require_once('fig.php');
         $inserta= "DELETE FROM admins WHERE idadmin='$id'";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["delOK"] = 1;

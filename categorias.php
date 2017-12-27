@@ -321,13 +321,16 @@ echo'
                             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
                         } else {
                             echo'
-						      <div class="table-responsive">
+						      <div class="table-responsive tablaJugadores">
 						       <table class="table table-striped">
 						         <thead>
 						         <tr>
                       <th class="celdaNumJugador">#</th>
 						           <th>Nombre</th>
 						           <th>Apellidos</th>
+                       <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                       <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                       <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 											 <th>LOPD</th>
 						           <th> </th>';
                             if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
@@ -346,6 +349,9 @@ echo'
                                 $apellidoPre = decrypt($filaPre['apellidos']);
                                 $numpedido = ($filaPre['pedido']);
                                 $arraypedidos [] = $numpedido;
+                                $fenix = ($filaPre['fenix']);
+                                $revision = ($filaPre['revision']);
+                                $ficha = ($filaPre['ficha']);
                                 $termsimage1Pre = ($filaPre['termsimage1']);
                                 $termsimage2Pre = ($filaPre['termsimage2']);
                                 $termsimage3Pre = ($filaPre['termsimage3']);
@@ -358,6 +364,27 @@ echo'
                         echo"</span></td>
 						            <td>$nombrePre</td>
 						            <td>$apellidoPre</td>
+                        <td class='nopadding-bot'>";
+                        if($fenix == 1){
+                          echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                        }else{
+                          echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                        } echo"
+                        </td>
+                        <td class='nopadding-bot'>";
+                        if($revision == 1){
+                          echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                        }else{
+                          echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                        } echo"
+                        </td>
+                        <td class='nopadding-bot'>";
+                        if($ficha == 1){
+                          echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                        }else{
+                          echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                        } echo"
+                        </td>
 												<td>";
 
                                 if ($termsimage1Pre == 1) {
@@ -426,6 +453,9 @@ echo'
                  <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
+                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
@@ -444,6 +474,9 @@ echo'
                     $apellidoBenja = decrypt($filaBenja['apellidos']);
                     $numpedido = ($filaBenja['pedido']);
                     $arraypedidos [] = $numpedido;
+                    $fenix = ($filaBenja['fenix']);
+                    $revision = ($filaBenja['revision']);
+                    $ficha = ($filaBenja['ficha']);
                     $termsimage1Benja = ($filaBenja['termsimage1']);
                     $termsimage2Benja = ($filaBenja['termsimage2']);
                     $termsimage3Benja = ($filaBenja['termsimage3']);
@@ -456,6 +489,27 @@ echo'
                   echo"</span></td>
 			            <td>$nombreBenja</td>
 			            <td>$apellidoBenja</td>
+                  <td class='nopadding-bot'>";
+                  if($fenix == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($revision == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($ficha == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
 									<td>";
 
                     if ($termsimage1Benja == 1) {
@@ -524,6 +578,9 @@ echo'
                  <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
+                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
@@ -542,6 +599,9 @@ echo'
                     $apellidoAle = decrypt($filaAle['apellidos']);
                     $numpedido = ($filaAle['pedido']);
                     $arraypedidos [] = $numpedido;
+                    $fenix = ($filaAle['fenix']);
+                    $revision = ($filaAle['revision']);
+                    $ficha = ($filaAle['ficha']);
                     $termsimage1Ale = ($filaAle['termsimage1']);
                     $termsimage2Ale = ($filaAle['termsimage2']);
                     $termsimage3Ale = ($filaAle['termsimage3']);
@@ -554,6 +614,27 @@ echo'
                   echo"</span></td>
 			            <td>$nombreAle</td>
 			            <td>$apellidoAle</td>
+                  <td class='nopadding-bot'>";
+                  if($fenix == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($revision == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($ficha == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
 									<td>";
 
                     if ($termsimage1Ale == 1) {
@@ -622,6 +703,9 @@ echo'
                  <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
+                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
@@ -640,6 +724,9 @@ echo'
                     $apellidoInfa = decrypt($filaInfa['apellidos']);
                     $numpedido = ($filaInfa['pedido']);
                     $arraypedidos [] = $numpedido;
+                    $fenix = ($filaInfa['fenix']);
+                    $revision = ($filaInfa['revision']);
+                    $ficha = ($filaInfa['ficha']);
                     $termsimage1Infa = ($filaInfa['termsimage1']);
                     $termsimage2Infa = ($filaInfa['termsimage2']);
                     $termsimage3Infa = ($filaInfa['termsimage3']);
@@ -652,6 +739,27 @@ echo'
                   echo"</span></td>
 			            <td>$nombreInfa</td>
 			            <td>$apellidoInfa</td>
+                  <td class='nopadding-bot'>";
+                  if($fenix == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($revision == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($ficha == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
 									<td>";
 
                     if ($termsimage1Infa == 1) {
@@ -719,6 +827,9 @@ echo'
                  <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
+                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
@@ -737,6 +848,9 @@ echo'
                     $apellidoCade = decrypt($filaCade['apellidos']);
                     $numpedido = ($filaCade['pedido']);
                     $arraypedidos [] = $numpedido;
+                    $fenix = ($filaCade['fenix']);
+                    $revision = ($filaCade['revision']);
+                    $ficha = ($filaCade['ficha']);
                     $termsimage1Cade = ($filaCade['termsimage1']);
                     $termsimage2Cade = ($filaCade['termsimage2']);
                     $termsimage3Cade = ($filaCade['termsimage3']);
@@ -749,6 +863,27 @@ echo'
                   echo"</span></td>
 			            <td>$nombreCade</td>
 			            <td>$apellidoCade</td>
+                  <td class='nopadding-bot'>";
+                  if($fenix == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($revision == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($ficha == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
 									<td>";
 
                     if ($termsimage1Cade == 1) {
@@ -816,6 +951,9 @@ echo'
                  <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
+                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
@@ -834,6 +972,9 @@ echo'
                     $apellidoJuve = decrypt($filaJuve['apellidos']);
                     $numpedido = ($filaJuve['pedido']);
                     $arraypedidos [] = $numpedido;
+                    $fenix = ($filaJuve['fenix']);
+                    $revision = ($filaJuve['revision']);
+                    $ficha = ($filaJuve['ficha']);
                     $termsimage1Juve = ($filaJuve['termsimage1']);
                     $termsimage2Juve = ($filaJuve['termsimage2']);
                     $termsimage3Juve = ($filaJuve['termsimage3']);
@@ -846,6 +987,27 @@ echo'
                   echo"</span></td>
 			            <td>$nombreJuve</td>
 			            <td>$apellidoJuve</td>
+                  <td class='nopadding-bot'>";
+                  if($fenix == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($revision == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($ficha == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
 									<td>";
 
                     if ($termsimage1Juve == 1) {
@@ -913,6 +1075,9 @@ echo'
                  <th class="celdaNumJugador">#</th>
 			           <th>Nombre</th>
 			           <th>Apellidos</th>
+                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
@@ -930,6 +1095,9 @@ echo'
                     $apellidoSenior = decrypt($filaSenior['apellidos']);
                     $numpedido = ($filaSenior['pedido']);
                     $arraypedidos [] = $numpedido;
+                    $fenix = ($filaSenior['fenix']);
+                    $revision = ($filaSenior['revision']);
+                    $ficha = ($filaSenior['ficha']);
                     $termsimage1Senior = ($filaSenior['termsimage1']);
                     $termsimage2Senior = ($filaSenior['termsimage2']);
                     $termsimage3Senior = ($filaSenior['termsimage3']);
@@ -942,6 +1110,27 @@ echo'
                   echo"</span></td>
 			            <td>$nombreSenior</td>
 			            <td>$apellidoSenior</td>
+                  <td class='nopadding-bot'>";
+                  if($fenix == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($revision == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
+                  <td class='nopadding-bot'>";
+                  if($ficha == 1){
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                  }else{
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                  } echo"
+                  </td>
 									<td>";
 
                     if ($termsimage1Senior == 1) {
@@ -1051,6 +1240,10 @@ echo'
             $lopd2 = ($filaModal['termsimage2']);
             $lopd3 = ($filaModal['termsimage3']);
             $lopd4 = ($filaModal['termsimage4']);
+
+            $fenix = ($filaModal['fenix']);
+            $revision = ($filaModal['revision']);
+            $ficha = ($filaModal['ficha']);
 
                     // $vb = iconv("UTF-8", "ISO-8859-1", $nombretut);
 
@@ -1231,46 +1424,83 @@ echo'
 														<label class='col-sm-2 control-label'></label>
 														<div class='col-sm-10'>
 																<input type='checkbox' ng-model='user.termsImage1' name='termsImage1' value='1' ";
-            if ($lopd1 == '1') {
-                echo" checked";
-            }
-            echo" />
+                                  if ($lopd1 == '1') {
+                                      echo" checked";
+                                  }
+                                  echo" />
 																La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.
 														</div>
 
 														<label class='col-sm-2 control-label'></label>
 														<div class='col-sm-10'>
 																<input type='checkbox' ng-model='user.termsImage2' name='termsImage2' value='1' ";
-            if ($lopd2 == '1') {
-                echo" checked";
-            }
-            echo" />
+                                  if ($lopd2 == '1') {
+                                      echo" checked";
+                                  }
+                                  echo" />
 																La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.
 														</div>
 
 														<label class='col-sm-2 control-label'></label>
 														<div class='col-sm-10'>
 																<input type='checkbox' ng-model='user.termsImage3' name='termsImage3' value='1' ";
-            if ($lopd3 == '1') {
-                echo" checked";
-            }
-            echo" />
+                                  if ($lopd3 == '1') {
+                                      echo" checked";
+                                  }
+                                  echo" />
 																La utilización de las imágenes para ilustrar las noticias remitidas a <a href='https://www.lacanyadacfs.com' target='_blank' >www.lacanyadacfs.com/</a>.
 														</div>
 
 														<label class='col-sm-2 control-label'></label>
 														<div class='col-sm-10'>
 																<input type='checkbox' ng-model='user.termsImage4' name='termsImage4' value='1' ";
-            if ($lopd4 == '1') {
-                echo" checked";
-            }
-            echo" />
+                                  if ($lopd4 == '1') {
+                                      echo" checked";
+                                  }
+                                  echo" />
 																La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como <a href='https://www.facebook.com/LaCanyadaCfs' target='_blank' >Facebook</a>, <a href='https://twitter.com/LaCanyadaCFS' target='_blank' >Twitter</a>, y <a href='https://www.youtube.com/user/LaCanyadaCFS?feature=mhee' target='_blank' >YouTube</a>.
 														</div>
 														<br>
 														<button type='submit' class='btn btn-warning float-right'>Guardar</button>
 												</form>
-										</div>
+										</div>	<!--row form-group#4-->
+
+                    <br>
+                    <h3 data-toggle='collapse' data-target='#editpanel5-$id' class='modal-title flip' data-parent='#accordion' id='flip5'>Otros Datos:</h3>
+                      <div class='row form-group paneledit collapse' id='editpanel5-$id'>
+                        <form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit5' method='POST'>
+                        <div class='row'>
+                            <label class='col-sm-1 control-label'></label>
+                            <div class='col-sm-3'>
+                                <input type='checkbox' ng-model='user.termsImage1' name='fenix' value='1' ";
+                                  if ($fenix == '1') {
+                                      echo" checked";
+                                  }
+                                  echo" /> <b>Alta Fénix</b>
+                            </div>
+
+                            <label class='col-sm-1 control-label'></label>
+                            <div class='col-sm-3'>
+                                <input type='checkbox' ng-model='user.termsImage1' name='revision' value='1' ";
+                                  if ($revision == '1') {
+                                      echo" checked";
+                                  }
+                                  echo" /> <b>Revisión Médica</b>
+                            </div>
+
+                            <label class='col-sm-1 control-label'></label>
+                            <div class='col-sm-3'>
+                                <input type='checkbox' ng-model='user.termsImage1' name='ficha' value='1' ";
+                                  if ($ficha == '1') {
+                                      echo" checked";
+                                  }
+                                  echo" /> <b>Ficha Emitida</b>
+                            </div>
+                        </div>
+                          <button type='submit' class='btn btn-warning float-right'>Guardar</button>
+                        </form>
+                        </div>	<!--row form-group#5-->
+
 
 							<br>
 							<br>

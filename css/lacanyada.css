@@ -685,6 +685,39 @@ button a {
   text-align: center;
 }
 
+th.textoTHRotado {
+  height: 110px;
+  white-space: nowrap;
+}
+
+th.textoTHRotado>div {
+  transform: /* Magic Numbers */
+  translate(-40px, -1px)
+  /* 45 is really 360 - 45 */
+  rotate(-45deg);
+  width: 30px;
+}
+
+th.textoTHRotado>div>span {
+  border-bottom: 2px solid #ddd;
+  padding: 5px 7px;
+}
+
+.tablaJugadores {
+  margin-top: -50px;
+}
+
+.iconTablaJugador {
+  line-height: 1 !important;
+  padding-bottom: -12px !important;
+  margin-left: -40px;
+  font-size: 23px;
+}
+
+td.nopadding-bot {
+  padding-bottom: 0 !important;
+}
+
 .modal-header {
   background-color: rgb(255, 140, 0);
   border-top-left-radius: 5px;

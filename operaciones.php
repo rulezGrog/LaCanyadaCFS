@@ -1,6 +1,6 @@
 <?php
 
-require_once('fig.php');
+require('fig.php');
 
 $tipoOperacion = $_GET['oper'];
 
@@ -12,7 +12,8 @@ if ($tipoOperacion == 'pagar') {
     $inserta= "UPDATE jugadores SET $plazo='0' WHERE pedido='$id'";
     $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
     $_SESSION["pagaOK"] = 1;
-    Header("Location: cobros.php");
+    // Header("Location: cobros.php");
+    echo "<script> window.location.replace('cobros.php') </script>";
 }
 
 //Función que realiza VARIOS PAGOS************************************************************//
@@ -23,7 +24,8 @@ if ($tipoOperacion == 'fullpago') {
     $inserta= "UPDATE jugadores SET $plazo='0' WHERE pedido IN ($ids)";
     $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
     $_SESSION["paga2OK"] = 1;
-    Header("Location: cobros.php");
+    // Header("Location: cobros.php");
+    echo "<script> window.location.replace('cobros.php') </script>";
 }
 
 //Función que cambia un pago**************************************************************//
@@ -35,7 +37,8 @@ if ($tipoOperacion == 'cambiarpago') {
     $inserta= "UPDATE jugadores SET $plazo='$cuantia' WHERE pedido='$id'";
     $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
     $_SESSION["pagaOK"] = 1;
-    Header("Location: cobros.php");
+    // Header("Location: cobros.php");
+    echo "<script> window.location.replace('cobros.php') </script>";
 }
 
 
@@ -47,7 +50,8 @@ if ($tipoOperacion == 'equip') {
         $inserta= "UPDATE jugadores SET equipacion='NO' WHERE pedido='$id'";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["equipOK"] = 1;
-        Header("Location: noequip.php");
+        // Header("Location: noequip.php");
+        echo "<script> window.location.replace('noequip.php') </script>";
     }
 }
 
@@ -60,6 +64,7 @@ if ($tipoOperacion == 'fullequip') {
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["equip2OK"] = 1;
         Header("Location: noequip.php");
+        echo "<script> window.location.replace('noequip.php') </script>";
     }
 }
 
@@ -78,7 +83,8 @@ if ($tipoOperacion == 'newtemp') {
 
     $_SESSION["newTemp"] = 'NO';
 
-    Header("Location: index.php");
+    // Header("Location: index.php");
+    echo "<script> window.location.replace('index.php') </script>";
 }
 
 //*********************DAMOS DE BAJA A UN JUGADOR*************************//
@@ -88,7 +94,8 @@ if ($tipoOperacion == 'baja') {
         $inserta= "DELETE FROM jugadores WHERE pedido='$id'";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["delOK"] = 1;
-        Header("Location: categorias.php");
+        // Header("Location: categorias.php");
+        echo "<script> window.location.replace('categorias.php') </script>";
     }
 }
 
@@ -100,7 +107,8 @@ if ($tipoOperacion == 'ascenso'){
         $inserta= "UPDATE jugadores SET categoria='$categoria' WHERE pedido='$id'";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["upOK"] = 1;
-        Header("Location: categorias.php");
+        // Header("Location: categorias.php");
+        echo "<script> window.location.replace('categorias.php') </script>";
     }
 }
 
@@ -111,7 +119,8 @@ if ($tipoOperacion == 'bajaAdmin') {
         $inserta= "DELETE FROM admins WHERE idadmin='$id'";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["delOK"] = 1;
-        Header("Location: admin.php");
+        // Header("Location: admin.php");
+        echo "<script> window.location.replace('admin.php') </script>";
     }
 }
 
@@ -119,7 +128,8 @@ if ($tipoOperacion == 'bajaAdmin') {
 //************************* AGREGAMOS UN ADMIN *************************//
 if ($tipoOperacion == 'regAdmin') {
     if (($_POST['nombre'] == ' ') or ($_POST['email'] == ' ') or ($_POST['pwd'] == ' ') or ($_POST['tipouser'] == ' ') or ($_POST['pwd2'] == ' ') and ($_POST['pwd'] == $_POST['pwd2'])) {//comprobamos que las variables enviadas por el form de login.php tienen contenido
-        Header("Location: admin.php"); //estan vacías, volvemos al index
+        // Header("Location: admin.php"); //estan vacías, volvemos al index
+        echo "<script> window.location.replace('admin.php') </script>";
     } else {
         $nombre = $_POST['nombre'];
         $email = $_POST['email'];
@@ -130,7 +140,8 @@ if ($tipoOperacion == 'regAdmin') {
         $inserta="INSERT INTO admins (level,nombre,email,password) VALUES ('$nivel','$nombre','$email','$pwd')";
         $resultado=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["regOK"]= 1;
-        Header("Location: admin.php");
+        // Header("Location: admin.php");
+        echo "<script> window.location.replace('admin.php') </script>";
     }
 }; //endIF registro nuevo Admin
 
@@ -143,13 +154,15 @@ if ($tipoOperacion == 'editAdminPass') {
 
     if ($newpass != $newpassVal) {
         $_SESSION["regOK"]= -2;
-        Header("Location: admin.php?id=$id");
+        // Header("Location: admin.php?id=$id");
+        echo "<script> window.location.replace('admin.php?id=$id') </script>";
     } else {
         mysql_select_db(DB_NAME_AG, $ilink);
         $updateAdmin1 = "UPDATE admins SET password = '$newpass' WHERE idadmin = '$id'";
         $resuUpAd1=mysql_query($updateAdmin1, $ilink) or die(mysql_error());
         $_SESSION["regOK"]= 2;
-        Header("Location: admin.php");
+        // Header("Location: admin.php");
+        echo "<script> window.location.replace('admin.php') </script>";
     }
 };
 
@@ -160,7 +173,8 @@ if ($tipoOperacion == 'editAdminTipo') {
     $updateAdmin2 = "UPDATE admins SET level = '$nivel' WHERE idadmin = '$id'";
     $resuUpAd2=mysql_query($updateAdmin2, $ilink) or die(mysql_error());
     $_SESSION["regOK"]= 2;
-    Header("Location: admin.php");
+    // Header("Location: admin.php");
+    echo "<script> window.location.replace('admin.php') </script>";
 };
  //endIF edición Admin;
 ?>

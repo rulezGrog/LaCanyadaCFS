@@ -1,4 +1,4 @@
-<?php  include("header.php");
+<?php  require("header.php");
 
 
 $selecciona2= "SELECT * FROM admins";
@@ -137,7 +137,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 var selected = new Array();
                 $(document).ready(function() {
                   $('input:checkbox:checked').each(function() {
-                    if ($(this).val() == 'NO') {                      
+                    if ($(this).val() == 'NO') {
                     } else {
                       selected.push($(this).val());
                       document.getElementById('imputer').value=selected;

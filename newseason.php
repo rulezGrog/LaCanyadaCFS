@@ -1,4 +1,4 @@
-<?php  include("header.php");
+<?php  require("header.php");
 
 
 if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form

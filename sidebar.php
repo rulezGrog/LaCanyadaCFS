@@ -14,6 +14,7 @@
     <li class="tree"><a type="button" data-parent="#accordion" data-toggle="collapse" href="#incidencias"><span class="glyphicon glyphicon-fire preicon" aria-hidden="true"></span><span class="textMenu">INCIDENCIAS</span></a>
      <ul id="incidencias" class="panel-collapse collapse">
        <?php
+        session_start();
          if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
              echo '
          <li><a href="cobros.php">COBROS A REALIZAR</a></li>';

@@ -1,6 +1,6 @@
 <?php
 
-include("header.php");
+require("header.php");
 
 //
 // $selecciona2= "SELECT * FROM jugadores";
@@ -15,7 +15,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         $temporada = $_SESSION['temporada'];
 
         echo '<div ng-app="app">';
-        require_once('funcionesJS.php');
+        require('funcionesJS.php');
         echo"
 
 <div class='headTitle'>

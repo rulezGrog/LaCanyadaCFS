@@ -39,4 +39,16 @@
     </div>
     ';
   }
+
+$_SESSION['obras'] = 0; //Vsariable de session q nos pone en modo mantenimiento
+
+if ($_SESSION['obras'] == 1) {
+  echo'
+  <div class="alert alert-danger">
+    <strong>¡IMPORTANTE, MODO MANTENIMIENTO ACTIVADO!</strong> La activación de este modo implica que existen cosas que no están funcionando correctamente y debido a ello, y por mantener la integridad de los datos,
+    se está usando una base de datos alternativa y <strong>desechable</strong>, por lo que los datos que actualmente aparecen no son, en absoluto, reflejo de la realidad. Disculpen las molestias.
+  </div>
+  ';
+}
+
 ?>

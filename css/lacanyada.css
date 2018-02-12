@@ -8,6 +8,7 @@
 
 html, body {
   margin: 0;
+  margin-top: -10px; /*de donde coño sale ese puto margen*/
   padding: 0;
   height: 100%;
   /* needed for container min-height */
@@ -858,4 +859,7 @@ margin-top: 25px;
 
 .font-green {
   color: #00a65a;
+}
+.text-center {
+  text-align: center;
 }

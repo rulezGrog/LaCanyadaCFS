@@ -1,7 +1,6 @@
 <?php
-
-require_once('fig.php'); //incluimos el config.php que contiene los datos de la conexión a la db
-require_once('funciones.php');
+require('fig.php'); //incluimos el config.php que contiene los datos de la conexión a la db
+require('funciones.php');
 
 $operacion = $_GET['op'];
 $id = $_GET['id'];
@@ -59,7 +58,8 @@ if ($operacion == 'edit1') { // edición del Primer Panel
     $resultado = mysql_query($update1, $ilink) or die(mysql_error());
 
     $_SESSION["editOK"]= 1;
-    Header("Location: categorias.php");
+    // Header("Location: categorias.php");
+    echo "<script> window.location.replace('categorias.php') </script>";
 }
 
 
@@ -75,7 +75,8 @@ if ($operacion == 'edit2') { // edición del segundo Panel
     $resultado = mysql_query($update2, $ilink) or die(mysql_error());
 
     $_SESSION["editOK"]= 1;
-    Header("Location: categorias.php");
+    // Header("Location: categorias.php");
+    echo "<script> window.location.replace('categorias.php') </script>";
 }
 
 if ($operacion == 'edit3') { // edición del Tercer Panel
@@ -94,7 +95,8 @@ if ($operacion == 'edit3') { // edición del Tercer Panel
     $resultado = mysql_query($update3, $ilink) or die(mysql_error());
 
     $_SESSION["editOK"]= 1;
-    Header("Location: categorias.php");
+    // Header("Location: categorias.php");
+    echo "<script> window.location.replace('categorias.php') </script>";
 }
 
 
@@ -128,7 +130,8 @@ if ($operacion == 'edit4') { // edición del Cuarto Panel
     $resultado = mysql_query($update4, $ilink) or die(mysql_error());
 
     $_SESSION["editOK"]= 1;
-    Header("Location: categorias.php");
+    // Header("Location: categorias.php");
+    echo "<script> window.location.replace('categorias.php') </script>";
 }
 
 if ($operacion == 'edit5') { // edición del Cuarto Panel
@@ -155,5 +158,6 @@ if ($operacion == 'edit5') { // edición del Cuarto Panel
     $resultado = mysql_query($update5, $ilink) or die(mysql_error());
 
     $_SESSION["editOK"]= 1;
-    Header("Location: categorias.php");
+    // Header("Location: categorias.php");
+    echo "<script> window.location.replace('categorias.php') </script>";
 }

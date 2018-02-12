@@ -2,7 +2,7 @@
   PÁGINA SOLO PARA PRUEBAS Y QUE NO SE MOSTRARÁ EN LA VERSIÓN DEFEINITIVA
 -->
 
-<?php  include("header.php");
+<?php  require("header.php");
 
 $selecciona2= "SELECT * FROM admins";
 

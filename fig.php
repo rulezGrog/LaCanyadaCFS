@@ -1,4 +1,8 @@
-<?php
+﻿<?php
+
+//Comenzamos la sesión, esto se explica despues en el Sistema de Login
+session_start();
+
         //conexion a Socios
 
         //LOCAL******************
@@ -33,7 +37,3 @@
         $ilink=mysql_connect(DB_HOST_AG, DB_USER_AG, DB_PASS_AG) or die(mysql_error());
         $dgAg = mysql_select_db(DB_NAME_AG, $ilink);
         // mysql_set_charset('utf8mb4', $ilink);
-
-
-//Comenzamos la sesión, esto se explica despues en el Sistema de Login
-session_start();

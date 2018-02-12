@@ -1,6 +1,6 @@
 <?php
-require_once('fig.php'); //incluimos el config.php que contiene los datos de la conexión a la db
-require_once('funciones.php');
+require('fig.php'); //incluimos el config.php que contiene los datos de la conexión a la db
+require('funciones.php');
 
 
 // $temporadaAct = $_SESSION["temporada"];

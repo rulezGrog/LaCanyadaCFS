@@ -23,14 +23,10 @@
 </head>
 
 <?php
+require('fig.php'); //incluimos el config.php que contiene los datos de la conexión a la db y la sesión
 
-require_once('fig.php'); //incluimos el config.php que contiene los datos de la conexión a la db y la sesión
-// session_start();
-
-
-        if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
-
-            require_once('login.php');
+        if (!isset($_SESSION['admin'])) {//comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
+            require('login.php');
         } else {
 
             //SI se ha logeado, mostramos el nick y la opción de deslogearse
@@ -47,11 +43,10 @@ require_once('fig.php'); //incluimos el config.php que contiene los datos de la 
             } else {
                 $temporada = date('Y');
             }
-            $_SESSION["temporada"] = $temporada;
+            $_SESSION['temporada'] = $temporada;
 
-                require_once('funciones.php');
-
-                require_once('headmenu.php');
+                require('funciones.php');
+                require('headmenu.php');
             }
         }
 

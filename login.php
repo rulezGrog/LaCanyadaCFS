@@ -1,7 +1,9 @@
 
   <body>
 
-<?php  include("headmenu.php"); ?>
+<?php
+require('headmenu.php');
+?>
 <!--
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -13,9 +15,23 @@
   </nav> -->
 
       <?php
-      if (isset($_SESSION["regNOT"]) &&  $_SESSION["regNOT"] == 1) {
-          echo'<div class="container"><div class="alert alert-danger" style="margin:0 auto;"><strong>¡¡¡eMail y/0 contraseña incorrectos!!!!.</strong></div></div>';
-          $_SESSION["regNOT"] = 0;
+      if (isset($_SESSION['regNOT']) &&  $_SESSION['regNOT'] == 1) {
+          echo'
+          <div class="container2">
+            <div class="alert alert-danger text-center" style="margin:0 auto;">
+              <strong>¡¡¡eMail y/0 contraseña incorrectos!!!!.</strong>
+            </div>
+          </div>';
+          $_SESSION['regNOT'] = 0;
+      }
+      if (isset($_SESSION['noLoginDATA']) &&  $_SESSION['noLoginDATA'] == 1) {
+          echo'
+          <div class="container2">
+            <div class="alert alert-warning text-center" style="margin:0 auto;">
+              <strong>No has introducido alguno de los datos requeridos.</strong>
+            </div>
+          </div>';
+          $_SESSION['noLoginDATA'] = 0;
       }
       ?>
 
@@ -52,9 +68,7 @@
       </div>
     </div>
   </form>
-
 </div>
-
 
   </body>
 </html>

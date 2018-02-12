@@ -1,7 +1,5 @@
-
 <?php
-
-include("header.php");
+require('header.php');
 
 $selecciona2= "SELECT * FROM admins";
 $resultado2=mysql_query($selecciona2, $ilink) or die(mysql_error());
@@ -73,7 +71,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             $resulJugaPE = mysql_query($JugadoresPE, $ilink) or die(mysql_error());
             $rowsJugaPE = mysql_num_rows($resulJugaPE);
 
-            $rowsJugaTOTAL = $rowsJugaPP + $rowsJugaSP + $rowsJugaTP + $rowsJugaPE;
+            $rowsJugaTOTAL = $rowsJugaPP + $rowsJugaSP + $rowsJugaTP + $rowsJuga4P + $rowsJuga5P + $rowsJugaPE;
 
 
          //OR segundopago<>'0' OR tercerpago<>'0' OR pagoextra<>'0'

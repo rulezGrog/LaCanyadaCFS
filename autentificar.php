@@ -29,8 +29,6 @@ $usuario = mysql_query("SELECT * FROM admins WHERE email='$emalio' and password=
         $_SESSION['INFO'] = 1;
         $_SESSION['pagaOK'] = 0;
 
-        echo $_SESSION['admin'];
-
         echo "<script> window.location.replace('index.php') </script>";
         // header('Location: index.php'); //volvemos al login donde nos saldrá nuestro menú de usuario
     } else {

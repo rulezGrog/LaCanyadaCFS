@@ -100,11 +100,24 @@ if ($tipoOperacion == 'baja') {
 }
 
 //**********************ASCENDEMOS A UN JUGADOR**************************//
-if ($tipoOperacion == 'ascenso'){
+if ($tipoOperacion == 'ascenso') {
     $id = $_GET['id'];
     $categoria = $_GET['newcategoria'];
     if ($id <> "") {
-        $inserta= "UPDATE jugadores SET categoria='$categoria' WHERE pedido='$id'";
+        $inserta= "UPDATE jugadores SET categoria='$categoria', ascendido='1' WHERE pedido='$id'";
+        $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
+        $_SESSION["upOK"] = 1;
+        // Header("Location: categorias.php");
+        echo "<script> window.location.replace('categorias.php') </script>";
+    }
+}
+
+//****************ASCENDEMOS A UN JUGADOR PREVIAMENTE ASCENDIDO*********************//
+if ($tipoOperacion == 'descenso') {
+    $id = $_GET['id'];
+    $categoria = $_GET['newcategoria'];
+    if ($id <> "") {
+        $inserta= "UPDATE jugadores SET categoria='$categoria', ascendido='0' WHERE pedido='$id'";
         $resultado1=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["upOK"] = 1;
         // Header("Location: categorias.php");
@@ -177,4 +190,3 @@ if ($tipoOperacion == 'editAdminTipo') {
     echo "<script> window.location.replace('admin.php') </script>";
 };
  //endIF edición Admin;
-?>

@@ -61,12 +61,12 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             unlink("./tmp/senior.csv");
         }
 
-            ///-------------- CSVs --------------///
+        ///-------------- CSVs --------------///
 
-                        $fp0 = fopen('./tmp/listajugadores.csv', 'w');
+        $fp0 = fopen('./tmp/listajugadores.csv', 'w');
 
-                        // output the column headings
-                        $headerarray0 = array('Categoria;Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
+        // output the column headings
+        $headerarray0 = array('Categoria;Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
 
         fputcsv($fp0, $headerarray0);
 
@@ -74,27 +74,27 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         $export0 = mysql_query($selectexport0) or die("Sql error : " . mysql_error());
 
-                        // loop over the rows, outputting them
-                        while ($headerarray0 = mysql_fetch_assoc($export0)) {
-                            $headerarray0['nombre'] = decrypt($headerarray0['nombre']).' '.decrypt($headerarray0['apellidos']);
-                            $headerarray0['dni'] = decrypt($headerarray0['dni']);
-                            if ($headerarray0['nom_tutor'] != "") {
-                              $headerarray0['nom_tutor'] = decrypt($headerarray0['nom_tutor']).' '.decrypt($headerarray0['ape_tutor']);
-                            }
-                            $headerarray0['email'] = decrypt($headerarray0['email']);
-                            $headerarray0['tlf'] = decrypt($headerarray0['tlf']);
-                            $headerarray0['direccion'] = $headerarray0['tipo_calle'].' '.decrypt($headerarray0['direccion']).' - '.$headerarray0['cp'].', '.decrypt($headerarray0['poblacion']).', '.decrypt($headerarray0['provincia']);
-                            unset($headerarray0['apellidos'], $headerarray0['ape_tutor'], $headerarray0['tipo_calle'], $headerarray0['cp'], $headerarray0['provincia'], $headerarray0['poblacion']);
-                            $headerarray0 = array_map("utf8_decode", $headerarray0);
-                            fputcsv($fp0, $headerarray0, ';');
-                        }
+        // loop over the rows, outputting them
+        while ($headerarray0 = mysql_fetch_assoc($export0)) {
+            $headerarray0['nombre'] = decrypt($headerarray0['nombre']).' '.decrypt($headerarray0['apellidos']);
+            $headerarray0['dni'] = decrypt($headerarray0['dni']);
+            if ($headerarray0['nom_tutor'] != "") {
+                $headerarray0['nom_tutor'] = decrypt($headerarray0['nom_tutor']).' '.decrypt($headerarray0['ape_tutor']);
+            }
+            $headerarray0['email'] = decrypt($headerarray0['email']);
+            $headerarray0['tlf'] = decrypt($headerarray0['tlf']);
+            $headerarray0['direccion'] = $headerarray0['tipo_calle'].' '.decrypt($headerarray0['direccion']).' - '.$headerarray0['cp'].', '.decrypt($headerarray0['poblacion']).', '.decrypt($headerarray0['provincia']);
+            unset($headerarray0['apellidos'], $headerarray0['ape_tutor'], $headerarray0['tipo_calle'], $headerarray0['cp'], $headerarray0['provincia'], $headerarray0['poblacion']);
+            $headerarray0 = array_map("utf8_decode", $headerarray0);
+            fputcsv($fp0, $headerarray0, ';');
+        }
         fclose($fp0);
 
-                        //------OTRO------//
-            $fp1 = fopen('./tmp/prebenjamin.csv', 'w');
+        //------OTRO------//
+        $fp1 = fopen('./tmp/prebenjamin.csv', 'w');
 
-            // output the column headings
-            $headerarray1 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
+        // output the column headings
+        $headerarray1 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
 
         fputcsv($fp1, $headerarray1);
 
@@ -102,28 +102,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         $export1 = mysql_query($selectexport1) or die("Sql error : " . mysql_error());
 
-            // loop over the rows, outputting them
-            while ($headerarray1 = mysql_fetch_assoc($export1)) {
-                $headerarray1['nombre'] = decrypt($headerarray1['nombre']).' '.decrypt($headerarray1['apellidos']);
-                $headerarray1['dni'] = decrypt($headerarray1['dni']);
-                if ($headerarray1['nom_tutor'] != "") {
-                  $headerarray1['nom_tutor'] = decrypt($headerarray1['nom_tutor']).' '.decrypt($headerarray1['ape_tutor']);
-                }
-                $headerarray1['email'] = decrypt($headerarray1['email']);
-                $headerarray1['tlf'] = decrypt($headerarray1['tlf']);
-                $headerarray1['direccion'] = $headerarray1['tipo_calle'].' '.decrypt($headerarray1['direccion']).' - '.$headerarray1['cp'].', '.decrypt($headerarray1['poblacion']).', '.decrypt($headerarray1['provincia']);
-                unset($headerarray1['apellidos'], $headerarray1['ape_tutor'], $headerarray1['tipo_calle'], $headerarray1['cp'], $headerarray1['provincia'], $headerarray1['poblacion']);
-                $headerarray1 = array_map("utf8_decode", $headerarray1);
-                fputcsv($fp1, $headerarray1, ';');
+        // loop over the rows, outputting them
+        while ($headerarray1 = mysql_fetch_assoc($export1)) {
+            $headerarray1['nombre'] = decrypt($headerarray1['nombre']).' '.decrypt($headerarray1['apellidos']);
+            $headerarray1['dni'] = decrypt($headerarray1['dni']);
+            if ($headerarray1['nom_tutor'] != "") {
+                $headerarray1['nom_tutor'] = decrypt($headerarray1['nom_tutor']).' '.decrypt($headerarray1['ape_tutor']);
             }
+            $headerarray1['email'] = decrypt($headerarray1['email']);
+            $headerarray1['tlf'] = decrypt($headerarray1['tlf']);
+            $headerarray1['direccion'] = $headerarray1['tipo_calle'].' '.decrypt($headerarray1['direccion']).' - '.$headerarray1['cp'].', '.decrypt($headerarray1['poblacion']).', '.decrypt($headerarray1['provincia']);
+            unset($headerarray1['apellidos'], $headerarray1['ape_tutor'], $headerarray1['tipo_calle'], $headerarray1['cp'], $headerarray1['provincia'], $headerarray1['poblacion']);
+            $headerarray1 = array_map("utf8_decode", $headerarray1);
+            fputcsv($fp1, $headerarray1, ';');
+        }
         fclose($fp1);
 
-            //------OTRO------//
+        //------OTRO------//
 
-            $fp2 = fopen('./tmp/benjamin.csv', 'w');
+        $fp2 = fopen('./tmp/benjamin.csv', 'w');
 
-            // output the column headings
-            $headerarray2 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
+        // output the column headings
+        $headerarray2 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
 
         fputcsv($fp2, $headerarray2);
 
@@ -131,28 +131,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         $export2 = mysql_query($selectexport2) or die("Sql error : " . mysql_error());
 
-            // loop over the rows, outputting them
-            while ($headerarray2 = mysql_fetch_assoc($export2)) {
-                $headerarray2['nombre'] = decrypt($headerarray2['nombre']).' '.decrypt($headerarray2['apellidos']);
-                $headerarray2['dni'] = decrypt($headerarray2['dni']);
-                if ($headerarray2['nom_tutor'] != "") {
-                  $headerarray2['nom_tutor'] = decrypt($headerarray2['nom_tutor']).' '.decrypt($headerarray2['ape_tutor']);
-                }
-                $headerarray2['email'] = decrypt($headerarray2['email']);
-                $headerarray2['tlf'] = decrypt($headerarray2['tlf']);
-                $headerarray2['direccion'] = $headerarray2['tipo_calle'].' '.decrypt($headerarray2['direccion']).' - '.$headerarray2['cp'].', '.decrypt($headerarray2['poblacion']).', '.decrypt($headerarray2['provincia']);
-                unset($headerarray2['apellidos'], $headerarray2['ape_tutor'], $headerarray2['tipo_calle'], $headerarray2['cp'], $headerarray2['provincia'], $headerarray2['poblacion']);
-                $headerarray2 = array_map("utf8_decode", $headerarray2);
-                fputcsv($fp2, $headerarray2, ';');
+        // loop over the rows, outputting them
+        while ($headerarray2 = mysql_fetch_assoc($export2)) {
+            $headerarray2['nombre'] = decrypt($headerarray2['nombre']).' '.decrypt($headerarray2['apellidos']);
+            $headerarray2['dni'] = decrypt($headerarray2['dni']);
+            if ($headerarray2['nom_tutor'] != "") {
+                $headerarray2['nom_tutor'] = decrypt($headerarray2['nom_tutor']).' '.decrypt($headerarray2['ape_tutor']);
             }
+            $headerarray2['email'] = decrypt($headerarray2['email']);
+            $headerarray2['tlf'] = decrypt($headerarray2['tlf']);
+            $headerarray2['direccion'] = $headerarray2['tipo_calle'].' '.decrypt($headerarray2['direccion']).' - '.$headerarray2['cp'].', '.decrypt($headerarray2['poblacion']).', '.decrypt($headerarray2['provincia']);
+            unset($headerarray2['apellidos'], $headerarray2['ape_tutor'], $headerarray2['tipo_calle'], $headerarray2['cp'], $headerarray2['provincia'], $headerarray2['poblacion']);
+            $headerarray2 = array_map("utf8_decode", $headerarray2);
+            fputcsv($fp2, $headerarray2, ';');
+        }
         fclose($fp2);
 
-            //------OTRO------//
+        //------OTRO------//
 
-            $fp3 = fopen('./tmp/alevin.csv', 'w');
+        $fp3 = fopen('./tmp/alevin.csv', 'w');
 
-            // output the column headings
-            $headerarray3 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
+        // output the column headings
+        $headerarray3 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
 
         fputcsv($fp3, $headerarray3);
 
@@ -160,28 +160,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         $export3 = mysql_query($selectexport3) or die("Sql error : " . mysql_error());
 
-            // loop over the rows, outputting them
-            while ($headerarray3 = mysql_fetch_assoc($export3)) {
-                $headerarray3['nombre'] = decrypt($headerarray3['nombre']).' '.decrypt($headerarray3['apellidos']);
-                $headerarray3['dni'] = decrypt($headerarray3['dni']);
-                if ($headerarray3['nom_tutor'] != "") {
-                  $headerarray3['nom_tutor'] = decrypt($headerarray3['nom_tutor']).' '.decrypt($headerarray3['ape_tutor']);
-                }
-                $headerarray3['email'] = decrypt($headerarray3['email']);
-                $headerarray3['tlf'] = decrypt($headerarray3['tlf']);
-                $headerarray3['direccion'] = $headerarray3['tipo_calle'].' '.decrypt($headerarray3['direccion']).' - '.$headerarray3['cp'].', '.decrypt($headerarray3['poblacion']).', '.decrypt($headerarray3['provincia']);
-                unset($headerarray3['apellidos'], $headerarray3['ape_tutor'], $headerarray3['tipo_calle'], $headerarray3['cp'], $headerarray3['provincia'], $headerarray3['poblacion']);
-                $headerarray3 = array_map("utf8_decode", $headerarray3);
-                fputcsv($fp3, $headerarray3, ';');
+        // loop over the rows, outputting them
+        while ($headerarray3 = mysql_fetch_assoc($export3)) {
+            $headerarray3['nombre'] = decrypt($headerarray3['nombre']).' '.decrypt($headerarray3['apellidos']);
+            $headerarray3['dni'] = decrypt($headerarray3['dni']);
+            if ($headerarray3['nom_tutor'] != "") {
+                $headerarray3['nom_tutor'] = decrypt($headerarray3['nom_tutor']).' '.decrypt($headerarray3['ape_tutor']);
             }
+            $headerarray3['email'] = decrypt($headerarray3['email']);
+            $headerarray3['tlf'] = decrypt($headerarray3['tlf']);
+            $headerarray3['direccion'] = $headerarray3['tipo_calle'].' '.decrypt($headerarray3['direccion']).' - '.$headerarray3['cp'].', '.decrypt($headerarray3['poblacion']).', '.decrypt($headerarray3['provincia']);
+            unset($headerarray3['apellidos'], $headerarray3['ape_tutor'], $headerarray3['tipo_calle'], $headerarray3['cp'], $headerarray3['provincia'], $headerarray3['poblacion']);
+            $headerarray3 = array_map("utf8_decode", $headerarray3);
+            fputcsv($fp3, $headerarray3, ';');
+        }
         fclose($fp3);
 
-            //------OTRO------//
+        //------OTRO------//
 
-            $fp4 = fopen('./tmp/infantil.csv', 'w');
+        $fp4 = fopen('./tmp/infantil.csv', 'w');
 
-            // output the column headings
-            $headerarray4 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
+        // output the column headings
+        $headerarray4 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
 
         fputcsv($fp4, $headerarray4);
 
@@ -189,28 +189,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         $export4 = mysql_query($selectexport4) or die("Sql error : " . mysql_error());
 
-            // loop over the rows, outputting them
-            while ($headerarray4 = mysql_fetch_assoc($export4)) {
-                $headerarray4['nombre'] = decrypt($headerarray4['nombre']).' '.decrypt($headerarray4['apellidos']);
-                $headerarray4['dni'] = decrypt($headerarray4['dni']);
-                if ($headerarray4['nom_tutor'] != "") {
-                  $headerarray4['nom_tutor'] = decrypt($headerarray4['nom_tutor']).' '.decrypt($headerarray4['ape_tutor']);
-                }
-                $headerarray4['email'] = decrypt($headerarray4['email']);
-                $headerarray4['tlf'] = decrypt($headerarray4['tlf']);
-                $headerarray4['direccion'] = $headerarray4['tipo_calle'].' '.decrypt($headerarray4['direccion']).' - '.$headerarray4['cp'].', '.decrypt($headerarray4['poblacion']).', '.decrypt($headerarray4['provincia']);
-                unset($headerarray4['apellidos'], $headerarray4['ape_tutor'], $headerarray4['tipo_calle'], $headerarray4['cp'], $headerarray4['provincia'], $headerarray4['poblacion']);
-                $headerarray4 = array_map("utf8_decode", $headerarray4);
-                fputcsv($fp4, $headerarray4, ';');
+        // loop over the rows, outputting them
+        while ($headerarray4 = mysql_fetch_assoc($export4)) {
+            $headerarray4['nombre'] = decrypt($headerarray4['nombre']).' '.decrypt($headerarray4['apellidos']);
+            $headerarray4['dni'] = decrypt($headerarray4['dni']);
+            if ($headerarray4['nom_tutor'] != "") {
+                $headerarray4['nom_tutor'] = decrypt($headerarray4['nom_tutor']).' '.decrypt($headerarray4['ape_tutor']);
             }
+            $headerarray4['email'] = decrypt($headerarray4['email']);
+            $headerarray4['tlf'] = decrypt($headerarray4['tlf']);
+            $headerarray4['direccion'] = $headerarray4['tipo_calle'].' '.decrypt($headerarray4['direccion']).' - '.$headerarray4['cp'].', '.decrypt($headerarray4['poblacion']).', '.decrypt($headerarray4['provincia']);
+            unset($headerarray4['apellidos'], $headerarray4['ape_tutor'], $headerarray4['tipo_calle'], $headerarray4['cp'], $headerarray4['provincia'], $headerarray4['poblacion']);
+            $headerarray4 = array_map("utf8_decode", $headerarray4);
+            fputcsv($fp4, $headerarray4, ';');
+        }
         fclose($fp4);
 
-            //------OTRO------//
+        //------OTRO------//
 
-            $fp5 = fopen('./tmp/cadete.csv', 'w');
+        $fp5 = fopen('./tmp/cadete.csv', 'w');
 
-            // output the column headings
-            $headerarray5 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
+        // output the column headings
+        $headerarray5 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
 
         fputcsv($fp5, $headerarray5);
 
@@ -218,28 +218,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         $export5 = mysql_query($selectexport5) or die("Sql error : " . mysql_error());
 
-            // loop over the rows, outputting them
-            while ($headerarray5 = mysql_fetch_assoc($export5)) {
-                $headerarray5['nombre'] = decrypt($headerarray5['nombre']).' '.decrypt($headerarray5['apellidos']);
-                $headerarray5['dni'] = decrypt($headerarray5['dni']);
-                if ($headerarray5['nom_tutor'] != "") {
-                  $headerarray5['nom_tutor'] = decrypt($headerarray5['nom_tutor']).' '.decrypt($headerarray5['ape_tutor']);
-                }
-                $headerarray5['email'] = decrypt($headerarray5['email']);
-                $headerarray5['tlf'] = decrypt($headerarray5['tlf']);
-                $headerarray5['direccion'] = $headerarray5['tipo_calle'].' '.decrypt($headerarray5['direccion']).' - '.$headerarray5['cp'].', '.decrypt($headerarray5['poblacion']).', '.decrypt($headerarray5['provincia']);
-                unset($headerarray5['apellidos'], $headerarray5['ape_tutor'], $headerarray5['tipo_calle'], $headerarray5['cp'], $headerarray5['provincia'], $headerarray5['poblacion']);
-                $headerarray5 = array_map("utf8_decode", $headerarray5);
-                fputcsv($fp5, $headerarray5, ';');
+        // loop over the rows, outputting them
+        while ($headerarray5 = mysql_fetch_assoc($export5)) {
+            $headerarray5['nombre'] = decrypt($headerarray5['nombre']).' '.decrypt($headerarray5['apellidos']);
+            $headerarray5['dni'] = decrypt($headerarray5['dni']);
+            if ($headerarray5['nom_tutor'] != "") {
+                $headerarray5['nom_tutor'] = decrypt($headerarray5['nom_tutor']).' '.decrypt($headerarray5['ape_tutor']);
             }
+            $headerarray5['email'] = decrypt($headerarray5['email']);
+            $headerarray5['tlf'] = decrypt($headerarray5['tlf']);
+            $headerarray5['direccion'] = $headerarray5['tipo_calle'].' '.decrypt($headerarray5['direccion']).' - '.$headerarray5['cp'].', '.decrypt($headerarray5['poblacion']).', '.decrypt($headerarray5['provincia']);
+            unset($headerarray5['apellidos'], $headerarray5['ape_tutor'], $headerarray5['tipo_calle'], $headerarray5['cp'], $headerarray5['provincia'], $headerarray5['poblacion']);
+            $headerarray5 = array_map("utf8_decode", $headerarray5);
+            fputcsv($fp5, $headerarray5, ';');
+        }
         fclose($fp5);
 
-            //------OTRO------//
+        //------OTRO------//
 
-            $fp6 = fopen('./tmp/juvenil.csv', 'w');
+        $fp6 = fopen('./tmp/juvenil.csv', 'w');
 
-            // output the column headings
-            $headerarray6 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
+        // output the column headings
+        $headerarray6 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
 
         fputcsv($fp6, $headerarray6);
 
@@ -247,28 +247,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         $export6 = mysql_query($selectexport6) or die("Sql error : " . mysql_error());
 
-            // loop over the rows, outputting them
-            while ($headerarray6 = mysql_fetch_assoc($export6)) {
-                $headerarray6['nombre'] = decrypt($headerarray6['nombre']).' '.decrypt($headerarray6['apellidos']);
-                $headerarray6['dni'] = decrypt($headerarray6['dni']);
-                if ($headerarray6['nom_tutor'] != "") {
-                  $headerarray6['nom_tutor'] = decrypt($headerarray6['nom_tutor']).' '.decrypt($headerarray6['ape_tutor']);
-                }
-                $headerarray6['email'] = decrypt($headerarray6['email']);
-                $headerarray6['tlf'] = decrypt($headerarray6['tlf']);
-                $headerarray6['direccion'] = $headerarray6['tipo_calle'].' '.decrypt($headerarray6['direccion']).' - '.$headerarray6['cp'].', '.decrypt($headerarray6['poblacion']).', '.decrypt($headerarray6['provincia']);
-                unset($headerarray6['apellidos'], $headerarray6['ape_tutor'], $headerarray6['tipo_calle'], $headerarray6['cp'], $headerarray6['provincia'], $headerarray6['poblacion']);
-                $headerarray6 = array_map("utf8_decode", $headerarray6);
-                fputcsv($fp6, $headerarray6, ';');
+        // loop over the rows, outputting them
+        while ($headerarray6 = mysql_fetch_assoc($export6)) {
+            $headerarray6['nombre'] = decrypt($headerarray6['nombre']).' '.decrypt($headerarray6['apellidos']);
+            $headerarray6['dni'] = decrypt($headerarray6['dni']);
+            if ($headerarray6['nom_tutor'] != "") {
+                $headerarray6['nom_tutor'] = decrypt($headerarray6['nom_tutor']).' '.decrypt($headerarray6['ape_tutor']);
             }
+            $headerarray6['email'] = decrypt($headerarray6['email']);
+            $headerarray6['tlf'] = decrypt($headerarray6['tlf']);
+            $headerarray6['direccion'] = $headerarray6['tipo_calle'].' '.decrypt($headerarray6['direccion']).' - '.$headerarray6['cp'].', '.decrypt($headerarray6['poblacion']).', '.decrypt($headerarray6['provincia']);
+            unset($headerarray6['apellidos'], $headerarray6['ape_tutor'], $headerarray6['tipo_calle'], $headerarray6['cp'], $headerarray6['provincia'], $headerarray6['poblacion']);
+            $headerarray6 = array_map("utf8_decode", $headerarray6);
+            fputcsv($fp6, $headerarray6, ';');
+        }
         fclose($fp6);
 
-            //------OTRO------//
+        //------OTRO------//
 
-            $fp7 = fopen('./tmp/senior.csv', 'w');
+        $fp7 = fopen('./tmp/senior.csv', 'w');
 
-            // output the column headings
-            $headerarray7 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
+        // output the column headings
+        $headerarray7 = array('Jugador;DNI;FechaNacimiento;Padre/Madre/Tutor;eMail;Telefono;Direccion');
 
         fputcsv($fp7, $headerarray7);
 
@@ -276,25 +276,25 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
         $export7 = mysql_query($selectexport7) or die("Sql error : " . mysql_error());
 
-            // loop over the rows, outputting them
-            while ($headerarray7 = mysql_fetch_assoc($export7)) {
-                $headerarray7['nombre'] = decrypt($headerarray7['nombre']).' '.decrypt($headerarray7['apellidos']);
-                $headerarray7['dni'] = decrypt($headerarray7['dni']);
-                if ($headerarray7['nom_tutor'] != "") {
-                  $headerarray7['nom_tutor'] = decrypt($headerarray7['nom_tutor']).' '.decrypt($headerarray7['ape_tutor']);
-                }
-                $headerarray7['email'] = decrypt($headerarray7['email']);
-                $headerarray7['tlf'] = decrypt($headerarray7['tlf']);
-                $headerarray7['direccion'] = $headerarray7['tipo_calle'].' '.decrypt($headerarray7['direccion']).' - '.$headerarray7['cp'].', '.decrypt($headerarray7['poblacion']).', '.decrypt($headerarray7['provincia']);
-                unset($headerarray7['apellidos'], $headerarray7['ape_tutor'], $headerarray7['tipo_calle'], $headerarray7['cp'], $headerarray7['provincia'], $headerarray7['poblacion']);
-                $headerarray7 = array_map("utf8_decode", $headerarray7);
-                fputcsv($fp7, $headerarray7, ';');
+        // loop over the rows, outputting them
+        while ($headerarray7 = mysql_fetch_assoc($export7)) {
+            $headerarray7['nombre'] = decrypt($headerarray7['nombre']).' '.decrypt($headerarray7['apellidos']);
+            $headerarray7['dni'] = decrypt($headerarray7['dni']);
+            if ($headerarray7['nom_tutor'] != "") {
+                $headerarray7['nom_tutor'] = decrypt($headerarray7['nom_tutor']).' '.decrypt($headerarray7['ape_tutor']);
             }
+            $headerarray7['email'] = decrypt($headerarray7['email']);
+            $headerarray7['tlf'] = decrypt($headerarray7['tlf']);
+            $headerarray7['direccion'] = $headerarray7['tipo_calle'].' '.decrypt($headerarray7['direccion']).' - '.$headerarray7['cp'].', '.decrypt($headerarray7['poblacion']).', '.decrypt($headerarray7['provincia']);
+            unset($headerarray7['apellidos'], $headerarray7['ape_tutor'], $headerarray7['tipo_calle'], $headerarray7['cp'], $headerarray7['provincia'], $headerarray7['poblacion']);
+            $headerarray7 = array_map("utf8_decode", $headerarray7);
+            fputcsv($fp7, $headerarray7, ';');
+        }
         fclose($fp7);
 
-            //------OTRO------//
+        //------OTRO------//
 
-echo'
+        echo'
 	<a type="button" class="btn btn-fullList pull-right" name="exportfullList" href="tmp/listajugadores.csv"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>EXPORTAR LISTA COMLPETA</a>
 
   <ul class="nav nav-tabs">
@@ -317,10 +317,10 @@ echo'
 
         $numPre = 1;
 
-                        if ($numfilasPre < 1) {
-                            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
-                        } else {
-                            echo'
+        if ($numfilasPre < 1) {
+            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
+        } else {
+            echo'
 						      <div class="table-responsive tablaJugadores">
 						       <table class="table table-striped">
 						         <thead>
@@ -333,104 +333,105 @@ echo'
                        <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 											 <th>LOPD</th>
 						           <th> </th>';
-                            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                                echo "
+            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                echo "
 						           <th> </th>
 						           <th> </th>
                        <th> </th>";
-                            };
-                            echo'
+            };
+            echo'
 						         </tr>
 						         </thead>
 						         <tbody>';
 
-                            while ($filaPre = mysql_fetch_array($resultadoPre)) {
-                                $nombrePre = decrypt($filaPre['nombre']);
-                                $apellidoPre = decrypt($filaPre['apellidos']);
-                                $numpedido = ($filaPre['pedido']);
-                                $arraypedidos [] = $numpedido;
-                                $fenix = ($filaPre['fenix']);
-                                $revision = ($filaPre['revision']);
-                                $ficha = ($filaPre['ficha']);
-                                $termsimage1Pre = ($filaPre['termsimage1']);
-                                $termsimage2Pre = ($filaPre['termsimage2']);
-                                $termsimage3Pre = ($filaPre['termsimage3']);
-                                $termsimage4Pre = ($filaPre['termsimage4']);
-                                echo"
+            while ($filaPre = mysql_fetch_array($resultadoPre)) {
+                $nombrePre = decrypt($filaPre['nombre']);
+                $apellidoPre = decrypt($filaPre['apellidos']);
+                $numpedido = ($filaPre['pedido']);
+                $arraypedidos [] = $numpedido;
+                $fenix = ($filaPre['fenix']);
+                $revision = ($filaPre['revision']);
+                $ficha = ($filaPre['ficha']);
+                $termsimage1Pre = ($filaPre['termsimage1']);
+                $termsimage2Pre = ($filaPre['termsimage2']);
+                $termsimage3Pre = ($filaPre['termsimage3']);
+                $termsimage4Pre = ($filaPre['termsimage4']);
+                echo"
 						          <tr>
                         <td class='celdaNumJugador'><span class='numJugador'>";
-                        echo $numPre;
-                        $numPre = $numPre + 1;
-                        echo"</span></td>
+                echo $numPre;
+                $numPre = $numPre + 1;
+                echo"</span></td>
 						            <td>$nombrePre</td>
 						            <td>$apellidoPre</td>
                         <td class='nopadding-bot'>";
-                        if($fenix == 1){
-                          echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                        }else{
-                          echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                        } echo"
+                if ($fenix == 1) {
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                } else {
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                }
+                echo"
                         </td>
                         <td class='nopadding-bot'>";
-                        if($revision == 1){
-                          echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                        }else{
-                          echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                        } echo"
+                if ($revision == 1) {
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                } else {
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                }
+                echo"
                         </td>
                         <td class='nopadding-bot'>";
-                        if($ficha == 1){
-                          echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                        }else{
-                          echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                        } echo"
+                if ($ficha == 1) {
+                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                } else {
+                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                }
+                echo"
                         </td>
 												<td>";
 
-                                if ($termsimage1Pre == 1) {
-                                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
-                                } else {
-                                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
-                                }
+                if ($termsimage1Pre == 1) {
+                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
+                } else {
+                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
+                }
 
-                                if ($termsimage2Pre == 1) {
-                                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
-                                } else {
-                                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
-                                }
+                if ($termsimage2Pre == 1) {
+                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
+                } else {
+                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
+                }
 
-                                if ($termsimage3Pre == 1) {
-                                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
-                                } else {
-                                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
-                                }
+                if ($termsimage3Pre == 1) {
+                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
+                } else {
+                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
+                }
 
-                                if ($termsimage4Pre == 1) {
-                                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
-                                } else {
-                                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
-                                }
+                if ($termsimage4Pre == 1) {
+                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
+                } else {
+                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
+                }
 
 
-                                echo" </td>
+                echo" </td>
 						            <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
-                                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                                    echo "
+                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                    echo "
 						            <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
 						            <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
-                        <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
-                        ";
-                                }
-                                echo"
-						          </tr>";
-                            };
-                            echo'
+                        <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></</td>";
+                }
+                echo"</tr>";
+            };
+            echo'
 						        </tbody>
 						       </table>
 						      </div>
 
 									<a type="button" class="btn btn-warning pull-right" name="exportpreb" href="tmp/prebenjamin.csv"><b>EXPORTAR</b></a>';
-                        };
+        };
         echo'
     </div>
     <div id="Benjamin" class="tab-pane fade">
@@ -442,10 +443,10 @@ echo'
 
         $numBenja = 1;
 
-            if ($numfilasBenja < 1) {
-                echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
-            } else {
-                echo'
+        if ($numfilasBenja < 1) {
+            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
+        } else {
+            echo'
 			      <div class="table-responsive">
 			       <table class="table table-striped">
 			         <thead>
@@ -458,104 +459,115 @@ echo'
                  <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
-                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                    echo "
+            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                echo "
 								 <th> </th>
 								 <th> </th>
                  <th> </th>";
-                };
-                echo'
+            };
+            echo'
 			         </tr>
 			         </thead>
 			         <tbody>';
 
-                while ($filaBenja = mysql_fetch_array($resultadoBenja)) {
-                    $nombreBenja = decrypt($filaBenja['nombre']);
-                    $apellidoBenja = decrypt($filaBenja['apellidos']);
-                    $numpedido = ($filaBenja['pedido']);
-                    $arraypedidos [] = $numpedido;
-                    $fenix = ($filaBenja['fenix']);
-                    $revision = ($filaBenja['revision']);
-                    $ficha = ($filaBenja['ficha']);
-                    $termsimage1Benja = ($filaBenja['termsimage1']);
-                    $termsimage2Benja = ($filaBenja['termsimage2']);
-                    $termsimage3Benja = ($filaBenja['termsimage3']);
-                    $termsimage4Benja = ($filaBenja['termsimage4']);
-                    echo"
+            while ($filaBenja = mysql_fetch_array($resultadoBenja)) {
+                $nombreBenja = decrypt($filaBenja['nombre']);
+                $apellidoBenja = decrypt($filaBenja['apellidos']);
+                $numpedido = ($filaBenja['pedido']);
+                $arraypedidos [] = $numpedido;
+                $fenix = ($filaBenja['fenix']);
+                $revision = ($filaBenja['revision']);
+                $ficha = ($filaBenja['ficha']);
+                $termsimage1Benja = ($filaBenja['termsimage1']);
+                $termsimage2Benja = ($filaBenja['termsimage2']);
+                $termsimage3Benja = ($filaBenja['termsimage3']);
+                $termsimage4Benja = ($filaBenja['termsimage4']);
+                $ascendidoBenja = ($filaBenja['ascendido']);
+                echo"
 			          <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
-                  echo $numBenja;
-                  $numBenja = $numBenja + 1;
-                  echo"</span></td>
-			            <td>$nombreBenja</td>
+                echo $numBenja;
+                $numBenja = $numBenja + 1;
+                echo"</span></td>
+			            <td>$nombreBenja";
+                if ($ascendidoBenja == 1) {
+                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                }
+                echo "</td>
 			            <td>$apellidoBenja</td>
                   <td class='nopadding-bot'>";
-                  if($fenix == 1){
+                if ($fenix == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($revision == 1){
+                if ($revision == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($ficha == 1){
+                if ($ficha == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
 									<td>";
 
-                    if ($termsimage1Benja == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
-                    } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
-                    }
+                if ($termsimage1Benja == 1) {
+                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
+                } else {
+                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
+                }
 
-                    if ($termsimage2Benja == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
-                    } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
-                    }
+                if ($termsimage2Benja == 1) {
+                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
+                } else {
+                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
+                }
 
-                    if ($termsimage3Benja == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
-                    } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
-                    }
+                if ($termsimage3Benja == 1) {
+                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
+                } else {
+                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
+                }
 
-                    if ($termsimage4Benja == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
-                    } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
-                    }
+                if ($termsimage4Benja == 1) {
+                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
+                } else {
+                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
+                }
 
 
-                    echo" </td>
+                echo" </td>
 									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
-                    if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                        echo "
+                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                    echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
-                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
-                  ";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                    if ($ascendidoBenja != 1) {
+                        echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
+                    } else {
+                        echo "<td><button type='button' class='btn btn-warning btn-xs' name='ascenbut' data-toggle='modal' data-target='#descensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-down'></span> Descender</a></button></td>";
                     }
-                    echo"
+                }
+                echo"
 								</tr>";
-                };
-                echo'
+            };
+            echo'
 			        </tbody>
 			       </table>
 			      </div>
 
 			      <a type="button" class="btn btn-warning pull-right" name="exportbenja" href="tmp/benjamin.csv"><b>EXPORTAR</b></a>';
-            };
+        };
         echo'
     </div>
     <div id="Alevin" class="tab-pane fade">
@@ -567,10 +579,10 @@ echo'
 
         $numAle = 1;
 
-            if ($numfilasAle < 1) {
-                echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
-            } else {
-                echo'
+        if ($numfilasAle < 1) {
+            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
+        } else {
+            echo'
 			      <div class="table-responsive">
 			       <table class="table table-striped">
 			         <thead>
@@ -583,104 +595,115 @@ echo'
                  <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
-                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                    echo "
+            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                echo "
 								 <th> </th>
 								 <th> </th>
                  <th> </th>";
-                };
-                echo'
+            };
+            echo'
 			         </tr>
 			         </thead>
 			         <tbody>';
 
-                while ($filaAle = mysql_fetch_array($resultadoAle)) {
-                    $nombreAle = decrypt($filaAle['nombre']);
-                    $apellidoAle = decrypt($filaAle['apellidos']);
-                    $numpedido = ($filaAle['pedido']);
-                    $arraypedidos [] = $numpedido;
-                    $fenix = ($filaAle['fenix']);
-                    $revision = ($filaAle['revision']);
-                    $ficha = ($filaAle['ficha']);
-                    $termsimage1Ale = ($filaAle['termsimage1']);
-                    $termsimage2Ale = ($filaAle['termsimage2']);
-                    $termsimage3Ale = ($filaAle['termsimage3']);
-                    $termsimage4Ale = ($filaAle['termsimage4']);
-                    echo"
+            while ($filaAle = mysql_fetch_array($resultadoAle)) {
+                $nombreAle = decrypt($filaAle['nombre']);
+                $apellidoAle = decrypt($filaAle['apellidos']);
+                $numpedido = ($filaAle['pedido']);
+                $arraypedidos [] = $numpedido;
+                $fenix = ($filaAle['fenix']);
+                $revision = ($filaAle['revision']);
+                $ficha = ($filaAle['ficha']);
+                $termsimage1Ale = ($filaAle['termsimage1']);
+                $termsimage2Ale = ($filaAle['termsimage2']);
+                $termsimage3Ale = ($filaAle['termsimage3']);
+                $termsimage4Ale = ($filaAle['termsimage4']);
+                $ascendidoAle = ($filaAle['ascendido']);
+                echo"
 			          <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
-                  echo $numAle;
-                  $numAle = $numAle + 1;
-                  echo"</span></td>
-			            <td>$nombreAle</td>
+                echo $numAle;
+                $numAle = $numAle + 1;
+                echo"</span></td>
+			            <td>$nombreAle";
+                if ($ascendidoAle == 1) {
+                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                }
+                echo "</td>
 			            <td>$apellidoAle</td>
                   <td class='nopadding-bot'>";
-                  if($fenix == 1){
+                if ($fenix == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($revision == 1){
+                if ($revision == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($ficha == 1){
+                if ($ficha == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
 									<td>";
 
-                    if ($termsimage1Ale == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
-                    } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
-                    }
+                if ($termsimage1Ale == 1) {
+                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
+                } else {
+                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
+                }
 
-                    if ($termsimage2Ale == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
-                    } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
-                    }
+                if ($termsimage2Ale == 1) {
+                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
+                } else {
+                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
+                }
 
-                    if ($termsimage3Ale == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
-                    } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
-                    }
+                if ($termsimage3Ale == 1) {
+                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
+                } else {
+                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
+                }
 
-                    if ($termsimage4Ale == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
-                    } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
-                    }
+                if ($termsimage4Ale == 1) {
+                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
+                } else {
+                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
+                }
 
 
-                    echo" </td>
+                echo" </td>
 									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
-                    if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                        echo "
+                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                    echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
-                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
-                  ";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                    if ($ascendidoAle != 1) {
+                        echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
+                    } else {
+                        echo "<td><button type='button' class='btn btn-warning btn-xs' name='ascenbut' data-toggle='modal' data-target='#descensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-down'></span> Descender</a></button></td>";
                     }
-                    echo"
+                }
+                echo"
 								</tr>";
-                };
-                echo'
+            };
+            echo'
 			        </tbody>
 			       </table>
 			      </div>
 
 			      <a type="button" class="btn btn-warning pull-right" name="exportalev" href="tmp/alevin.csv"><b>EXPORTAR</b></a>';
-            };
+        };
         echo'
     </div>
     <div id="Infantil" class="tab-pane fade">
@@ -692,10 +715,10 @@ echo'
 
         $numInfa = 1;
 
-            if ($numfilasInfa < 1) {
-                echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
-            } else {
-                echo'
+        if ($numfilasInfa < 1) {
+            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
+        } else {
+            echo'
 			      <div class="table-responsive">
 			       <table class="table table-striped">
 			         <thead>
@@ -708,104 +731,115 @@ echo'
                  <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
-                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                    echo "
+            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                echo "
 								 <th> </th>
 								 <th> </th>
                  <th> </th>";
-                };
-                echo'
+            };
+            echo'
 			         </tr>
 			         </thead>
 			         <tbody>';
 
-                while ($filaInfa = mysql_fetch_array($resultadoInfa)) {
-                    $nombreInfa = decrypt($filaInfa['nombre']);
-                    $apellidoInfa = decrypt($filaInfa['apellidos']);
-                    $numpedido = ($filaInfa['pedido']);
-                    $arraypedidos [] = $numpedido;
-                    $fenix = ($filaInfa['fenix']);
-                    $revision = ($filaInfa['revision']);
-                    $ficha = ($filaInfa['ficha']);
-                    $termsimage1Infa = ($filaInfa['termsimage1']);
-                    $termsimage2Infa = ($filaInfa['termsimage2']);
-                    $termsimage3Infa = ($filaInfa['termsimage3']);
-                    $termsimage4Infa = ($filaInfa['termsimage4']);
-                    echo"
+            while ($filaInfa = mysql_fetch_array($resultadoInfa)) {
+                $nombreInfa = decrypt($filaInfa['nombre']);
+                $apellidoInfa = decrypt($filaInfa['apellidos']);
+                $numpedido = ($filaInfa['pedido']);
+                $arraypedidos [] = $numpedido;
+                $fenix = ($filaInfa['fenix']);
+                $revision = ($filaInfa['revision']);
+                $ficha = ($filaInfa['ficha']);
+                $termsimage1Infa = ($filaInfa['termsimage1']);
+                $termsimage2Infa = ($filaInfa['termsimage2']);
+                $termsimage3Infa = ($filaInfa['termsimage3']);
+                $termsimage4Infa = ($filaInfa['termsimage4']);
+                $ascendidoInfa = ($filaInfa['ascendido']);
+                echo"
 			          <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
-                  echo $numInfa;
-                  $numInfa = $numInfa + 1;
-                  echo"</span></td>
-			            <td>$nombreInfa</td>
+                echo $numInfa;
+                $numInfa = $numInfa + 1;
+                echo"</span></td>
+			            <td>$nombreInfa";
+                if ($ascendidoInfa == 1) {
+                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                }
+                echo "</td>
 			            <td>$apellidoInfa</td>
                   <td class='nopadding-bot'>";
-                  if($fenix == 1){
+                if ($fenix == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($revision == 1){
+                if ($revision == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($ficha == 1){
+                if ($ficha == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
 									<td>";
 
-                    if ($termsimage1Infa == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
-                    } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
-                    }
+                if ($termsimage1Infa == 1) {
+                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
+                } else {
+                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
+                }
 
-                    if ($termsimage2Infa == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
-                    } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
-                    }
+                if ($termsimage2Infa == 1) {
+                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
+                } else {
+                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
+                }
 
-                    if ($termsimage3Infa == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
-                    } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
-                    }
+                if ($termsimage3Infa == 1) {
+                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
+                } else {
+                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
+                }
 
-                    if ($termsimage4Infa == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
-                    } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
-                    }
+                if ($termsimage4Infa == 1) {
+                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
+                } else {
+                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
+                }
 
 
-                    echo" </td>
+                echo" </td>
 									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
-                    if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                        echo "
+                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                    echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
-                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
-                  ";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                    if ($ascendidoInfa != 1) {
+                        echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
+                    } else {
+                        echo "<td><button type='button' class='btn btn-warning btn-xs' name='ascenbut' data-toggle='modal' data-target='#descensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-down'></span> Descender</a></button></td>";
                     }
-                    echo"
+                }
+                echo"
 								</tr>";
-                };
-                echo'
+            };
+            echo'
 			        </tbody>
 			       </table>
 			      </div>
 
 			      <a type="button" class="btn btn-warning pull-right" name="exportinfa" href="tmp/infantil.csv"><b>EXPORTAR</b></a>';
-            };
+        };
         echo'
     </div><div id="Cadete" class="tab-pane fade">
       <h3>Cadete</h3>';
@@ -816,10 +850,10 @@ echo'
 
         $numCade = 1;
 
-            if ($numfilasCade < 1) {
-                echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
-            } else {
-                echo'
+        if ($numfilasCade < 1) {
+            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
+        } else {
+            echo'
 			      <div class="table-responsive">
 			       <table class="table table-striped">
 			         <thead>
@@ -832,104 +866,115 @@ echo'
                  <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
-                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                    echo "
+            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                echo "
 								 <th> </th>
 								 <th> </th>
                  <th> </th>";
-                };
-                echo'
+            };
+            echo'
 			         </tr>
 			         </thead>
 			         <tbody>';
 
-                while ($filaCade = mysql_fetch_array($resultadoCade)) {
-                    $nombreCade = decrypt($filaCade['nombre']);
-                    $apellidoCade = decrypt($filaCade['apellidos']);
-                    $numpedido = ($filaCade['pedido']);
-                    $arraypedidos [] = $numpedido;
-                    $fenix = ($filaCade['fenix']);
-                    $revision = ($filaCade['revision']);
-                    $ficha = ($filaCade['ficha']);
-                    $termsimage1Cade = ($filaCade['termsimage1']);
-                    $termsimage2Cade = ($filaCade['termsimage2']);
-                    $termsimage3Cade = ($filaCade['termsimage3']);
-                    $termsimage4Cade = ($filaCade['termsimage4']);
-                    echo"
+            while ($filaCade = mysql_fetch_array($resultadoCade)) {
+                $nombreCade = decrypt($filaCade['nombre']);
+                $apellidoCade = decrypt($filaCade['apellidos']);
+                $numpedido = ($filaCade['pedido']);
+                $arraypedidos [] = $numpedido;
+                $fenix = ($filaCade['fenix']);
+                $revision = ($filaCade['revision']);
+                $ficha = ($filaCade['ficha']);
+                $termsimage1Cade = ($filaCade['termsimage1']);
+                $termsimage2Cade = ($filaCade['termsimage2']);
+                $termsimage3Cade = ($filaCade['termsimage3']);
+                $termsimage4Cade = ($filaCade['termsimage4']);
+                $ascendidoCade = ($filaCade['ascendido']);
+                echo"
 			          <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
-                  echo $numCade;
-                  $numCade = $numCade + 1;
-                  echo"</span></td>
-			            <td>$nombreCade</td>
+                echo $numCade;
+                $numCade = $numCade + 1;
+                echo"</span></td>
+			            <td>$nombreCade";
+                if ($ascendidoCade == 1) {
+                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                }
+                echo "</td>
 			            <td>$apellidoCade</td>
                   <td class='nopadding-bot'>";
-                  if($fenix == 1){
+                if ($fenix == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($revision == 1){
+                if ($revision == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($ficha == 1){
+                if ($ficha == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
 									<td>";
 
-                    if ($termsimage1Cade == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
-                    } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
-                    }
+                if ($termsimage1Cade == 1) {
+                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
+                } else {
+                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
+                }
 
-                    if ($termsimage2Cade == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
-                    } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
-                    }
+                if ($termsimage2Cade == 1) {
+                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
+                } else {
+                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
+                }
 
-                    if ($termsimage3Cade == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
-                    } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
-                    }
+                if ($termsimage3Cade == 1) {
+                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
+                } else {
+                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
+                }
 
-                    if ($termsimage4Cade == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
-                    } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
-                    }
+                if ($termsimage4Cade == 1) {
+                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
+                } else {
+                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
+                }
 
 
-                    echo" </td>
+                echo" </td>
 									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
-                    if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                        echo "
+                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                    echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
-                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
-                  ";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                    if ($ascendidoCade != 1) {
+                        echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
+                    } else {
+                        echo "<td><button type='button' class='btn btn-warning btn-xs' name='ascenbut' data-toggle='modal' data-target='#descensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-down'></span> Descender</a></button></td>";
                     }
-                    echo"
+                }
+                echo"
 								</tr>";
-                };
-                echo'
+            };
+            echo'
 			        </tbody>
 			       </table>
 			      </div>
 
 			      <a type="button" class="btn btn-warning pull-right" name="exportcade" href="tmp/cadete.csv"><b>EXPORTAR</b></a>';
-            };
+        };
         echo'
     </div><div id="Juvenil" class="tab-pane fade">
       <h3>Juvenil</h3>';
@@ -940,10 +985,10 @@ echo'
 
         $numJuve = 1;
 
-            if ($numfilasJuve < 1) {
-                echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
-            } else {
-                echo'
+        if ($numfilasJuve < 1) {
+            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
+        } else {
+            echo'
 			      <div class="table-responsive">
 			       <table class="table table-striped">
 			         <thead>
@@ -956,104 +1001,115 @@ echo'
                  <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
-                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                    echo "
+            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                echo "
 								 <th> </th>
 								 <th> </th>
                  <th> </th>";
-                };
-                echo'
+            };
+            echo'
 			         </tr>
 			         </thead>
 			         <tbody>';
 
-                while ($filaJuve = mysql_fetch_array($resultadoJuve)) {
-                    $nombreJuve = decrypt($filaJuve['nombre']);
-                    $apellidoJuve = decrypt($filaJuve['apellidos']);
-                    $numpedido = ($filaJuve['pedido']);
-                    $arraypedidos [] = $numpedido;
-                    $fenix = ($filaJuve['fenix']);
-                    $revision = ($filaJuve['revision']);
-                    $ficha = ($filaJuve['ficha']);
-                    $termsimage1Juve = ($filaJuve['termsimage1']);
-                    $termsimage2Juve = ($filaJuve['termsimage2']);
-                    $termsimage3Juve = ($filaJuve['termsimage3']);
-                    $termsimage4Juve = ($filaJuve['termsimage4']);
-                    echo"
+            while ($filaJuve = mysql_fetch_array($resultadoJuve)) {
+                $nombreJuve = decrypt($filaJuve['nombre']);
+                $apellidoJuve = decrypt($filaJuve['apellidos']);
+                $numpedido = ($filaJuve['pedido']);
+                $arraypedidos [] = $numpedido;
+                $fenix = ($filaJuve['fenix']);
+                $revision = ($filaJuve['revision']);
+                $ficha = ($filaJuve['ficha']);
+                $termsimage1Juve = ($filaJuve['termsimage1']);
+                $termsimage2Juve = ($filaJuve['termsimage2']);
+                $termsimage3Juve = ($filaJuve['termsimage3']);
+                $termsimage4Juve = ($filaJuve['termsimage4']);
+                $ascendidoJuve = ($filaJuve['ascendido']);
+                echo"
 			          <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
-                  echo $numJuve;
-                  $numJuve = $numJuve + 1;
-                  echo"</span></td>
-			            <td>$nombreJuve</td>
+                echo $numJuve;
+                $numJuve = $numJuve + 1;
+                echo"</span></td>
+			            <td>$nombreJuve";
+                if ($ascendidoJuve == 1) {
+                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                }
+                echo "</td>
 			            <td>$apellidoJuve</td>
                   <td class='nopadding-bot'>";
-                  if($fenix == 1){
+                if ($fenix == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($revision == 1){
+                if ($revision == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($ficha == 1){
+                if ($ficha == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
 									<td>";
 
-                    if ($termsimage1Juve == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
-                    } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
-                    }
+                if ($termsimage1Juve == 1) {
+                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
+                } else {
+                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
+                }
 
-                    if ($termsimage2Juve == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
-                    } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
-                    }
+                if ($termsimage2Juve == 1) {
+                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
+                } else {
+                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
+                }
 
-                    if ($termsimage3Juve == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
-                    } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
-                    }
+                if ($termsimage3Juve == 1) {
+                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
+                } else {
+                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
+                }
 
-                    if ($termsimage4Juve == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
-                    } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
-                    }
+                if ($termsimage4Juve == 1) {
+                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
+                } else {
+                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
+                }
 
 
-                    echo" </td>
+                echo" </td>
 									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
-                    if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                        echo "
+                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                    echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
-                  <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>
-                  ";
+									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                    if ($ascendidoJuve != 1) {
+                        echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
+                    } else {
+                        echo "<td><button type='button' class='btn btn-warning btn-xs' name='ascenbut' data-toggle='modal' data-target='#descensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-down'></span> Descender</a></button></td>";
                     }
-                    echo"
+                }
+                echo"
 								</tr>";
-                };
-                echo'
+            };
+            echo'
 			        </tbody>
 			       </table>
 			      </div>
 
 			      <a type="button" class="btn btn-warning pull-right" name="exportjuve" href="tmp/juvenil.csv"><b>EXPORTAR</b></a>';
-            };
+        };
         echo'
     </div><div id="Senior" class="tab-pane fade">
       <h3>Senior</h3>';
@@ -1064,10 +1120,10 @@ echo'
 
         $numSenior = 1;
 
-            if ($numfilasSenior < 1) {
-                echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
-            } else {
-                echo'
+        if ($numfilasSenior < 1) {
+            echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
+        } else {
+            echo'
 			      <div class="table-responsive">
 			       <table class="table table-striped">
 			         <thead>
@@ -1080,101 +1136,112 @@ echo'
                  <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
 								 <th>LOPD</th>
 			           <th> </th>';
-                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                    echo "
+            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                echo "
 								 <th> </th>
 								 <th> </th>";
-                };
-                echo'
+            };
+            echo'
 			         </tr>
 			         </thead>
 			         <tbody>';
 
-                while ($filaSenior = mysql_fetch_array($resultadoSenior)) {
-                    $nombreSenior = decrypt($filaSenior['nombre']);
-                    $apellidoSenior = decrypt($filaSenior['apellidos']);
-                    $numpedido = ($filaSenior['pedido']);
-                    $arraypedidos [] = $numpedido;
-                    $fenix = ($filaSenior['fenix']);
-                    $revision = ($filaSenior['revision']);
-                    $ficha = ($filaSenior['ficha']);
-                    $termsimage1Senior = ($filaSenior['termsimage1']);
-                    $termsimage2Senior = ($filaSenior['termsimage2']);
-                    $termsimage3Senior = ($filaSenior['termsimage3']);
-                    $termsimage4Senior = ($filaSenior['termsimage4']);
-                    echo"
+            while ($filaSenior = mysql_fetch_array($resultadoSenior)) {
+                $nombreSenior = decrypt($filaSenior['nombre']);
+                $apellidoSenior = decrypt($filaSenior['apellidos']);
+                $numpedido = ($filaSenior['pedido']);
+                $arraypedidos [] = $numpedido;
+                $fenix = ($filaSenior['fenix']);
+                $revision = ($filaSenior['revision']);
+                $ficha = ($filaSenior['ficha']);
+                $termsimage1Senior = ($filaSenior['termsimage1']);
+                $termsimage2Senior = ($filaSenior['termsimage2']);
+                $termsimage3Senior = ($filaSenior['termsimage3']);
+                $termsimage4Senior = ($filaSenior['termsimage4']);
+                $ascendidoSenior = ($filaSenior['ascendido']);
+                echo"
 			          <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
-                  echo $numSenior;
-                  $numSenior = $numSenior + 1;
-                  echo"</span></td>
-			            <td>$nombreSenior</td>
+                echo $numSenior;
+                $numSenior = $numSenior + 1;
+                echo"</span></td>
+			            <td>$nombreSenior";
+                if ($ascendidoSenior == 1) {
+                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                }
+                echo "</td>
 			            <td>$apellidoSenior</td>
                   <td class='nopadding-bot'>";
-                  if($fenix == 1){
+                if ($fenix == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($revision == 1){
+                if ($revision == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
                   <td class='nopadding-bot'>";
-                  if($ficha == 1){
+                if ($ficha == 1) {
                     echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                  }else{
+                } else {
                     echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                  } echo"
+                }
+                echo"
                   </td>
 									<td>";
 
-                    if ($termsimage1Senior == 1) {
-                        echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
-                    } else {
-                        echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
-                    }
+                if ($termsimage1Senior == 1) {
+                    echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
+                } else {
+                    echo"<span title='NO a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.'  class='label label-danger'>1</span> ";
+                }
 
-                    if ($termsimage2Senior == 1) {
-                        echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
-                    } else {
-                        echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
-                    }
+                if ($termsimage2Senior == 1) {
+                    echo"<span title='SÍ a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-success'>2</span> ";
+                } else {
+                    echo"<span title='NO a : La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.' class='label label-danger'>2</span> ";
+                }
 
-                    if ($termsimage3Senior == 1) {
-                        echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
-                    } else {
-                        echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
-                    }
+                if ($termsimage3Senior == 1) {
+                    echo"<span title='SÍ a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-success'>3</span> ";
+                } else {
+                    echo"<span title='NO a :  La utilización de las imágenes para ilustrar las noticias remitidas a www.lacanyadacfs.com/.' class='label label-danger'>3</span> ";
+                }
 
-                    if ($termsimage4Senior == 1) {
-                        echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
-                    } else {
-                        echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
-                    }
+                if ($termsimage4Senior == 1) {
+                    echo"<span title='SÍ a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-success'>4</span>";
+                } else {
+                    echo"<span title='NO a : La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como Facebook, Twitter, y YouTube.' class='label label-danger'>4</span> ";
+                }
 
 
-                    echo" </td>
+                echo" </td>
 			            <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
-                    if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                        echo "
+                if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                    echo "
 									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
 									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                    if ($ascendidoSenior == 1) {
+                        echo "<td><button type='button' class='btn btn-warning btn-xs' name='ascenbut' data-toggle='modal' data-target='#descensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-down'></span> Descender</a></button></td>";
                     }
-                    echo"
+                }
+                echo"
 								</tr>";
-                };
-                echo'
+            };
+            echo'
 			        </tbody>
 			       </table>
 			      </div>
 
 			      <a type="button" class="btn btn-warning pull-right" name="exportsenior" href="tmp/senior.csv"><b>EXPORTAR</b></a>';
-            };
+        };
         echo'
 
     </div>
@@ -1187,15 +1254,15 @@ echo'
 
             $resultadoModal=mysql_query($seleccionaModal, $ilink) or die(mysql_error());
             $filaModal = mysql_fetch_array($resultadoModal);
-            if ($filaModal['nom_tutor'] != ""){
-              $nombretut = decrypt($filaModal['nom_tutor']); //isset OK OK
-            }else{
-              $nombretut = "";
+            if ($filaModal['nom_tutor'] != "") {
+                $nombretut = decrypt($filaModal['nom_tutor']); //isset OK OK
+            } else {
+                $nombretut = "";
             }
-            if ($filaModal['ape_tutor'] != ""){
-              $apellidostut = decrypt($filaModal['ape_tutor']); //isset OK OK
-            }else{
-              $apellidostut = "";
+            if ($filaModal['ape_tutor'] != "") {
+                $apellidostut = decrypt($filaModal['ape_tutor']); //isset OK OK
+            } else {
+                $apellidostut = "";
             }
             $nombre = decrypt($filaModal['nombre']);
             $apellidos = decrypt($filaModal['apellidos']);
@@ -1211,20 +1278,20 @@ echo'
             $mensaje = ($filaModal['mensaje']); //isset OK OK
             $importe = ($filaModal['importe']);
             $fraccionado = ($filaModal['fraccionada']);
-            if ($filaModal['titular_cuenta'] != ""){
-              $nombrecuenta = decrypt($filaModal['titular_cuenta']); //isset OK OK
-            }else{
-              $nombrecuenta = "";
+            if ($filaModal['titular_cuenta'] != "") {
+                $nombrecuenta = decrypt($filaModal['titular_cuenta']); //isset OK OK
+            } else {
+                $nombrecuenta = "";
             }
-            if ($filaModal['ape_cuenta'] != ""){
-              $apecuenta = decrypt($filaModal['ape_cuenta']); //isset OK OK
-            }else{
-              $apecuenta = "";
+            if ($filaModal['ape_cuenta'] != "") {
+                $apecuenta = decrypt($filaModal['ape_cuenta']); //isset OK OK
+            } else {
+                $apecuenta = "";
             }
-            if ($filaModal['num_cuenta'] != ""){
-              $numcuenta = decrypt($filaModal['num_cuenta']); //isset OK OK
-            }else{
-              $numcuenta = "";
+            if ($filaModal['num_cuenta'] != "") {
+                $numcuenta = decrypt($filaModal['num_cuenta']); //isset OK OK
+            } else {
+                $numcuenta = "";
             }
             $categoria = ($filaModal['categoria']);
             $temporada = ($filaModal['temporada']);
@@ -1245,16 +1312,16 @@ echo'
             $revision = ($filaModal['revision']);
             $ficha = ($filaModal['ficha']);
 
-                    // $vb = iconv("UTF-8", "ISO-8859-1", $nombretut);
+            // $vb = iconv("UTF-8", "ISO-8859-1", $nombretut);
 
 
-                    //***************************************************//
-                    //********************* MODALS **********************//
-                    //***************************************************//
+            //***************************************************//
+            //********************* MODALS **********************//
+            //***************************************************//
 
-//**** EDITAR MODAL ****//
+            //**** EDITAR MODAL ****//
 
-                echo "
+            echo "
 				<div class='modal fade bs-example-modal-lg alto' id='editarModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
 					<div class='modal-dialog modal-lg' role='document'>
 						<div class='modal-content' id='accordion'>
@@ -1424,40 +1491,40 @@ echo'
 														<label class='col-sm-2 control-label'></label>
 														<div class='col-sm-10'>
 																<input type='checkbox' ng-model='user.termsImage1' name='termsImage1' value='1' ";
-                                  if ($lopd1 == '1') {
-                                      echo" checked";
-                                  }
-                                  echo" />
+            if ($lopd1 == '1') {
+                echo" checked";
+            }
+            echo" />
 																La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.
 														</div>
 
 														<label class='col-sm-2 control-label'></label>
 														<div class='col-sm-10'>
 																<input type='checkbox' ng-model='user.termsImage2' name='termsImage2' value='1' ";
-                                  if ($lopd2 == '1') {
-                                      echo" checked";
-                                  }
-                                  echo" />
+            if ($lopd2 == '1') {
+                echo" checked";
+            }
+            echo" />
 																La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.
 														</div>
 
 														<label class='col-sm-2 control-label'></label>
 														<div class='col-sm-10'>
 																<input type='checkbox' ng-model='user.termsImage3' name='termsImage3' value='1' ";
-                                  if ($lopd3 == '1') {
-                                      echo" checked";
-                                  }
-                                  echo" />
+            if ($lopd3 == '1') {
+                echo" checked";
+            }
+            echo" />
 																La utilización de las imágenes para ilustrar las noticias remitidas a <a href='https://www.lacanyadacfs.com' target='_blank' >www.lacanyadacfs.com/</a>.
 														</div>
 
 														<label class='col-sm-2 control-label'></label>
 														<div class='col-sm-10'>
 																<input type='checkbox' ng-model='user.termsImage4' name='termsImage4' value='1' ";
-                                  if ($lopd4 == '1') {
-                                      echo" checked";
-                                  }
-                                  echo" />
+            if ($lopd4 == '1') {
+                echo" checked";
+            }
+            echo" />
 																La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como <a href='https://www.facebook.com/LaCanyadaCfs' target='_blank' >Facebook</a>, <a href='https://twitter.com/LaCanyadaCFS' target='_blank' >Twitter</a>, y <a href='https://www.youtube.com/user/LaCanyadaCFS?feature=mhee' target='_blank' >YouTube</a>.
 														</div>
 														<br>
@@ -1473,28 +1540,28 @@ echo'
                             <label class='col-sm-1 control-label'></label>
                             <div class='col-sm-3'>
                                 <input type='checkbox' ng-model='user.termsImage1' name='fenix' value='1' ";
-                                  if ($fenix == '1') {
-                                      echo" checked";
-                                  }
-                                  echo" /> <b>Alta Fénix</b>
+            if ($fenix == '1') {
+                echo" checked";
+            }
+            echo" /> <b>Alta Fénix</b>
                             </div>
 
                             <label class='col-sm-1 control-label'></label>
                             <div class='col-sm-3'>
                                 <input type='checkbox' ng-model='user.termsImage1' name='revision' value='1' ";
-                                  if ($revision == '1') {
-                                      echo" checked";
-                                  }
-                                  echo" /> <b>Revisión Médica</b>
+            if ($revision == '1') {
+                echo" checked";
+            }
+            echo" /> <b>Revisión Médica</b>
                             </div>
 
                             <label class='col-sm-1 control-label'></label>
                             <div class='col-sm-3'>
                                 <input type='checkbox' ng-model='user.termsImage1' name='ficha' value='1' ";
-                                  if ($ficha == '1') {
-                                      echo" checked";
-                                  }
-                                  echo" /> <b>Ficha Emitida</b>
+            if ($ficha == '1') {
+                echo" checked";
+            }
+            echo" /> <b>Ficha Emitida</b>
                             </div>
                         </div>
                           <button type='submit' class='btn btn-warning float-right'>Guardar</button>
@@ -1611,7 +1678,7 @@ echo'
 				    <div class='modal-content'>
 				      <div class='modal-header'>";
 
-                switch (strtolower($categoria)) {
+            switch (strtolower($categoria)) {
                   case 'prebenjamin':
                     $newCat = 'Benjamin';
                     break;
@@ -1641,7 +1708,7 @@ echo'
                     break;
                 }
 
-				        echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+            echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 				        <h4 class='modal-title' id='myModalLabel'>¿Estás seguro de ascender al Jugador a la categoria de $newCat ?</h4>
 				      </div>
 							<div class='modal-body'>
@@ -1654,6 +1721,52 @@ echo'
 				    </div>
 				  </div>
 				</div>
+
+<!-- **** DESCENSO MODAL **** -->
+
+				<div class='modal fade bs-example-modal-sm' id='descensoModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+				  <div class='modal-dialog' role='document'>
+				    <div class='modal-content'>
+				      <div class='modal-header'>";
+            switch (strtolower($categoria)) {
+                  case 'benjamin':
+                    $newCat = 'Prebenjamin';
+                    break;
+                  case 'alevin':
+                    $newCat = 'Benjamin';
+                    break;
+                  case 'infantil':
+                    $newCat = 'Alevin';
+                    break;
+                  case 'cadete':
+                    $newCat = 'Infantil';
+                    break;
+                  case 'juvenil':
+                    $newCat = 'Cadete';
+                    break;
+                  case 'senior':
+                    $newCat = 'Juvenil';
+                    break;
+                  default:
+                    $newCat = '"ERRRORRR, no continuar"';
+                    break;
+                        }
+
+            echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+				        <h4 class='modal-title' id='myModalLabel'>¿Estás seguro de descender al Jugador a la categoria de $newCat ?</h4>
+				      </div>
+							<div class='modal-body'>
+				        <p>Esta acción provocará que $nombre $apellidos descienda a la categoría de <strong>$newCat</strong>, ¿es correcto?.</p>
+				      </div>
+				      <div class='modal-footer'>
+				        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
+					        <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?id=$id&oper=descenso&newcategoria=$newCat'>SI</a>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+  <!---- FINAL MODALS ---->
 
         ";
         };

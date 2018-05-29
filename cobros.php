@@ -122,7 +122,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
                     fputcsv($fp4, $headerarray4);
 
-                    $selectexport4 = "SELECT nombre,apellidos,dni,tlf,categoria,segundopago,titular_cuenta,ape_cuenta,num_cuenta  FROM jugadores WHERE cuartopago <> 0";
+                    $selectexport4 = "SELECT nombre,apellidos,dni,tlf,categoria,cuartopago,titular_cuenta,ape_cuenta,num_cuenta  FROM jugadores WHERE cuartopago <> 0";
 
                     $export4 = mysql_query($selectexport4) or die("Sql error : " . mysql_error());
 
@@ -148,7 +148,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
                     fputcsv($fp5, $headerarray5);
 
-                    $selectexport5 = "SELECT nombre,apellidos,dni,tlf,categoria,segundopago,titular_cuenta,ape_cuenta,num_cuenta  FROM jugadores WHERE quintopago <> 0";
+                    $selectexport5 = "SELECT nombre,apellidos,dni,tlf,categoria,quintopago,titular_cuenta,ape_cuenta,num_cuenta  FROM jugadores WHERE quintopago <> 0";
 
                     $export5 = mysql_query($selectexport5) or die("Sql error : " . mysql_error());
 

@@ -18,7 +18,7 @@ $temporadaReg = $_POST['temporada'];
       $operacion = $_POST['numoper'];
   } else {
       // Obtiene el contador (lo crea si no existe)
-    $file = fopen("iupay/contador.txt", "r");
+      $file = fopen("iupay/contador.txt", "r");
       $operacion = fgets($file);
       if ($operacion == "" || $operacion == false) {
           $operacion = nextCount("0");
@@ -109,7 +109,7 @@ mysql_select_db(DB_NAME_AG, $ilink);
 
 if ($temporadaAct == $temporadaReg) { //*******************************************
 
-  $antiquity = $_POST['antiquity'];
+    $antiquity = $_POST['antiquity'];
     $equipacion = $_POST['equipement'];
 
     $tpv = $_POST['tpv'];
@@ -161,7 +161,8 @@ if ($temporadaAct == $temporadaReg) { //****************************************
 
 
     $_SESSION["regOK"]= 1;
-    Header("Location: categorias.php");
+    // Header("Location: categorias.php");
+    echo "<script> window.location.replace('categorias.php') </script>";
 } //endIF**************************************
 
 if ($temporadaAct > $temporadaReg) {
@@ -169,7 +170,8 @@ if ($temporadaAct > $temporadaReg) {
     $resultado=mysql_query($inserta, $ilink) or die(mysql_error());
 
     $_SESSION["regOK"]= 1;
-    Header("Location: newplayer.php");
+    // Header("Location: newplayer.php");
+    echo "<script> window.location.replace('newplayer.php') </script>";
 }
   mysql_close($ilink);
 

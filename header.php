@@ -38,7 +38,7 @@ require('fig.php'); //incluimos el config.php que contiene los datos de la conex
             //*Nota2: para cambiar el level a 1, se tiene k hacer manualmente por phpmyadmin
 
             $mesactual = date('n');
-            if ($mesactual < 7) {
+            if ($mesactual < 6) {
                 $temporada = date('Y')-1;
             } else {
                 $temporada = date('Y');

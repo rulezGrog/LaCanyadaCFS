@@ -77,7 +77,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
          //OR segundopago<>'0' OR tercerpago<>'0' OR pagoextra<>'0'
 
             $mesactual = date('n');
-            if ($mesactual >= 7) {
+            if ($mesactual >= 6) {
                 $oldTable = 'temp'.($temporada-1);
                 // echo $oldTable;
                 $oldTempResult = mysql_query("SHOW TABLES LIKE '$oldTable'");

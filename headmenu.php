@@ -34,7 +34,7 @@
   if (isset($_SESSION["newTemp"]) && $_SESSION["newTemp"] == 'SI') {
       echo '
     <div class="alert alert-danger">
-      <strong>¡PELIGRO!</strong> Desde Julio estamos ya en una nueva Temporada, pero aún seguimos usando la base de datos de la Temporada pasada. Porfavor, <strong>cree una nueva temporada</strong> en la sección <strong>"Gestión de Temporadas</strong>". <br>
+      <strong>¡PELIGRO!</strong> Desde Junio estamos ya en una nueva Temporada, pero aún seguimos usando la base de datos de la Temporada pasada. Porfavor, <strong>cree una nueva temporada</strong> en la sección <strong>"Gestión de Temporadas</strong>". <br>
       De lo contrario todas las nuevas actualizaciones de la ya actual temporada se harán en la base de datos de la vieja temporada, por lo que se crearán incongruencias.
     </div>
     ';

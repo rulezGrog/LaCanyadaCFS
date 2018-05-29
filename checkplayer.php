@@ -6,7 +6,7 @@ require('funciones.php');
 // $temporadaAct = $_SESSION["temporada"];
 
 $mesactual = date('n');
-if ($mesactual < 7) {
+if ($mesactual < 6) {
     $temporadaAct = date('Y')-1;
 } else {
     $temporadaAct = date('Y');

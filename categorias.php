@@ -1,5 +1,4 @@
-<?php  require("header.php");
-
+<?php  require("header.php"); 
 
 if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
 } else {
@@ -362,33 +361,39 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 echo $numPre;
                 $numPre = $numPre + 1;
                 echo"</span></td>
-						            <td>$nombrePre</td>
-						            <td>$apellidoPre</td>
-                        <td class='nopadding-bot'>";
-                if ($fenix == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                        </td>
-                        <td class='nopadding-bot'>";
-                if ($revision == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                        </td>
-                        <td class='nopadding-bot'>";
-                if ($ficha == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                        </td>
-												<td>";
+				<td>$nombrePre</td>
+				<td>$apellidoPre</td>
+                <td class='nopadding-bot'>";
+                    if ($fenix == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($fenix == 2){
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($revision == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($revision == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($ficha == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($ficha == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+				<td>";
 
                 if ($termsimage1Pre == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -489,37 +494,43 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 echo $numBenja;
                 $numBenja = $numBenja + 1;
                 echo"</span></td>
-			            <td>$nombreBenja";
-                if ($ascendidoBenja == 1) {
-                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
-                }
+			    <td>$nombreBenja";
+                    if ($ascendidoBenja == 1) {
+                        echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                    }
                 echo "</td>
-			            <td>$apellidoBenja</td>
-                  <td class='nopadding-bot'>";
-                if ($fenix == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($revision == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($ficha == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-									<td>";
+			    <td>$apellidoBenja</td>
+                <td class='nopadding-bot'>";
+                    if ($fenix == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($fenix == 2){
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($revision == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($revision == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($ficha == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($ficha == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+				<td>";
 
                 if ($termsimage1Benja == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -630,32 +641,38 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
                 }
                 echo "</td>
-			            <td>$apellidoAle</td>
-                  <td class='nopadding-bot'>";
-                if ($fenix == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($revision == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($ficha == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-									<td>";
+			    <td>$apellidoAle</td>
+                <td class='nopadding-bot'>";
+                    if ($fenix == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($fenix == 2){
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($revision == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($revision == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($ficha == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($ficha == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+				<td>";
 
                 if ($termsimage1Ale == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -761,37 +778,43 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 echo $numInfa;
                 $numInfa = $numInfa + 1;
                 echo"</span></td>
-			            <td>$nombreInfa";
-                if ($ascendidoInfa == 1) {
-                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
-                }
+			    <td>$nombreInfa";
+                    if ($ascendidoInfa == 1) {
+                        echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                    }
                 echo "</td>
-			            <td>$apellidoInfa</td>
-                  <td class='nopadding-bot'>";
-                if ($fenix == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($revision == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($ficha == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-									<td>";
+			    <td>$apellidoInfa</td>
+                <td class='nopadding-bot'>";
+                    if ($fenix == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($fenix == 2){
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($revision == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($revision == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($ficha == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($ficha == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+				<td>";
 
                 if ($termsimage1Infa == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -896,37 +919,43 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 echo $numCade;
                 $numCade = $numCade + 1;
                 echo"</span></td>
-			            <td>$nombreCade";
-                if ($ascendidoCade == 1) {
-                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
-                }
+			    <td>$nombreCade";
+                    if ($ascendidoCade == 1) {
+                        echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                    }
                 echo "</td>
-			            <td>$apellidoCade</td>
-                  <td class='nopadding-bot'>";
-                if ($fenix == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($revision == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($ficha == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-									<td>";
+			    <td>$apellidoCade</td>
+                <td class='nopadding-bot'>";
+                    if ($fenix == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($fenix == 2){
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($revision == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($revision == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($ficha == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($ficha == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+				<td>";
 
                 if ($termsimage1Cade == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -1031,37 +1060,43 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 echo $numJuve;
                 $numJuve = $numJuve + 1;
                 echo"</span></td>
-			            <td>$nombreJuve";
-                if ($ascendidoJuve == 1) {
-                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
-                }
+			    <td>$nombreJuve";
+                    if ($ascendidoJuve == 1) {
+                        echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                    }
                 echo "</td>
-			            <td>$apellidoJuve</td>
-                  <td class='nopadding-bot'>";
-                if ($fenix == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($revision == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($ficha == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-									<td>";
+			    <td>$apellidoJuve</td>
+                <td class='nopadding-bot'>";
+                    if ($fenix == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($fenix == 2){
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($revision == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($revision == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($ficha == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($ficha == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+				<td>";
 
                 if ($termsimage1Juve == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -1165,37 +1200,43 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 echo $numSenior;
                 $numSenior = $numSenior + 1;
                 echo"</span></td>
-			            <td>$nombreSenior";
-                if ($ascendidoSenior == 1) {
-                    echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
-                }
+			    <td>$nombreSenior";
+                    if ($ascendidoSenior == 1) {
+                        echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
+                    }
                 echo "</td>
-			            <td>$apellidoSenior</td>
-                  <td class='nopadding-bot'>";
-                if ($fenix == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($revision == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-                  <td class='nopadding-bot'>";
-                if ($ficha == 1) {
-                    echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
-                } else {
-                    echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
-                }
-                echo"
-                  </td>
-									<td>";
+			    <td>$apellidoSenior</td>
+                <td class='nopadding-bot'>";
+                    if ($fenix == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($fenix == 2){
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($revision == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($revision == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+                <td class='nopadding-bot'>";
+                    if ($ficha == 1) {
+                        echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
+                    } else if ($ficha == 2) {
+                        echo "<span style='color:darkred;' class='glyphicon glyphicon-remove-sign iconTablaJugador'></span>";
+                    } else {
+                        echo "<span style='color:grey;' class='glyphicon glyphicon-question-sign iconTablaJugador'></span>";
+                    }
+                    echo"
+                </td>
+				<td>";
 
                 if ($termsimage1Senior == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -1537,45 +1578,41 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                       <div class='row form-group paneledit collapse' id='editpanel5-$id'>
                         <form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit5' method='POST'>
                         <div class='row'>
-                            <label class='col-sm-1 control-label'></label>
-                            <div class='col-sm-3'>
-                                <input type='checkbox' ng-model='user.termsImage1' name='fenix' value='1' ";
-            if ($fenix == '1') {
-                echo" checked";
-            }
-            echo" /> <b>Alta Fénix</b>
+                            <div class='col-sm-4 form-group'>
+                            <label for='fenixSelct'><b>Alta Fénix</b></label>
+                                <select class='form-control' name='fenix' id='fenixSelct'>
+                                    <option value='0'";  if ($fenix == '0') {echo"selected";} echo">Desconocido</option>
+                                    <option value='1'";  if ($fenix == '1') {echo"selected";} echo">Entregado</option>
+                                    <option value='2'";  if ($fenix == '2') {echo"selected";} echo">NO Entregado</option>
+                                </select>                             
                             </div>
 
-                            <label class='col-sm-1 control-label'></label>
-                            <div class='col-sm-3'>
-                                <input type='checkbox' ng-model='user.termsImage1' name='revision' value='1' ";
-            if ($revision == '1') {
-                echo" checked";
-            }
-            echo" /> <b>Revisión Médica</b>
+                            <div class='col-sm-4 form-group'>
+                            <label for='revisionSelct'><b>Revisión Médica</b></label>
+                                <select class='form-control' name='revision' id='revisionSelct'>
+                                    <option value='0'";  if ($revision == '0') {echo"selected";} echo">Desconocido</option>
+                                    <option value='1'";  if ($revision == '1') {echo"selected";} echo">Entregado</option>
+                                    <option value='2'";  if ($revision == '2') {echo"selected";} echo">NO Entregado</option>
+                                </select>                             
                             </div>
 
-                            <label class='col-sm-1 control-label'></label>
-                            <div class='col-sm-3'>
-                                <input type='checkbox' ng-model='user.termsImage1' name='ficha' value='1' ";
-            if ($ficha == '1') {
-                echo" checked";
-            }
-            echo" /> <b>Ficha Emitida</b>
+                            <div class='col-sm-4 form-group'>
+                            <label for='fichaSelct'><b>Ficha Emitida</b></label>
+                                <select class='form-control' name='ficha' id='fichaSelct'>
+                                    <option value='0'";  if ($ficha == '0') {echo"selected";} echo">Desconocido</option>
+                                    <option value='1'";  if ($ficha == '1') {echo"selected";} echo">Entregado</option>
+                                    <option value='2'";  if ($ficha == '2') {echo"selected";} echo">NO Entregado</option>
+                                </select>                             
                             </div>
                         </div>
                           <button type='submit' class='btn btn-warning float-right'>Guardar</button>
                         </form>
                         </div>	<!--row form-group#5-->
-
-
 							<br>
 							<br>
-
 							</div>	<!--/.modal-body-->
-
 							<div class='modal-footer'>
-									<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>CERRAR</button>
+								<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>CERRAR</button>
 							</div>
 
 						</div>	<!--/.modal-content-->

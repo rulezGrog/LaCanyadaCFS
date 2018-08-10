@@ -136,23 +136,9 @@ if ($operacion == 'edit4') { // edición del Cuarto Panel
 
 if ($operacion == 'edit5') { // edición del Cuarto Panel
 
-  if ($_POST['fenix'] <> 1) {
-      $fenix = 0;
-  } else {
-      $fenix = 1;
-  }
-
-    if ($_POST['revision'] <> 1) {
-        $revision = 0;
-    } else {
-        $revision = 1;
-    }
-
-    if ($_POST['ficha'] <> 1) {
-        $ficha = 0;
-    } else {
-        $ficha = 1;
-    }
+    $fenix = $_POST['fenix'];    
+    $revision = $_POST['revision']; 
+    $ficha = $_POST['ficha'];
 
     $update5 = "UPDATE jugadores SET fenix = '$fenix', revision = '$revision', ficha = '$ficha' WHERE pedido = '$id'";
     $resultado = mysql_query($update5, $ilink) or die(mysql_error());

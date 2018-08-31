@@ -324,7 +324,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 						       <table class="table table-striped">
 						         <thead>
 						         <tr>
-                      <th class="celdaNumJugador">#</th>
+                                   <th class="celdaNumJugador">#</th>
 						           <th>Nombre</th>
 						           <th>Apellidos</th>
                        <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
@@ -356,8 +356,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $termsimage3Pre = ($filaPre['termsimage3']);
                 $termsimage4Pre = ($filaPre['termsimage4']);
                 echo"
-						          <tr>
-                        <td class='celdaNumJugador'><span class='numJugador'>";
+				<tr>
+                    <td class='celdaNumJugador'><span class='numJugador'>";
                 echo $numPre;
                 $numPre = $numPre + 1;
                 echo"</span></td>
@@ -1163,23 +1163,23 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 			       <table class="table table-striped">
 			         <thead>
 			         <tr>
-                 <th class="celdaNumJugador">#</th>
-			           <th>Nombre</th>
-			           <th>Apellidos</th>
-                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
-                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
-                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
-								 <th>LOPD</th>
-			           <th> </th>';
-            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                echo "
-								 <th> </th>
-								 <th> </th>";
-            };
-            echo'
-			         </tr>
-			         </thead>
-			         <tbody>';
+                        <th class="celdaNumJugador">#</th>
+			            <th>Nombre</th>
+			            <th>Apellidos</th>
+                        <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                        <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                        <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
+						<th>LOPD</th>
+			            <th> </th>';
+                        if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                        echo "
+						<th> </th>
+						<th> </th>";
+                        };
+                        echo'
+			        </tr>
+			        </thead>
+			        <tbody>';
 
             while ($filaSenior = mysql_fetch_array($resultadoSenior)) {
                 $nombreSenior = decrypt($filaSenior['nombre']);
@@ -1382,8 +1382,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 											<div class='form-group col-sm-7'>
 												<label class='control-label' for='nombre'>Apellidos padre/madre/tutor:</label>
 												<input type='text' class='form-control' id='apellidostut' name='apellidostut' placeholder='Introduzca los apellidos' value='";
-            echo str_replace('%ufffd', "_", $apellidostut);
-            echo"'>
+                                                echo str_replace('%ufffd', "_", $apellidostut);
+                                                echo"'>
 											</div>
 											<div class='form-group col-sm-5'>
 												<label class='control-label' for='nombre'>Nombre Jugador:</label>
@@ -1456,18 +1456,18 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 											<label class='col-sm-2 control-label no-padding-left' for='fracc'>¿Pago Fraccionado?</label>
 												<div class='col-sm-10'>
 													<label class='radio-inline'>
-															<input type='radio' name='fracc' value='1'";
-            if ($fraccionado == '1') {
-                echo" checked='true'";
-            }
-            echo" />Sí
+														<input type='radio' name='fracc' value='1'";
+                                                        if ($fraccionado == '1') {
+                                                            echo" checked='true'";
+                                                        }
+                                                        echo" />Sí
 													</label>
 													<label class='radio-inline'>
-															<input type='radio' name='fracc' value='0'";
-            if ($fraccionado == '0') {
-                echo" checked";
-            }
-            echo" />No
+														<input type='radio' name='fracc' value='0'";
+                                                        if ($fraccionado == '0') {
+                                                            echo" checked";
+                                                        }
+                                                        echo" />No
 													</label>
 											</div>
 										</div>-->
@@ -1575,49 +1575,50 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
                     <br>
                     <h3 data-toggle='collapse' data-target='#editpanel5-$id' class='modal-title flip' data-parent='#accordion' id='flip5'>Otros Datos:</h3>
-                      <div class='row form-group paneledit collapse' id='editpanel5-$id'>
-                        <form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit5' method='POST'>
-                        <div class='row'>
-                            <div class='col-sm-4 form-group'>
-                            <label for='fenixSelct'><b>Alta Fénix</b></label>
-                                <select class='form-control' name='fenix' id='fenixSelct'>
-                                    <option value='0'";  if ($fenix == '0') {echo"selected";} echo">Desconocido</option>
-                                    <option value='1'";  if ($fenix == '1') {echo"selected";} echo">Entregado</option>
-                                    <option value='2'";  if ($fenix == '2') {echo"selected";} echo">NO Entregado</option>
-                                </select>                             
-                            </div>
+                        <div class='row form-group paneledit collapse' id='editpanel5-$id'>
+                            <form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit5' method='POST'>
+                            <div class='row'>
+                                <div class='col-sm-4 form-group'>
+                                <label for='fenixSelct'><b>Alta Fénix</b></label>
+                                    <select class='form-control' name='fenix' id='fenixSelct'>
+                                        <option value='0'";  if ($fenix == '0') {echo"selected";} echo">Desconocido</option>
+                                        <option value='1'";  if ($fenix == '1') {echo"selected";} echo">Entregado</option>
+                                        <option value='2'";  if ($fenix == '2') {echo"selected";} echo">NO Entregado</option>
+                                    </select>                             
+                                </div>
 
-                            <div class='col-sm-4 form-group'>
-                            <label for='revisionSelct'><b>Revisión Médica</b></label>
-                                <select class='form-control' name='revision' id='revisionSelct'>
-                                    <option value='0'";  if ($revision == '0') {echo"selected";} echo">Desconocido</option>
-                                    <option value='1'";  if ($revision == '1') {echo"selected";} echo">Entregado</option>
-                                    <option value='2'";  if ($revision == '2') {echo"selected";} echo">NO Entregado</option>
-                                </select>                             
-                            </div>
+                                <div class='col-sm-4 form-group'>
+                                <label for='revisionSelct'><b>Revisión Médica</b></label>
+                                    <select class='form-control' name='revision' id='revisionSelct'>
+                                        <option value='0'";  if ($revision == '0') {echo"selected";} echo">Desconocido</option>
+                                        <option value='1'";  if ($revision == '1') {echo"selected";} echo">Entregado</option>
+                                        <option value='2'";  if ($revision == '2') {echo"selected";} echo">NO Entregado</option>
+                                    </select>                             
+                                </div>
 
-                            <div class='col-sm-4 form-group'>
-                            <label for='fichaSelct'><b>Ficha Emitida</b></label>
-                                <select class='form-control' name='ficha' id='fichaSelct'>
-                                    <option value='0'";  if ($ficha == '0') {echo"selected";} echo">Desconocido</option>
-                                    <option value='1'";  if ($ficha == '1') {echo"selected";} echo">Entregado</option>
-                                    <option value='2'";  if ($ficha == '2') {echo"selected";} echo">NO Entregado</option>
-                                </select>                             
+                                <div class='col-sm-4 form-group'>
+                                <label for='fichaSelct'><b>Ficha Emitida</b></label>
+                                    <select class='form-control' name='ficha' id='fichaSelct'>
+                                        <option value='0'";  if ($ficha == '0') {echo"selected";} echo">Desconocido</option>
+                                        <option value='1'";  if ($ficha == '1') {echo"selected";} echo">Entregado</option>
+                                        <option value='2'";  if ($ficha == '2') {echo"selected";} echo">NO Entregado</option>
+                                    </select>                             
+                                </div>
                             </div>
-                        </div>
-                          <button type='submit' class='btn btn-warning float-right'>Guardar</button>
-                        </form>
-                        </div>	<!--row form-group#5-->
-							<br>
-							<br>
-							</div>	<!--/.modal-body-->
-							<div class='modal-footer'>
-								<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>CERRAR</button>
-							</div>
+                            <button type='submit' class='btn btn-warning float-right'>Guardar</button>
+                            </form>
+                        </div> <!--row form-group#5-->
 
-						</div>	<!--/.modal-content-->
+                        <br>
+                        <br>
+					</div>	<!--/.modal-body-->
+					<div class='modal-footer'>
+						<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>CERRAR</button>
 					</div>
+
+					</div>	<!--/.modal-content-->
 				</div>
+			</div>
 
 <!-- **** INFO MODAL **** -->
 

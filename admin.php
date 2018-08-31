@@ -1,9 +1,8 @@
 <?php  require("header.php");
 
 $selecciona2= "SELECT * FROM admins";
-
-        $resultado2=mysql_query($selecciona2, $ilink) or die(mysql_error());
-        $numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
+$resultado2=mysql_query($selecciona2, $ilink) or die(mysql_error());
+$numfilas = mysql_num_rows($resultado2); // obtenemos el número de filas
 
 
 if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es decir, que no se ha logeado, y mostramos el form
@@ -65,7 +64,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
          <tbody>';
         while ($fila = mysql_fetch_array($resultado2)) {
             $idadmin = utf8_encode($fila['idadmin']);  //LOS utf8_encode HAY QUE ARREGLARLO, DEBE FUNCIONAR LA PAGINA ENTERA CON UTF8 SIN PROBLEMAS
-                     $nombreAdmin = utf8_encode($fila['nombre']);
+            $nombreAdmin = utf8_encode($fila['nombre']);
             $emailAdmin = ($fila['email']);
             $level = ($fila['level']);
 

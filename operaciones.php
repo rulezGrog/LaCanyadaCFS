@@ -349,3 +349,29 @@ if ($tipoOperacion == 'UpArchive') {
         }
 
 }; //endIF 
+
+//*********************DAMOS DE BAJA A UN ENTRENADOR***************************//
+if ($tipoOperacion == 'borrarCoach') {
+    $id = $_GET['id'];
+    if ($id <> "") {
+        $delete= "DELETE FROM entrenadores WHERE idcoach='$id'";
+        $update= "UPDATE equipos SET entrenador = NULL WHERE entrenador='$id'";
+        $resultado1=mysql_query($delete, $ilink) or die(mysql_error());
+        $resultado2=mysql_query($update, $ilink) or die(mysql_error());
+        $_SESSION["delOK"] = 1;
+        // Header("Location: categorias.php");
+        echo "<script> window.location.replace('entrenadores.php') </script>";
+    }
+} //endIF 
+
+//**************************BORRAMOS UN EQUIPO*********************************//
+if ($tipoOperacion == 'borrarCoach') {
+    $id = $_GET['id'];
+    if ($id <> "") {
+        $delete= "DELETE FROM equipos WHERE idequipo='$id'";
+        $resultado=mysql_query($delete, $ilink) or die(mysql_error());
+        $_SESSION["delOK"] = 1;
+        // Header("Location: categorias.php");
+        echo "<script> window.location.replace('equipos.php') </script>";
+    }
+} //endIF 

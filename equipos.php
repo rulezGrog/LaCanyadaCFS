@@ -124,8 +124,8 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                         echo'</td>';
                         if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                         echo'
-                        <td><button type="button" class="btn btn-success btn-xs" name="editbutt" data-toggle="modal" data-target="#editarModal-'.idTeam.'"><a href="#">EDITAR</a></button></td>
-                        <td><button type="button" class="btn btn-danger btn-xs" name="bajabutt" data-toggle="modal" data-target="#borrarModal-'.idTeam.'"><a href="#">BORRAR</a></button></td>
+                        <td><button type="button" class="btn btn-success btn-xs" name="editbutt" data-toggle="modal" data-target="#editarModal-'.$idTeam.'"><a href="#">EDITAR</a></button></td>
+                        <td><button type="button" class="btn btn-danger btn-xs" name="bajabutt" data-toggle="modal" data-target="#borrarModal-'.$idTeam.'"><a href="#">BORRAR</a></button></td>
                         ';
                         } 
                     echo'</tr>

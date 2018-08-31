@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/bootstrap-datepicker3.css">
 
   <link rel="stylesheet" href="css/lacanyada.css">
+  <link rel="stylesheet" href="js/jquery-filestyle.min.css">
 
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">

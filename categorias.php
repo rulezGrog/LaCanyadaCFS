@@ -1415,7 +1415,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 											<br>
 											<button type='submit' class='btn btn-warning float-right'>Guardar</button>
 										</form>
-										</div>	<!--row form-group#1-->
+									</div>	<!--row form-group#1-->
 
 								<br>
 								<h3 data-toggle='collapse' data-target='#editpanel2-$id' class='modal-title flip collapsed' data-parent='#accordion' id='flip2'>Dirección:</h3>

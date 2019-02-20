@@ -294,7 +294,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         //------OTRO------//
 
         echo'
-	<a type="button" class="btn btn-fullList pull-right" name="exportfullList" href="tmp/listajugadores.csv"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>EXPORTAR LISTA COMLPETA</a>
+    <a type="button" class="btn btn-fullList pull-right" name="exportfullList" href="tmp/listajugadores.csv"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>EXPORTAR LISTA COMLPETA</a>
 
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#Preb">Pre-Benjamín</a></li>
@@ -320,28 +320,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
         } else {
             echo'
-						      <div class="table-responsive tablaJugadores">
-						       <table class="table table-striped">
-						         <thead>
-						         <tr>
-                                   <th class="celdaNumJugador">#</th>
-						           <th>Nombre</th>
-						           <th>Apellidos</th>
-                       <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
-                       <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
-                       <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
-											 <th>LOPD</th>
-						           <th> </th>';
-            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                echo "
-						           <th> </th>
-						           <th> </th>
-                       <th> </th>";
-            };
-            echo'
-						         </tr>
-						         </thead>
-						         <tbody>';
+                <div class="table-responsive tablaJugadores">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="celdaNumJugador">#</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                        <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                        <th class="textoTHRotado"><div><span>Ficha Firmada</span></div></th>
+                        <th>LOPD</th>
+                        <th> </th>';
+                        if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                            echo "
+                        <th> </th>
+                        <th> </th>
+                        <th> </th>";
+                        };
+                        echo'
+                    </tr>
+                    </thead>
+                    <tbody>';
 
             while ($filaPre = mysql_fetch_array($resultadoPre)) {
                 $nombrePre = decrypt($filaPre['nombre']);
@@ -356,13 +356,13 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $termsimage3Pre = ($filaPre['termsimage3']);
                 $termsimage4Pre = ($filaPre['termsimage4']);
                 echo"
-				<tr>
+                <tr>
                     <td class='celdaNumJugador'><span class='numJugador'>";
                 echo $numPre;
                 $numPre = $numPre + 1;
                 echo"</span></td>
-				<td>$nombrePre</td>
-				<td>$apellidoPre</td>
+                <td>$nombrePre</td>
+                <td>$apellidoPre</td>
                 <td class='nopadding-bot'>";
                     if ($fenix == 1) {
                         echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
@@ -393,7 +393,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                     echo"
                 </td>
-				<td>";
+                <td>";
 
                 if ($termsimage1Pre == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -421,21 +421,21 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
 
                 echo" </td>
-						            <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
+                                    <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
-						            <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-						            <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
+                                    <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
+                                    <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>
                         <td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></</td>";
                 }
                 echo"</tr>";
             };
             echo'
-						        </tbody>
-						       </table>
-						      </div>
+                                </tbody>
+                               </table>
+                              </div>
 
-									<a type="button" class="btn btn-warning pull-right" name="exportpreb" href="tmp/prebenjamin.csv"><b>EXPORTAR</b></a>';
+                                    <a type="button" class="btn btn-warning pull-right" name="exportpreb" href="tmp/prebenjamin.csv"><b>EXPORTAR</b></a>';
         };
         echo'
     </div>
@@ -452,28 +452,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
         } else {
             echo'
-			      <div class="table-responsive">
-			       <table class="table table-striped">
-			         <thead>
-			         <tr>
-                 <th class="celdaNumJugador">#</th>
-			           <th>Nombre</th>
-			           <th>Apellidos</th>
-                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
-                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
-                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
-								 <th>LOPD</th>
-			           <th> </th>';
-            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                echo "
-								 <th> </th>
-								 <th> </th>
-                 <th> </th>";
-            };
-            echo'
-			         </tr>
-			         </thead>
-			         <tbody>';
+                  <div class="table-responsive">
+                   <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="celdaNumJugador">#</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                        <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                        <th class="textoTHRotado"><div><span>Ficha Firmada</span></div></th>
+                        <th>LOPD</th>
+                        <th> </th>';
+                        if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                            echo "
+                        <th> </th>
+                        <th> </th>
+                        <th> </th>";
+                        };
+                        echo'
+                    </tr>
+                    </thead>
+                    <tbody>';
 
             while ($filaBenja = mysql_fetch_array($resultadoBenja)) {
                 $nombreBenja = decrypt($filaBenja['nombre']);
@@ -489,17 +489,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $termsimage4Benja = ($filaBenja['termsimage4']);
                 $ascendidoBenja = ($filaBenja['ascendido']);
                 echo"
-			          <tr>
+                      <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
                 echo $numBenja;
                 $numBenja = $numBenja + 1;
                 echo"</span></td>
-			    <td>$nombreBenja";
+                <td>$nombreBenja";
                     if ($ascendidoBenja == 1) {
                         echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
                     }
                 echo "</td>
-			    <td>$apellidoBenja</td>
+                <td>$apellidoBenja</td>
                 <td class='nopadding-bot'>";
                     if ($fenix == 1) {
                         echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
@@ -530,7 +530,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                     echo"
                 </td>
-				<td>";
+                <td>";
 
                 if ($termsimage1Benja == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -558,11 +558,11 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
 
                 echo" </td>
-									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
+                                    <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                                    <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
+                                    <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
                     if ($ascendidoBenja != 1) {
                         echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
                     } else {
@@ -570,14 +570,14 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                 }
                 echo"
-								</tr>";
+                                </tr>";
             };
             echo'
-			        </tbody>
-			       </table>
-			      </div>
+                    </tbody>
+                   </table>
+                  </div>
 
-			      <a type="button" class="btn btn-warning pull-right" name="exportbenja" href="tmp/benjamin.csv"><b>EXPORTAR</b></a>';
+                  <a type="button" class="btn btn-warning pull-right" name="exportbenja" href="tmp/benjamin.csv"><b>EXPORTAR</b></a>';
         };
         echo'
     </div>
@@ -594,28 +594,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
         } else {
             echo'
-			      <div class="table-responsive">
-			       <table class="table table-striped">
-			         <thead>
-			         <tr>
-                 <th class="celdaNumJugador">#</th>
-			           <th>Nombre</th>
-			           <th>Apellidos</th>
-                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
-                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
-                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
-								 <th>LOPD</th>
-			           <th> </th>';
-            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                echo "
-								 <th> </th>
-								 <th> </th>
-                 <th> </th>";
-            };
-            echo'
-			         </tr>
-			         </thead>
-			         <tbody>';
+                  <div class="table-responsive">
+                   <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="celdaNumJugador">#</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                        <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                        <th class="textoTHRotado"><div><span>Ficha Firmada</span></div></th>
+                        <th>LOPD</th>
+                        <th> </th>';
+                        if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                            echo "
+                        <th> </th>
+                        <th> </th>
+                        <th> </th>";
+                        };
+                        echo'
+                    </tr>
+                    </thead>
+                    <tbody>';
 
             while ($filaAle = mysql_fetch_array($resultadoAle)) {
                 $nombreAle = decrypt($filaAle['nombre']);
@@ -631,17 +631,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $termsimage4Ale = ($filaAle['termsimage4']);
                 $ascendidoAle = ($filaAle['ascendido']);
                 echo"
-			          <tr>
+                      <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
                 echo $numAle;
                 $numAle = $numAle + 1;
                 echo"</span></td>
-			            <td>$nombreAle";
+                        <td>$nombreAle";
                 if ($ascendidoAle == 1) {
                     echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
                 }
                 echo "</td>
-			    <td>$apellidoAle</td>
+                <td>$apellidoAle</td>
                 <td class='nopadding-bot'>";
                     if ($fenix == 1) {
                         echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
@@ -672,7 +672,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                     echo"
                 </td>
-				<td>";
+                <td>";
 
                 if ($termsimage1Ale == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -700,11 +700,11 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
 
                 echo" </td>
-									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
+                                    <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                                    <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
+                                    <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
                     if ($ascendidoAle != 1) {
                         echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
                     } else {
@@ -712,14 +712,14 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                 }
                 echo"
-								</tr>";
+                                </tr>";
             };
             echo'
-			        </tbody>
-			       </table>
-			      </div>
+                    </tbody>
+                   </table>
+                  </div>
 
-			      <a type="button" class="btn btn-warning pull-right" name="exportalev" href="tmp/alevin.csv"><b>EXPORTAR</b></a>';
+                  <a type="button" class="btn btn-warning pull-right" name="exportalev" href="tmp/alevin.csv"><b>EXPORTAR</b></a>';
         };
         echo'
     </div>
@@ -736,28 +736,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
         } else {
             echo'
-			      <div class="table-responsive">
-			       <table class="table table-striped">
-			         <thead>
-			         <tr>
-                 <th class="celdaNumJugador">#</th>
-			           <th>Nombre</th>
-			           <th>Apellidos</th>
-                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
-                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
-                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
-								 <th>LOPD</th>
-			           <th> </th>';
-            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                echo "
-								 <th> </th>
-								 <th> </th>
-                 <th> </th>";
-            };
-            echo'
-			         </tr>
-			         </thead>
-			         <tbody>';
+                  <div class="table-responsive">
+                   <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="celdaNumJugador">#</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                        <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                        <th class="textoTHRotado"><div><span>Ficha Firmada</span></div></th>
+                        <th>LOPD</th>
+                        <th> </th>';
+                        if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                            echo "
+                        <th> </th>
+                        <th> </th>
+                        <th> </th>";
+                        };
+                        echo'
+                    </tr>
+                    </thead>
+                    <tbody>';
 
             while ($filaInfa = mysql_fetch_array($resultadoInfa)) {
                 $nombreInfa = decrypt($filaInfa['nombre']);
@@ -773,17 +773,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $termsimage4Infa = ($filaInfa['termsimage4']);
                 $ascendidoInfa = ($filaInfa['ascendido']);
                 echo"
-			          <tr>
+                      <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
                 echo $numInfa;
                 $numInfa = $numInfa + 1;
                 echo"</span></td>
-			    <td>$nombreInfa";
+                <td>$nombreInfa";
                     if ($ascendidoInfa == 1) {
                         echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
                     }
                 echo "</td>
-			    <td>$apellidoInfa</td>
+                <td>$apellidoInfa</td>
                 <td class='nopadding-bot'>";
                     if ($fenix == 1) {
                         echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
@@ -814,7 +814,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                     echo"
                 </td>
-				<td>";
+                <td>";
 
                 if ($termsimage1Infa == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -842,11 +842,11 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
 
                 echo" </td>
-									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
+                                    <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                                    <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
+                                    <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
                     if ($ascendidoInfa != 1) {
                         echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
                     } else {
@@ -854,14 +854,14 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                 }
                 echo"
-								</tr>";
+                                </tr>";
             };
             echo'
-			        </tbody>
-			       </table>
-			      </div>
+                    </tbody>
+                   </table>
+                  </div>
 
-			      <a type="button" class="btn btn-warning pull-right" name="exportinfa" href="tmp/infantil.csv"><b>EXPORTAR</b></a>';
+                  <a type="button" class="btn btn-warning pull-right" name="exportinfa" href="tmp/infantil.csv"><b>EXPORTAR</b></a>';
         };
         echo'
     </div><div id="Cadete" class="tab-pane fade">
@@ -877,28 +877,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
         } else {
             echo'
-			      <div class="table-responsive">
-			       <table class="table table-striped">
-			         <thead>
-			         <tr>
-                 <th class="celdaNumJugador">#</th>
-			           <th>Nombre</th>
-			           <th>Apellidos</th>
-                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
-                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
-                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
-								 <th>LOPD</th>
-			           <th> </th>';
-            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                echo "
-								 <th> </th>
-								 <th> </th>
-                 <th> </th>";
-            };
-            echo'
-			         </tr>
-			         </thead>
-			         <tbody>';
+                <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="celdaNumJugador">#</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                        <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                        <th class="textoTHRotado"><div><span>Ficha Firmada</span></div></th>
+                        <th>LOPD</th>
+                        <th> </th>';
+                        if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                            echo "
+                        <th> </th>
+                        <th> </th>
+                        <th> </th>";
+                        };
+                        echo'
+                    </tr>
+                    </thead>
+                    <tbody>';
 
             while ($filaCade = mysql_fetch_array($resultadoCade)) {
                 $nombreCade = decrypt($filaCade['nombre']);
@@ -914,17 +914,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $termsimage4Cade = ($filaCade['termsimage4']);
                 $ascendidoCade = ($filaCade['ascendido']);
                 echo"
-			          <tr>
+                      <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
                 echo $numCade;
                 $numCade = $numCade + 1;
                 echo"</span></td>
-			    <td>$nombreCade";
+                <td>$nombreCade";
                     if ($ascendidoCade == 1) {
                         echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
                     }
                 echo "</td>
-			    <td>$apellidoCade</td>
+                <td>$apellidoCade</td>
                 <td class='nopadding-bot'>";
                     if ($fenix == 1) {
                         echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
@@ -955,7 +955,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                     echo"
                 </td>
-				<td>";
+                <td>";
 
                 if ($termsimage1Cade == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -983,11 +983,11 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
 
                 echo" </td>
-									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
+                                    <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                                    <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
+                                    <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
                     if ($ascendidoCade != 1) {
                         echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
                     } else {
@@ -995,14 +995,14 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                 }
                 echo"
-								</tr>";
+                                </tr>";
             };
             echo'
-			        </tbody>
-			       </table>
-			      </div>
+                    </tbody>
+                   </table>
+                  </div>
 
-			      <a type="button" class="btn btn-warning pull-right" name="exportcade" href="tmp/cadete.csv"><b>EXPORTAR</b></a>';
+                  <a type="button" class="btn btn-warning pull-right" name="exportcade" href="tmp/cadete.csv"><b>EXPORTAR</b></a>';
         };
         echo'
     </div><div id="Juvenil" class="tab-pane fade">
@@ -1018,28 +1018,28 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
         } else {
             echo'
-			      <div class="table-responsive">
-			       <table class="table table-striped">
-			         <thead>
-			         <tr>
-                 <th class="celdaNumJugador">#</th>
-			           <th>Nombre</th>
-			           <th>Apellidos</th>
-                 <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
-                 <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
-                 <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
-								 <th>LOPD</th>
-			           <th> </th>';
-            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                echo "
-								 <th> </th>
-								 <th> </th>
-                 <th> </th>";
-            };
-            echo'
-			         </tr>
-			         </thead>
-			         <tbody>';
+                <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="celdaNumJugador">#</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
+                        <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
+                        <th class="textoTHRotado"><div><span>Ficha Firmada</span></div></th>
+                        <th>LOPD</th>
+                        <th> </th>';
+                        if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                            echo "
+                        <th> </th>
+                        <th> </th>
+                        <th> </th>";
+                        };
+                        echo'
+                    </tr>
+                    </thead>
+                    <tbody>';
 
             while ($filaJuve = mysql_fetch_array($resultadoJuve)) {
                 $nombreJuve = decrypt($filaJuve['nombre']);
@@ -1055,17 +1055,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $termsimage4Juve = ($filaJuve['termsimage4']);
                 $ascendidoJuve = ($filaJuve['ascendido']);
                 echo"
-			          <tr>
+                      <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
                 echo $numJuve;
                 $numJuve = $numJuve + 1;
                 echo"</span></td>
-			    <td>$nombreJuve";
+                <td>$nombreJuve";
                     if ($ascendidoJuve == 1) {
                         echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
                     }
                 echo "</td>
-			    <td>$apellidoJuve</td>
+                <td>$apellidoJuve</td>
                 <td class='nopadding-bot'>";
                     if ($fenix == 1) {
                         echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
@@ -1096,7 +1096,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                     echo"
                 </td>
-				<td>";
+                <td>";
 
                 if ($termsimage1Juve == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -1124,11 +1124,11 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
 
                 echo" </td>
-									<td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
+                                    <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                                    <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
+                                    <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
                     if ($ascendidoJuve != 1) {
                         echo "<td><button type='button' class='btn btn-primary btn-xs' name='ascenbut' data-toggle='modal' data-target='#ascensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-up'></span> Ascender</a></button></td>";
                     } else {
@@ -1136,14 +1136,14 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                 }
                 echo"
-								</tr>";
+                                </tr>";
             };
             echo'
-			        </tbody>
-			       </table>
-			      </div>
+                    </tbody>
+                   </table>
+                  </div>
 
-			      <a type="button" class="btn btn-warning pull-right" name="exportjuve" href="tmp/juvenil.csv"><b>EXPORTAR</b></a>';
+                  <a type="button" class="btn btn-warning pull-right" name="exportjuve" href="tmp/juvenil.csv"><b>EXPORTAR</b></a>';
         };
         echo'
     </div><div id="Senior" class="tab-pane fade">
@@ -1159,27 +1159,27 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             echo'<div class="alert alert-warning text-center"><strong>No existen jugadores en esta categoría.</strong></div>';
         } else {
             echo'
-			      <div class="table-responsive">
-			       <table class="table table-striped">
-			         <thead>
-			         <tr>
+                <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
                         <th class="celdaNumJugador">#</th>
-			            <th>Nombre</th>
-			            <th>Apellidos</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
                         <th class="textoTHRotado"><div><span>Alta Fénix</span></div></th>
                         <th class="textoTHRotado"><div><span>Revisión Médica</span></div></th>
-                        <th class="textoTHRotado"><div><span>Ficha Emitida</span></div></th>
-						<th>LOPD</th>
-			            <th> </th>';
+                        <th class="textoTHRotado"><div><span>Ficha Firmada</span></div></th>
+                        <th>LOPD</th>
+                        <th> </th>';
                         if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                         echo "
-						<th> </th>
-						<th> </th>";
+                        <th> </th>
+                        <th> </th>";
                         };
                         echo'
-			        </tr>
-			        </thead>
-			        <tbody>';
+                    </tr>
+                    </thead>
+                    <tbody>';
 
             while ($filaSenior = mysql_fetch_array($resultadoSenior)) {
                 $nombreSenior = decrypt($filaSenior['nombre']);
@@ -1195,17 +1195,17 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 $termsimage4Senior = ($filaSenior['termsimage4']);
                 $ascendidoSenior = ($filaSenior['ascendido']);
                 echo"
-			          <tr>
+                      <tr>
                   <td class='celdaNumJugador'><span class='numJugador'>";
                 echo $numSenior;
                 $numSenior = $numSenior + 1;
                 echo"</span></td>
-			    <td>$nombreSenior";
+                <td>$nombreSenior";
                     if ($ascendidoSenior == 1) {
                         echo" <span style='color:#DAA520;' class='glyphicon glyphicon-circle-arrow-up'></span>";
                     }
                 echo "</td>
-			    <td>$apellidoSenior</td>
+                <td>$apellidoSenior</td>
                 <td class='nopadding-bot'>";
                     if ($fenix == 1) {
                         echo "<span style='color:green;' class='glyphicon glyphicon-ok-sign iconTablaJugador'></span>";
@@ -1236,7 +1236,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     }
                     echo"
                 </td>
-				<td>";
+                <td>";
 
                 if ($termsimage1Senior == 1) {
                     echo"<span title='SÍ a : La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.' class='label label-success'>1</span> ";
@@ -1264,24 +1264,24 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
 
                 echo" </td>
-			            <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
+                        <td><button type='button' class='btn btn-info btn-xs' name='infobut' data-toggle='modal' data-target='#infoModal-$numpedido'><a href='#'>+INFO</a></button></td>";
                 if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                     echo "
-									<td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
-									<td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
+                                    <td><button type='button' class='btn btn-success btn-xs' name='editbut' data-toggle='modal' data-target='#editarModal-$numpedido'><a href='#'>EDITAR</a></button></td>
+                                    <td><button type='button' class='btn btn-danger btn-xs' name='bajabut' data-toggle='modal' data-target='#bajaModal-$numpedido'><a href='#'>BAJA</a></button></td>";
                     if ($ascendidoSenior == 1) {
                         echo "<td><button type='button' class='btn btn-warning btn-xs' name='ascenbut' data-toggle='modal' data-target='#descensoModal-$numpedido'><a href='#'><span class='glyphicon glyphicon-circle-arrow-down'></span> Descender</a></button></td>";
                     }
                 }
                 echo"
-								</tr>";
+                                </tr>";
             };
             echo'
-			        </tbody>
-			       </table>
-			      </div>
+                    </tbody>
+                   </table>
+                  </div>
 
-			      <a type="button" class="btn btn-warning pull-right" name="exportsenior" href="tmp/senior.csv"><b>EXPORTAR</b></a>';
+                  <a type="button" class="btn btn-warning pull-right" name="exportsenior" href="tmp/senior.csv"><b>EXPORTAR</b></a>';
         };
         echo'
 
@@ -1363,215 +1363,215 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
             //**** EDITAR MODAL ****//
 
             echo "
-				<div class='modal fade bs-example-modal-lg alto' id='editarModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-					<div class='modal-dialog modal-lg' role='document'>
-						<div class='modal-content' id='accordion'>
-							<div class='modal-header'>
-								<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-								<h4 class='modal-title' id='myModalLabel'>EDICIÓN DE DATOS DEL JUGADOR: \"<span class='text-uppercase'>$nombre $apellidos\"</span></h4>
-							</div>
-							<div class='modal-body'>
-								<br>
-								<h3 data-toggle='collapse' data-target='#editpanel1-$id' class='modal-title flip' data-parent='#accordion' id='flip1'>Datos Personales:</h3>
-									<div class='row form-group paneledit in' id='editpanel1-$id'>
-										<form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit1' method='POST'>
-											<div class='form-group col-sm-5'>
-												<label class='control-label' for='nombretut'>Nombre padre/madre/tutor:</label>
-												<input type='text' class='form-control' id='nombretut' name='nombretut' placeholder='Introduzca nombre' value='$nombretut'>
-											</div>
-											<div class='form-group col-sm-7'>
-												<label class='control-label' for='nombre'>Apellidos padre/madre/tutor:</label>
-												<input type='text' class='form-control' id='apellidostut' name='apellidostut' placeholder='Introduzca los apellidos' value='";
+                <div class='modal fade bs-example-modal-lg alto' id='editarModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+                    <div class='modal-dialog modal-lg' role='document'>
+                        <div class='modal-content' id='accordion'>
+                            <div class='modal-header'>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                                <h4 class='modal-title' id='myModalLabel'>EDICIÓN DE DATOS DEL JUGADOR: \"<span class='text-uppercase'>$nombre $apellidos\"</span></h4>
+                            </div>
+                            <div class='modal-body'>
+                                <br>
+                                <h3 data-toggle='collapse' data-target='#editpanel1-$id' class='modal-title flip' data-parent='#accordion' id='flip1'>Datos Personales:</h3>
+                                    <div class='row form-group paneledit in' id='editpanel1-$id'>
+                                        <form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit1' method='POST'>
+                                            <div class='form-group col-sm-5'>
+                                                <label class='control-label' for='nombretut'>Nombre padre/madre/tutor:</label>
+                                                <input type='text' class='form-control' id='nombretut' name='nombretut' placeholder='Introduzca nombre' value='$nombretut'>
+                                            </div>
+                                            <div class='form-group col-sm-7'>
+                                                <label class='control-label' for='nombre'>Apellidos padre/madre/tutor:</label>
+                                                <input type='text' class='form-control' id='apellidostut' name='apellidostut' placeholder='Introduzca los apellidos' value='";
                                                 echo str_replace('%ufffd', "_", $apellidostut);
                                                 echo"'>
-											</div>
-											<div class='form-group col-sm-5'>
-												<label class='control-label' for='nombre'>Nombre Jugador:</label>
-												<input type='text' class='form-control' id='nombre' name='nombre' placeholder='Introduzca nombre' value='$nombre' required>
-											</div>
-											<div class='form-group col-sm-7'>
-												<label class='control-label' for='apellidos'>Apellidos Jugador:</label>
-												<input type='text' class='form-control' id='apellidos' name='apellidos' placeholder='Introduzca los apellidos' value='$apellidos' required>
-											</div>
+                                            </div>
+                                            <div class='form-group col-sm-5'>
+                                                <label class='control-label' for='nombre'>Nombre Jugador:</label>
+                                                <input type='text' class='form-control' id='nombre' name='nombre' placeholder='Introduzca nombre' value='$nombre' required>
+                                            </div>
+                                            <div class='form-group col-sm-7'>
+                                                <label class='control-label' for='apellidos'>Apellidos Jugador:</label>
+                                                <input type='text' class='form-control' id='apellidos' name='apellidos' placeholder='Introduzca los apellidos' value='$apellidos' required>
+                                            </div>
 
-											<div class='form-group col-sm-3'>
-												<label class='control-label' for='dni'>DNI:</label>
-												<input type='text' class='form-control' id='dni' name='dni' placeholder='Introduzca DNI' value='$dni' required>
-											</div>
-											<div class='form-group col-sm-3' style='float:left !important;'>
-												<label class='control-label' for='birthdate'>Fecha nacimiento:</label>
-												<div class='input-group date'>
-													<input class='form-control' type='text' name='birthdate' class='readonly' value='$birthdate' required><span class='input-group-addon'><i class='glyphicon glyphicon-calendar' required></i></span>
-												</div>
-											</div>
-											<div class='form-group col-sm-2'>
-												<label class='control-label' for='telefono'>Teléfono:</label>
-												<input type='tel' class='form-control' id='telefono' name='telefono' placeholder='612345678' value='$telefono' required>
-											</div>
-											<div class='form-group col-sm-4'>
-												<label class='control-label' for='email'>eMail:</label>
-												<input type='email' class='form-control' id='email' name='email' placeholder='Introduzca eMail' value='$email' required>
-											</div>
-											<br>
-											<button type='submit' class='btn btn-warning float-right'>Guardar</button>
-										</form>
-									</div>	<!--row form-group#1-->
+                                            <div class='form-group col-sm-3'>
+                                                <label class='control-label' for='dni'>DNI:</label>
+                                                <input type='text' class='form-control' id='dni' name='dni' placeholder='Introduzca DNI' value='$dni' required>
+                                            </div>
+                                            <div class='form-group col-sm-3' style='float:left !important;'>
+                                                <label class='control-label' for='birthdate'>Fecha nacimiento:</label>
+                                                <div class='input-group date'>
+                                                    <input class='form-control' type='text' name='birthdate' class='readonly' value='$birthdate' required><span class='input-group-addon'><i class='glyphicon glyphicon-calendar' required></i></span>
+                                                </div>
+                                            </div>
+                                            <div class='form-group col-sm-2'>
+                                                <label class='control-label' for='telefono'>Teléfono:</label>
+                                                <input type='tel' class='form-control' id='telefono' name='telefono' placeholder='612345678' value='$telefono' required>
+                                            </div>
+                                            <div class='form-group col-sm-4'>
+                                                <label class='control-label' for='email'>eMail:</label>
+                                                <input type='email' class='form-control' id='email' name='email' placeholder='Introduzca eMail' value='$email' required>
+                                            </div>
+                                            <br>
+                                            <button type='submit' class='btn btn-warning float-right'>Guardar</button>
+                                        </form>
+                                    </div>  <!--row form-group#1-->
 
-								<br>
-								<h3 data-toggle='collapse' data-target='#editpanel2-$id' class='modal-title flip collapsed' data-parent='#accordion' id='flip2'>Dirección:</h3>
-									<div class='row form-group paneledit collapse' id='editpanel2-$id'>
-										<form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit2' method='POST'>
-										<div class='form-group col-sm-3'>
-											<label class='control-label' for='via'>Tipo Vía:</label>
-											<input type='text' class='form-control' id='via' name='via' placeholder='Calle / Avenida /...' value='$via' required>
-										</div>
-										<div class='form-group col-sm-9'>
-											<label class='control-label' for='direccion'>Dirección:</label>
-											<input type='txet' class='form-control' id='direccion' name='direccion' placeholder='Introduzca dirección' value='$direccion' required>
-										</div>
+                                <br>
+                                <h3 data-toggle='collapse' data-target='#editpanel2-$id' class='modal-title flip collapsed' data-parent='#accordion' id='flip2'>Dirección:</h3>
+                                    <div class='row form-group paneledit collapse' id='editpanel2-$id'>
+                                        <form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit2' method='POST'>
+                                        <div class='form-group col-sm-3'>
+                                            <label class='control-label' for='via'>Tipo Vía:</label>
+                                            <input type='text' class='form-control' id='via' name='via' placeholder='Calle / Avenida /...' value='$via' required>
+                                        </div>
+                                        <div class='form-group col-sm-9'>
+                                            <label class='control-label' for='direccion'>Dirección:</label>
+                                            <input type='txet' class='form-control' id='direccion' name='direccion' placeholder='Introduzca dirección' value='$direccion' required>
+                                        </div>
 
-										<div class='form-group col-sm-4'>
-											<label class='control-label' for='poblacion'>Población:</label>
-											<input type='text' class='form-control' id='poblacion' name='poblacion' placeholder='Población' value='$poblacion' required>
-										</div>
-										<div class='form-group col-sm-4'>
-											<label class='control-label' for='provincia'>Provincia:</label>
-											<input type='text' class='form-control' id='provincia' name='provincia' placeholder='Provincia' value='$provincia' required>
-										</div>
-										<div class='form-group col-sm-4'>
-											<label class='control-label' for='cp'>Código Postal:</label>
-											<input type='text' class='form-control' id='cp' name='cp' placeholder='Código postal' value='$cp' required>
-										</div>
-										<br>
-										<button type='submit' class='btn btn-warning  float-right'>Guardar</button>
-									</form>
-									</div>	<!--row form-group#2-->
+                                        <div class='form-group col-sm-4'>
+                                            <label class='control-label' for='poblacion'>Población:</label>
+                                            <input type='text' class='form-control' id='poblacion' name='poblacion' placeholder='Población' value='$poblacion' required>
+                                        </div>
+                                        <div class='form-group col-sm-4'>
+                                            <label class='control-label' for='provincia'>Provincia:</label>
+                                            <input type='text' class='form-control' id='provincia' name='provincia' placeholder='Provincia' value='$provincia' required>
+                                        </div>
+                                        <div class='form-group col-sm-4'>
+                                            <label class='control-label' for='cp'>Código Postal:</label>
+                                            <input type='text' class='form-control' id='cp' name='cp' placeholder='Código postal' value='$cp' required>
+                                        </div>
+                                        <br>
+                                        <button type='submit' class='btn btn-warning  float-right'>Guardar</button>
+                                    </form>
+                                    </div>  <!--row form-group#2-->
 
-									<br>
-									<h3 data-toggle='collapse' data-target='#editpanel3-$id' class='modal-title flip collapsed' data-parent='#accordion' id='flip3'>Datos bancarios:</h3>
-										<div class='row form-group paneledit collapse' id='editpanel3-$id'>
-										<form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit3' method='POST'>
-										<br>
-											<!--<div class='col-sm-12' style='margin-bottom:10px;'>
-											<label class='col-sm-2 control-label no-padding-left' for='fracc'>¿Pago Fraccionado?</label>
-												<div class='col-sm-10'>
-													<label class='radio-inline'>
-														<input type='radio' name='fracc' value='1'";
+                                    <br>
+                                    <h3 data-toggle='collapse' data-target='#editpanel3-$id' class='modal-title flip collapsed' data-parent='#accordion' id='flip3'>Datos bancarios:</h3>
+                                        <div class='row form-group paneledit collapse' id='editpanel3-$id'>
+                                        <form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit3' method='POST'>
+                                        <br>
+                                            <!--<div class='col-sm-12' style='margin-bottom:10px;'>
+                                            <label class='col-sm-2 control-label no-padding-left' for='fracc'>¿Pago Fraccionado?</label>
+                                                <div class='col-sm-10'>
+                                                    <label class='radio-inline'>
+                                                        <input type='radio' name='fracc' value='1'";
                                                         if ($fraccionado == '1') {
                                                             echo" checked='true'";
                                                         }
                                                         echo" />Sí
-													</label>
-													<label class='radio-inline'>
-														<input type='radio' name='fracc' value='0'";
+                                                    </label>
+                                                    <label class='radio-inline'>
+                                                        <input type='radio' name='fracc' value='0'";
                                                         if ($fraccionado == '0') {
                                                             echo" checked";
                                                         }
                                                         echo" />No
-													</label>
-											</div>
-										</div>-->
+                                                    </label>
+                                            </div>
+                                        </div>-->
 
-										<div id='siFracc' class='oculto'>
-											<div ng-show='user.fracc'>
-													<div class='row form-group col-sm-12'>
-															<label class='col-sm-2 control-label' for='bancname'>Titular de la cuenta bancaria</label>
-															<div class='col-sm-4'>
-																	<input class='form-control' type='text' name='bancname' value='$nombrecuenta' placeholder='Nombre titular cuenta' />
-															</div>
-															<div class='col-sm-6'>
-																	<input class='form-control' type='text' name='bancsurname' value='$apecuenta' placeholder='Apellidos titular cuenta' />
-															</div>
-													</div>
-													<div class='row form-group col-sm-12'>
-															<label class='col-sm-4 control-label' for='bancnum'>Número de cuenta bancaria</label>
-															<div class='col-sm-8 no-padding-left'>
-																	<input class='form-control' id='cuentaV' type='text' name='bancnum' value='$numcuenta' placeholder='AA0000000000000000000000'/>
-															</div>
-													</div>
-											</div>
+                                        <div id='siFracc' class='oculto'>
+                                            <div ng-show='user.fracc'>
+                                                    <div class='row form-group col-sm-12'>
+                                                            <label class='col-sm-2 control-label' for='bancname'>Titular de la cuenta bancaria</label>
+                                                            <div class='col-sm-4'>
+                                                                    <input class='form-control' type='text' name='bancname' value='$nombrecuenta' placeholder='Nombre titular cuenta' />
+                                                            </div>
+                                                            <div class='col-sm-6'>
+                                                                    <input class='form-control' type='text' name='bancsurname' value='$apecuenta' placeholder='Apellidos titular cuenta' />
+                                                            </div>
+                                                    </div>
+                                                    <div class='row form-group col-sm-12'>
+                                                            <label class='col-sm-4 control-label' for='bancnum'>Número de cuenta bancaria</label>
+                                                            <div class='col-sm-8 no-padding-left'>
+                                                                    <input class='form-control' id='cuentaV' type='text' name='bancnum' value='$numcuenta' placeholder='AA0000000000000000000000'/>
+                                                            </div>
+                                                    </div>
+                                            </div>
 
-											<div class='form-group col-sm-2' ng-hide='user.fracc'>
-													<label class='control-label' for='importe1'>Primer Pago:</label>
-													<input class='form-control' type='text' name='importe1' placeholder='000€' value='$primerpago'/>
-											</div>
-											<div class='form-group col-sm-2' ng-hide='user.fracc'>
-													<label class='control-label' for='importe2'>Segundo Pago</label>
-													<input class='form-control' type='text' name='importe2' placeholder='000€' value='$segundopago'/>
-											</div>
-											<div class='form-group col-sm-2' ng-hide='user.fracc'>
-													<label class='control-label' for='importe3'>Tercer Pago:</label>
-													<input class='form-control' type='text' name='importe3' placeholder='000€' value='$tercerpago'/>
-											</div>
-											<div class='form-group col-sm-2' ng-hide='user.fracc'>
-													<label class='control-label' for='importe4'>Cuarto Pago:</label>
-													<input class='form-control' type='text' name='importe4' placeholder='000€' value='$cuartopago'/>
-											</div>
-											<div class='form-group col-sm-2' ng-hide='user.fracc'>
-													<label class='control-label' for='importe5'>Quinto Pago:</label>
-													<input class='form-control' type='text' name='importe5' placeholder='000€' value='$quintopago'/>
-											</div>
-											<div class='form-group col-sm-2' ng-hide='user.fracc'>
-													<label class='control-label' for='importeExtra'>Pago Extra:</label>
-													<input class='form-control' type='text' name='importeExtra' placeholder='000€' value='$pagoextra'/>
-											</div>
-									</div>
-									<br>
-										<button type='submit' class='btn btn-warning float-right'>Guardar</button>
-									</form>
-									</div>	<!--row form-group#3-->
+                                            <div class='form-group col-sm-2' ng-hide='user.fracc'>
+                                                    <label class='control-label' for='importe1'>Primer Pago:</label>
+                                                    <input class='form-control' type='text' name='importe1' placeholder='000€' value='$primerpago'/>
+                                            </div>
+                                            <div class='form-group col-sm-2' ng-hide='user.fracc'>
+                                                    <label class='control-label' for='importe2'>Segundo Pago</label>
+                                                    <input class='form-control' type='text' name='importe2' placeholder='000€' value='$segundopago'/>
+                                            </div>
+                                            <div class='form-group col-sm-2' ng-hide='user.fracc'>
+                                                    <label class='control-label' for='importe3'>Tercer Pago:</label>
+                                                    <input class='form-control' type='text' name='importe3' placeholder='000€' value='$tercerpago'/>
+                                            </div>
+                                            <div class='form-group col-sm-2' ng-hide='user.fracc'>
+                                                    <label class='control-label' for='importe4'>Cuarto Pago:</label>
+                                                    <input class='form-control' type='text' name='importe4' placeholder='000€' value='$cuartopago'/>
+                                            </div>
+                                            <div class='form-group col-sm-2' ng-hide='user.fracc'>
+                                                    <label class='control-label' for='importe5'>Quinto Pago:</label>
+                                                    <input class='form-control' type='text' name='importe5' placeholder='000€' value='$quintopago'/>
+                                            </div>
+                                            <div class='form-group col-sm-2' ng-hide='user.fracc'>
+                                                    <label class='control-label' for='importeExtra'>Pago Extra:</label>
+                                                    <input class='form-control' type='text' name='importeExtra' placeholder='000€' value='$pagoextra'/>
+                                            </div>
+                                    </div>
+                                    <br>
+                                        <button type='submit' class='btn btn-warning float-right'>Guardar</button>
+                                    </form>
+                                    </div>  <!--row form-group#3-->
 
-										<br>
-										<h3 data-toggle='collapse' data-target='#editpanel4-$id' class='modal-title flip collapsed' id='flip4'>Ley Orgánica de protección de datos:</h3>
-											<div class='row form-group paneledit collapse' id='editpanel4-$id'>
-												<form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit4' method='POST'>
-														<div class='col-sm-12'>
-															<p><strong>El jugador (y, en el caso de menores de 14 años, sus padres/representantes legales) autoriza/n, mediante el marcado de la casilla, a:</strong></p>
-														</div>
+                                        <br>
+                                        <h3 data-toggle='collapse' data-target='#editpanel4-$id' class='modal-title flip collapsed' id='flip4'>Ley Orgánica de protección de datos:</h3>
+                                            <div class='row form-group paneledit collapse' id='editpanel4-$id'>
+                                                <form accept-charset='utf-8' role='form' action='editplayer.php?id=$id&op=edit4' method='POST'>
+                                                        <div class='col-sm-12'>
+                                                            <p><strong>El jugador (y, en el caso de menores de 14 años, sus padres/representantes legales) autoriza/n, mediante el marcado de la casilla, a:</strong></p>
+                                                        </div>
 
-														<label class='col-sm-2 control-label'></label>
-														<div class='col-sm-10'>
-																<input type='checkbox' ng-model='user.termsImage1' name='termsImage1' value='1' ";
-            if ($lopd1 == '1') {
-                echo" checked";
-            }
-            echo" />
-																La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.
-														</div>
+                                                        <label class='col-sm-2 control-label'></label>
+                                                        <div class='col-sm-10'>
+                                                                <input type='checkbox' ng-model='user.termsImage1' name='termsImage1' value='1' ";
+                                                                if ($lopd1 == '1') {
+                                                                    echo" checked";
+                                                                }
+                                                                echo" />
+                                                                La captación y reproducción, sea cual sea el medio utilizado para ello, de su imagen (y, en su caso, la de su hij@) durante su participación o presencia en cualquier evento deportivo en el que participe.
+                                                        </div>
 
-														<label class='col-sm-2 control-label'></label>
-														<div class='col-sm-10'>
-																<input type='checkbox' ng-model='user.termsImage2' name='termsImage2' value='1' ";
-            if ($lopd2 == '1') {
-                echo" checked";
-            }
-            echo" />
-																La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.
-														</div>
+                                                        <label class='col-sm-2 control-label'></label>
+                                                        <div class='col-sm-10'>
+                                                                <input type='checkbox' ng-model='user.termsImage2' name='termsImage2' value='1' ";
+                                                                if ($lopd2 == '1') {
+                                                                    echo" checked";
+                                                                }
+                                                                echo" />
+                                                                La inclusión de las imágenes en agendas, carteles, trípticos y demás material utilizado para publicitar, apoyar o difundir las actividades deportivas de la Asopciación.
+                                                        </div>
 
-														<label class='col-sm-2 control-label'></label>
-														<div class='col-sm-10'>
-																<input type='checkbox' ng-model='user.termsImage3' name='termsImage3' value='1' ";
-            if ($lopd3 == '1') {
-                echo" checked";
-            }
-            echo" />
-																La utilización de las imágenes para ilustrar las noticias remitidas a <a href='https://www.lacanyadacfs.com' target='_blank' >www.lacanyadacfs.com/</a>.
-														</div>
+                                                        <label class='col-sm-2 control-label'></label>
+                                                        <div class='col-sm-10'>
+                                                                <input type='checkbox' ng-model='user.termsImage3' name='termsImage3' value='1' ";
+                                                                if ($lopd3 == '1') {
+                                                                    echo" checked";
+                                                                }
+                                                                echo" />
+                                                                La utilización de las imágenes para ilustrar las noticias remitidas a <a href='https://www.lacanyadacfs.com' target='_blank' >www.lacanyadacfs.com/</a>.
+                                                        </div>
 
-														<label class='col-sm-2 control-label'></label>
-														<div class='col-sm-10'>
-																<input type='checkbox' ng-model='user.termsImage4' name='termsImage4' value='1' ";
-            if ($lopd4 == '1') {
-                echo" checked";
-            }
-            echo" />
-																La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como <a href='https://www.facebook.com/LaCanyadaCfs' target='_blank' >Facebook</a>, <a href='https://twitter.com/LaCanyadaCFS' target='_blank' >Twitter</a>, y <a href='https://www.youtube.com/user/LaCanyadaCFS?feature=mhee' target='_blank' >YouTube</a>.
-														</div>
-														<br>
-														<button type='submit' class='btn btn-warning float-right'>Guardar</button>
-												</form>
-										</div>	<!--row form-group#4-->
+                                                        <label class='col-sm-2 control-label'></label>
+                                                        <div class='col-sm-10'>
+                                                                <input type='checkbox' ng-model='user.termsImage4' name='termsImage4' value='1' ";
+                                                                if ($lopd4 == '1') {
+                                                                    echo" checked";
+                                                                }
+                                                                echo" />
+                                                                La utilización de las imágenes para ilustrar las noticias remitidas a páginas de Internet desarrolladas dentro del ámbito de la Asociación, como <a href='https://www.facebook.com/LaCanyadaCfs' target='_blank' >Facebook</a>, <a href='https://twitter.com/LaCanyadaCFS' target='_blank' >Twitter</a>, y <a href='https://www.youtube.com/user/LaCanyadaCFS?feature=mhee' target='_blank' >YouTube</a>.
+                                                        </div>
+                                                        <br>
+                                                        <button type='submit' class='btn btn-warning float-right'>Guardar</button>
+                                                </form>
+                                        </div>  <!--row form-group#4-->
 
                     <br>
                     <h3 data-toggle='collapse' data-target='#editpanel5-$id' class='modal-title flip' data-parent='#accordion' id='flip5'>Otros Datos:</h3>
@@ -1597,7 +1597,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                 </div>
 
                                 <div class='col-sm-4 form-group'>
-                                <label for='fichaSelct'><b>Ficha Emitida</b></label>
+                                <label for='fichaSelct'><b>Ficha Firmada</b></label>
                                     <select class='form-control' name='ficha' id='fichaSelct'>
                                         <option value='0'";  if ($ficha == '0') {echo"selected";} echo">Desconocido</option>
                                         <option value='1'";  if ($ficha == '1') {echo"selected";} echo">Entregado</option>
@@ -1611,110 +1611,110 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
                         <br>
                         <br>
-					</div>	<!--/.modal-body-->
-					<div class='modal-footer'>
-						<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>CERRAR</button>
-					</div>
+                    </div>  <!--/.modal-body-->
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>CERRAR</button>
+                    </div>
 
-					</div>	<!--/.modal-content-->
-				</div>
-			</div>
+                    </div>  <!--/.modal-content-->
+                </div>
+            </div>
 
 <!-- **** INFO MODAL **** -->
 
-				<div class='modal fade bs-example-modal-lg alto' id='infoModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-					<div class='modal-dialog modal-lg' role='document'>
-						<div class='modal-content'>
-							<div class='modal-header'>
-								<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-								<h4 class='modal-title' id='myModalLabel'>INFORMACIÓN DEL JUGADOR</h4>
-							</div>
-							<div class='modal-body'>
-									<div class='modalInfoPlayerHead'>
-										<div style='min-height: 170px;'>
-											<img style='float:left;' class='modalFotoPlayer' src='img/avatars/zoidberg.png' alt='' />
-											<h2>$nombre $apellidos</h2>
-											<div class='infoPlayerLeft'>
-													<p><strong>Fecha de nacimiento: </strong>";
-            echo strftime('%d de %B de %Y', strtotime($birthdate));
-            echo"</p>
-													<p><strong>Categoría</strong>: $categoria</p>
-													<p><strong>DNI</strong>: $dni</p>
-											</div>
-											<div class='infoPlayerRight'>";
-            if ($filaModal['nom_tutor'] != "") {
-                echo"<p><strong>Padre/Madre/Tutor:</strong> $nombretut $apellidostut</p>";
-            };
-            echo"
-													<p><strong>Teléfono</strong>: $telefono</p>
-													<p><strong>@eMail</strong>: $email</p>
-											</div>
-										</div>
-											<div class=''>
-												<p><strong>Dirección:</strong> $via $direccion - $cp, $poblacion, $provincia</p>";
-            if ($filaModal['mensaje'] != "") {
-                echo"
-															<button class='btn btn-primary' type='button' data-toggle='collapse' data-target='#collapseExample-$id' aria-expanded='false' aria-controls='collapseExample'>
-															  Abrir Mensaje
-															</button>
-															<div class='collapse' id='collapseExample-$id'>
-															  <div style='margin-top:10px;' class='well'>
-															    <p>$mensaje</p>
-															  </div>
-															</div>";
-            };
+                <div class='modal fade bs-example-modal-lg alto' id='infoModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+                    <div class='modal-dialog modal-lg' role='document'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                                <h4 class='modal-title' id='myModalLabel'>INFORMACIÓN DEL JUGADOR</h4>
+                            </div>
+                            <div class='modal-body'>
+                                    <div class='modalInfoPlayerHead'>
+                                        <div style='min-height: 170px;'>
+                                            <img style='float:left;' class='modalFotoPlayer' src='img/avatars/zoidberg.png' alt='' />
+                                            <h2>$nombre $apellidos</h2>
+                                            <div class='infoPlayerLeft'>
+                                                    <p><strong>Fecha de nacimiento: </strong>";
+                                                    echo strftime('%d de %B de %Y', strtotime($birthdate));
+                                                    echo"</p>
+                                                    <p><strong>Categoría</strong>: $categoria</p>
+                                                    <p><strong>DNI</strong>: $dni</p>
+                                            </div>
+                                            <div class='infoPlayerRight'>";
+                                                if ($filaModal['nom_tutor'] != "") {
+                                                    echo"<p><strong>Padre/Madre/Tutor:</strong> $nombretut $apellidostut</p>";
+                                                };
+                                                echo"
+                                                    <p><strong>Teléfono</strong>: $telefono</p>
+                                                    <p><strong>@eMail</strong>: $email</p>
+                                            </div>
+                                        </div>
+                                            <div class=''>
+                                                <p><strong>Dirección:</strong> $via $direccion - $cp, $poblacion, $provincia</p>";
+                                                    if ($filaModal['mensaje'] != "") {
+                                                        echo"
+                                                            <button class='btn btn-primary' type='button' data-toggle='collapse' data-target='#collapseExample-$id' aria-expanded='false' aria-controls='collapseExample'>
+                                                              Abrir Mensaje
+                                                            </button>
+                                                            <div class='collapse' id='collapseExample-$id'>
+                                                              <div style='margin-top:10px;' class='well'>
+                                                                <p>$mensaje</p>
+                                                              </div>
+                                                            </div>";
+                                                    };
 
-            if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
-                if ($filaModal['titular_cuenta'] != "") {
-                    echo"
-																	<button class='btn btn-primary' type='button' data-toggle='collapse' data-target='#banco-$id' aria-expanded='false' aria-controls='collapseExample'>
-																	  Mostrar datos bancarios
-																	</button>
-																	<div class='collapse' id='banco-$id'>
-																	  <div style='margin-top:10px;' class='well'>
-																	    <p><strong>Titular de la cuenta:</strong> $nombrecuenta $apecuenta</p>
-																			<p><strong>Número de cuenta:</strong> $numcuenta</p>
-																	  </div>
-																	</div>";
-                };
-            };
-            echo"
-											</div>
-									</div>
-							</div>
-							<div class='modal-footer'>
-									<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>CERRAR</button>
-							</div>
-						</div>
-					</div>
-				</div>
+                                                    if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
+                                                        if ($filaModal['titular_cuenta'] != "") {
+                                                            echo"
+                                                                    <button class='btn btn-primary' type='button' data-toggle='collapse' data-target='#banco-$id' aria-expanded='false' aria-controls='collapseExample'>
+                                                                      Mostrar datos bancarios
+                                                                    </button>
+                                                                    <div class='collapse' id='banco-$id'>
+                                                                      <div style='margin-top:10px;' class='well'>
+                                                                        <p><strong>Titular de la cuenta:</strong> $nombrecuenta $apecuenta</p>
+                                                                            <p><strong>Número de cuenta:</strong> $numcuenta</p>
+                                                                      </div>
+                                                                    </div>";
+                                                        };
+                                                    };
+                                                echo"
+                                            </div>
+                                    </div>
+                            </div>
+                            <div class='modal-footer'>
+                                    <button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>CERRAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 <!-- **** BAJA MODAL **** -->
 
-				<div class='modal fade bs-example-modal-sm' id='bajaModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-				  <div class='modal-dialog' role='document'>
-				    <div class='modal-content'>
-				      <div class='modal-header'>
-				        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-				        <h4 class='modal-title' id='myModalLabel'>¿Estás seguro de eliminar al Jugador? $nombre $apellidos</h4>
-				      </div>
-							<div class='modal-body'>
-				        <p>Esta acción <strong>NO</strong> tendrá vuelta atrás y los datos borrados no podrán ser recuperados, aún así, ¿estas seguro de querer borrar al jugador?</p>
-				      </div>
-				      <div class='modal-footer'>
-				        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
-					        <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?id=$id&oper=baja'>SI</a>
-				      </div>
-				    </div>
-				  </div>
-				</div>
+                <div class='modal fade bs-example-modal-sm' id='bajaModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+                  <div class='modal-dialog' role='document'>
+                    <div class='modal-content'>
+                      <div class='modal-header'>
+                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                        <h4 class='modal-title' id='myModalLabel'>¿Estás seguro de eliminar al Jugador? $nombre $apellidos</h4>
+                      </div>
+                            <div class='modal-body'>
+                        <p>Esta acción <strong>NO</strong> tendrá vuelta atrás y los datos borrados no podrán ser recuperados, aún así, ¿estas seguro de querer borrar al jugador?</p>
+                      </div>
+                      <div class='modal-footer'>
+                            <button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
+                            <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?id=$id&oper=baja'>SI</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
 <!-- **** ASCENSO MODAL **** -->
 
-				<div class='modal fade bs-example-modal-sm' id='ascensoModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-				  <div class='modal-dialog' role='document'>
-				    <div class='modal-content'>
-				      <div class='modal-header'>";
+                <div class='modal fade bs-example-modal-sm' id='ascensoModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+                  <div class='modal-dialog' role='document'>
+                    <div class='modal-content'>
+                      <div class='modal-header'>";
 
             switch (strtolower($categoria)) {
                   case 'prebenjamin':
@@ -1747,25 +1747,25 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 }
 
             echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-				        <h4 class='modal-title' id='myModalLabel'>¿Estás seguro de ascender al Jugador a la categoria de $newCat ?</h4>
-				      </div>
-							<div class='modal-body'>
-				        <p>Esta acción provocará que $nombre $apellidos ascienda a la categoría de <strong>$newCat</strong>, ¿es correcto?.</p>
-				      </div>
-				      <div class='modal-footer'>
-				        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
-					        <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?id=$id&oper=ascenso&newcategoria=$newCat'>SI</a>
-				      </div>
-				    </div>
-				  </div>
-				</div>
+                        <h4 class='modal-title' id='myModalLabel'>¿Estás seguro de ascender al Jugador a la categoria de $newCat ?</h4>
+                      </div>
+                            <div class='modal-body'>
+                        <p>Esta acción provocará que $nombre $apellidos ascienda a la categoría de <strong>$newCat</strong>, ¿es correcto?.</p>
+                      </div>
+                      <div class='modal-footer'>
+                            <button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
+                            <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?id=$id&oper=ascenso&newcategoria=$newCat'>SI</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
 <!-- **** DESCENSO MODAL **** -->
 
-				<div class='modal fade bs-example-modal-sm' id='descensoModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-				  <div class='modal-dialog' role='document'>
-				    <div class='modal-content'>
-				      <div class='modal-header'>";
+                <div class='modal fade bs-example-modal-sm' id='descensoModal-$id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+                  <div class='modal-dialog' role='document'>
+                    <div class='modal-content'>
+                      <div class='modal-header'>";
             switch (strtolower($categoria)) {
                   case 'benjamin':
                     $newCat = 'Prebenjamin';
@@ -1791,18 +1791,18 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                         }
 
             echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-				        <h4 class='modal-title' id='myModalLabel'>¿Estás seguro de descender al Jugador a la categoria de $newCat ?</h4>
-				      </div>
-							<div class='modal-body'>
-				        <p>Esta acción provocará que $nombre $apellidos descienda a la categoría de <strong>$newCat</strong>, ¿es correcto?.</p>
-				      </div>
-				      <div class='modal-footer'>
-				        	<button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
-					        <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?id=$id&oper=descenso&newcategoria=$newCat'>SI</a>
-				      </div>
-				    </div>
-				  </div>
-				</div>
+                        <h4 class='modal-title' id='myModalLabel'>¿Estás seguro de descender al Jugador a la categoria de $newCat ?</h4>
+                      </div>
+                            <div class='modal-body'>
+                        <p>Esta acción provocará que $nombre $apellidos descienda a la categoría de <strong>$newCat</strong>, ¿es correcto?.</p>
+                      </div>
+                      <div class='modal-footer'>
+                            <button type='button' class='btn btn-primary btn-sm' data-dismiss='modal'>NO</button>
+                            <a type='button' class='btn btn-danger btn-sm' href='operaciones.php?id=$id&oper=descenso&newcategoria=$newCat'>SI</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
   <!---- FINAL MODALS ---->
 
@@ -1819,7 +1819,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 <!--
 <script>
 $('#container .input-group.date').datepicker({
-		language: "es"
+        language: "es"
 });
 </script>
 

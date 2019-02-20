@@ -42,9 +42,10 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                 <thead>
                     <tr>                        
                         <th class="celdaNumJugador">#</th>
-                        <th>NickEquipo</th>
+                        <th>Nombre Equipo</th>
                         <th>Categoría</th>  
                         <th>Entrenador</th>
+                        <th> </th>
                         <th> </th>
                         <th> </th>
                     </tr>
@@ -56,6 +57,14 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     $nickTeam = $filaTeam['nickequipo'];
                     $categoria = $filaTeam['categoria'];
                     $identrenador = $filaTeam['entrenador'];
+
+                    $row_Coach_NULL = mysql_query("SELECT idcoach, nombre, apellidos FROM entrenadores c WHERE NOT EXISTS (SELECT 1 FROM equipos e WHERE e.entrenador = c.idcoach)", $ilink);
+                    $numero_filas_Coach = mysql_num_rows($row_Coach_NULL); 
+
+                    if (!empty($identrenador)) {
+                        $rowCoach = mysql_query("SELECT nombre, apellidos, idcoach FROM entrenadores WHERE idcoach = $identrenador", $ilink);                   
+                        $Coach = mysql_fetch_array($rowCoach);
+                    }
 
                     echo'
                         <tr>
@@ -82,18 +91,16 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                                 <div class="form-group">
                                                 <label class="control-label col-sm-3" for="TeamToCoach">Entrenador</label>
                                                     <div class="col-sm-8">';
-                                                    $rowentreNULL = mysql_query("SELECT idcoach, nombre, apellidos FROM entrenadores c WHERE NOT EXISTS (SELECT 1 FROM equipos e WHERE e.entrenador = c.idcoach)", $ilink);
-                                                    $numero_filas = mysql_num_rows($rowentreNULL);                                                    
-                                                    if (empty($numero_filas)) {
+                                                    if (empty($numero_filas_Coach)) {
                                                         echo'
                                                         <select class="form-control" id="TeamToCoach" name="TeamToCoach" disabled>
-                                                                <option value="#" selected>NO HAY ENTEANDORES DISPONIBLES</option>';
+                                                            <option value="#" selected>NO HAY ENTEANDORES DISPONIBLES</option>';
                                                         } else {
                                                         echo'    
                                                         <select class="form-control" id="TeamToCoach" name="TeamToCoach">';                   
-                                                        while ($entrenadorNULL = mysql_fetch_array($rowentreNULL)) {
+                                                        while ($entrenadorNULL = mysql_fetch_array($row_Coach_NULL)) {
                                                             echo'
-                                                                <option value="'.$entrenadorNULL["idcoach"].'">'.decrypt($entrenadorNULL["nombre"]).' -- '.decrypt($entrenadorNULL["apellidos"]).'</option>';                                                       }                                                           
+                                                            <option value="'.$entrenadorNULL["idcoach"].'">'.decrypt($entrenadorNULL["nombre"]).' '.decrypt($entrenadorNULL["apellidos"]).'</option>';                                                       }                                                           
                                                     }   echo'
                                                         </select>
                                                     </div>
@@ -101,7 +108,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">ATRÁS</button>';
-                                                if (empty($numero_filas)) {
+                                                if (empty($numero_filas_Coach)) {
                                                 echo'    
                                                 <button type="submit" class="btn btn-success btn-sm" disabled>ENVIAR</button>';
                                                 } else {
@@ -116,16 +123,83 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                             </div>                            
                             ';
                         } else { 
-                            $rowentre = mysql_query("SELECT nombre, apellidos FROM entrenadores WHERE idcoach = $identrenador", $ilink);                   
-                            $entrenador = mysql_fetch_array($rowentre);
-
-                            echo decrypt($entrenador['nombre']).' --- '.decrypt($entrenador['apellidos']);
+                            //$rowentre = mysql_query("SELECT nombre, apellidos FROM entrenadores WHERE idcoach = $identrenador", $ilink);                   
+                            //$entrenador = mysql_fetch_array($rowentre);
+                            echo decrypt($Coach['nombre']).' '.decrypt($Coach['apellidos']);
                         } 
                         echo'</td>';
+
                         if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                         echo'
                         <td><button type="button" class="btn btn-success btn-xs" name="editbutt" data-toggle="modal" data-target="#editarModal-'.$idTeam.'"><a href="#">EDITAR</a></button></td>
+                        <div class="modal fade bs-example-modal-sm" id="editarModal-'.$idTeam.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">EDITAR EQUIPO '.$nickTeam.'</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                        <h3 data-toggle="collapse" data-target="#editpanel1-'.$idTeam.'" class="modal-title flip" data-parent="#accordion" id="flip1">Datos Básicos del Equipo</h3>
+                                        <div class="row form-group paneledit in" id="editpanel1-'.$idTeam.'">
+                                            <form accept-charset="utf-8" role="form" action="operaciones.php?oper=editTeam&id='.$idTeam.'" method="POST">                                                
+                                                <div class="form-group col-sm-5">
+                                                    <label class="control-label" for="nombre">Nick Equipo</label>
+                                                    <input type="text" class="form-control" id="editNickTeam" name="editNickTeam" placeholder="Introduzca nuevo Nick del Equipo" value="'.$nickTeam.'" required>
+                                                </div>
+                                                <div class="form-group col-sm-7">
+                                                    <label class="control-label" for="editTeamToCoach">Reasignar un entrenador</label>';
+                                                    if (empty($numero_filas_Coach)) {
+                                                        echo'
+                                                        <select class="form-control" id="editTeamToCoach" name="editTeamToCoach" disabled>
+                                                            <option value="'.$Coach["idcoach"].'" selected>NO HAY MÁS ENTRENADORES DISPONIBLES</option>';
+                                                    } else {
+                                                        echo'    
+                                                        <select class="form-control" id="editTeamToCoach" name="editTeamToCoach">';
+                                                            if (!empty($identrenador)) {
+                                                            echo'
+                                                            <option value="'.$Coach["idcoach"].'" selected>'.decrypt($Coach["nombre"]).' '.decrypt($Coach["apellidos"]).'</option>';
+                                                            }
+                                                            mysql_data_seek( $row_Coach_NULL, 0 );
+                                                            while ($entrenadorNULL = mysql_fetch_array($row_Coach_NULL)) {
+                                                            echo'
+                                                            <option value="'.$entrenadorNULL["idcoach"].'">'.decrypt($entrenadorNULL["nombre"]).' '.decrypt($entrenadorNULL["apellidos"]).'</option>';
+                                                            }                                                           
+                                                    }   echo'
+                                                        </select>
+                                                </div>                                                
+                                                <br>
+                                                <button type="submit" class="btn btn-warning float-right">Guardar</button>
+                                                <button type="button" class="btn btn-primary float-right" style="margin-right: 15px;" data-dismiss="modal">ATRÁS</button>
+                                            </form>
+                                        </div>	<!--row form-group#1-->
+
+                                        </div> <!-- modal.body -->
+                                    </div>
+                                </div>
+                        </div>                    
+
                         <td><button type="button" class="btn btn-danger btn-xs" name="bajabutt" data-toggle="modal" data-target="#borrarModal-'.$idTeam.'"><a href="#">BORRAR</a></button></td>
+                        <div class="modal fade bs-example-modal-sm" id="borrarModal-'.$idTeam.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">¿Estás seguro de eliminar al Equipo <i>"'.$nickTeam.'"</i>?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Esta acción <strong>NO</strong> tendrá vuelta atrás y los datos borrados no podrán ser recuperados, aún así, ¿estas seguro de querer borrar al jugador?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">NO</button>
+                                        <a type="button" class="btn btn-danger btn-sm" href="operaciones.php?id='.$idTeam.'&oper=borrarTeam">SI</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <td><a type="button" class="btn btn-info btn-xs" href="equipo.php?id='.$idTeam.'">VER EQUIPO</a></td>
                         ';
                         } 
                     echo'</tr>

@@ -272,7 +272,7 @@ if ($tipoOperacion == 'TeamToCoach') {
         $entrenador = $_POST['TeamToCoach'];
 
         mysql_select_db(DB_NAME_AG, $ilink);
-        $inserta="UPDATE equipos SET entrenador = $entrenador WHERE idequipo = '$idTeam'";
+        $inserta="UPDATE equipos SET entrenador = '$entrenador' WHERE idequipo = '$idTeam'";
         $resultado=mysql_query($inserta, $ilink) or die(mysql_error());
         $_SESSION["TeamToCoach"] = 1;
         echo "<script> window.location.replace('equipos.php') </script>";
@@ -294,9 +294,6 @@ if ($tipoOperacion == 'UpArchive') {
             $size     = $_FILES['file']['size'];
             $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
 
-            echo $name;
-            echo $folder;
-
             switch ($error) {
                 case UPLOAD_ERR_OK:
                     $valid = true;
@@ -312,8 +309,7 @@ if ($tipoOperacion == 'UpArchive') {
                     }
                     //upload file
                     if ($valid) {
-                        $targetPath =  $folder. $name;
-                        echo $targetPath;
+                        $targetPath =  $folder.'/'. $name;
                         move_uploaded_file($tmpName,$targetPath);
                         header( 'Location: entrenadores.php' ) ;
                         exit;
@@ -352,12 +348,18 @@ if ($tipoOperacion == 'UpArchive') {
 
 //*********************DAMOS DE BAJA A UN ENTRENADOR***************************//
 if ($tipoOperacion == 'borrarCoach') {
-    $id = $_GET['id'];
-    if ($id <> "") {
-        $delete= "DELETE FROM entrenadores WHERE idcoach='$id'";
-        $update= "UPDATE equipos SET entrenador = NULL WHERE entrenador='$id'";
+    $idCoach = $_GET['id'];
+    if ($idCoach <> "") {        
+        $temporada = $_SESSION["temporada"];
+
+        $delete= "DELETE FROM entrenadores WHERE idcoach='$idCoach'";
+        $update= "UPDATE equipos SET entrenador = NULL WHERE entrenador='$idCoach'";
         $resultado1=mysql_query($delete, $ilink) or die(mysql_error());
         $resultado2=mysql_query($update, $ilink) or die(mysql_error());
+        
+        $dirCoach = "./uploads/entrenadores/$temporada/$idCoach/";
+        rmdir_recursive($dirCoach);
+
         $_SESSION["delOK"] = 1;
         // Header("Location: categorias.php");
         echo "<script> window.location.replace('entrenadores.php') </script>";
@@ -365,13 +367,135 @@ if ($tipoOperacion == 'borrarCoach') {
 } //endIF 
 
 //**************************BORRAMOS UN EQUIPO*********************************//
-if ($tipoOperacion == 'borrarCoach') {
-    $id = $_GET['id'];
-    if ($id <> "") {
-        $delete= "DELETE FROM equipos WHERE idequipo='$id'";
-        $resultado=mysql_query($delete, $ilink) or die(mysql_error());
+if ($tipoOperacion == 'borrarTeam') {
+    $idTeam = $_GET['id'];
+    if ($idTeam <> "") {
+
+        $delete = "DELETE FROM equipos WHERE idequipo='$idTeam'";
+        $resultado = mysql_query($delete, $ilink) or die(mysql_error());
         $_SESSION["delOK"] = 1;
         // Header("Location: categorias.php");
         echo "<script> window.location.replace('equipos.php') </script>";
     }
 } //endIF 
+
+ //************************* MODIFICAMOS UN EQUIPO ****************************//
+ if ($tipoOperacion == 'editTeam') {
+    if (($_POST['editNickTeam'] == '') or ($_POST['editTeamToCoach'] == '')) {
+        //comprobamos que las variables enviadas desde el formulario equipos.php tienen contenido
+
+        $_SESSION["editTeamFailure"] = 1;
+        echo "<script> window.location.replace('equipos.php') </script>";
+    } else {
+        $idTeam = $_GET['id'];
+        $nickTeam = $_POST['editNickTeam'];
+        $coachTeam = $_POST['editTeamToCoach'];
+
+        $update = "UPDATE equipos SET entrenador = '$coachTeam', nickequipo = '$nickTeam' WHERE idequipo = '$idTeam' ";
+        $resultado=mysql_query($update, $ilink) or die(mysql_error());
+
+        $_SESSION["editTeamOK"] = 1;
+        echo "<script> window.location.replace('equipos.php') </script>";
+    }
+}; //endIF modificación EQUIPO
+
+ //************************ MODIFICAMOS UN ENTRENADOR edit1 *******************//
+ if ($tipoOperacion == 'editCoach') {
+    if (($_POST['editNombreCoach'] == '') or ($_POST['editApellidoCoach'] == '') or ($_POST['editEmailCoach']) == '') {
+        //comprobamos que las variables enviadas desde el formulario equipos.php tienen contenido
+
+        $_SESSION["editCoachFailure"] = 1;
+        echo "<script> window.location.replace('entrenadores.php') </script>";
+    } else {
+        $idCoach = $_GET['id'];
+        $nombreCoach = encrypt(mb_ucwords(mb_strtolower($_POST['editNombreCoach'])));
+        $apellidoCoach = encrypt(mb_ucwords(mb_strtolower($_POST['editApellidoCoach'])));
+        $emailCoach = encrypt($_POST['editEmailCoach']);
+
+        $update = "UPDATE entrenadores SET nombre = '$nombreCoach', apellidos = '$apellidoCoach', email = '$emailCoach' WHERE idcoach = '$idCoach' ";
+        $resultado=mysql_query($update, $ilink) or die(mysql_error());
+
+        $_SESSION["editCoachOK"] = 1;
+        echo "<script> window.location.replace('entrenadores.php') </script>";
+    }
+}; //endIF modificación EQUIPO1
+
+ //************************ MODIFICAMOS UN ENTRENADOR edit2 *******************//
+ if ($tipoOperacion == 'editCoach2') {
+    if ($_POST['revisionCoach'] == '') {
+        //comprobamos que las variables enviadas desde el formulario equipos.php tienen contenido
+
+        $_SESSION["editCoachFailure"] = 1;
+        echo "<script> window.location.replace('entrenadores.php') </script>";
+    } else {
+        $idCoach = $_GET['id'];
+        $revisionCoach = $_POST['revisionCoach'];
+
+        $update = "UPDATE entrenadores SET revision = '$revisionCoach' WHERE idcoach = '$idCoach' ";
+        $resultado=mysql_query($update, $ilink) or die(mysql_error());
+
+        $_SESSION["editCoachOK"] = 1;
+        echo "<script> window.location.replace('entrenadores.php') </script>";
+    }
+}; //endIF modificación EQUIPO2
+
+ //************************ MODIFICAMOS UN ENTRENADOR edit3 *******************//
+ if ($tipoOperacion == 'editCoach3') {
+    if ($_POST['editCoachToTeam'] == '') {
+        //comprobamos que las variables enviadas desde el formulario equipos.php tienen contenido
+
+        $_SESSION["editCoachFailure"] = 1;
+        echo "<script> window.location.replace('entrenadores.php') </script>";
+    } else {
+        $idCoach = $_GET['id'];               
+        $idTeam = $_POST['editCoachToTeam'];
+
+        if (isset($_POST['OwnedEquipo'])) {
+            $idOwnedEquipo = ($_POST['OwnedEquipo']);
+            $update1 = "UPDATE equipos SET entrenador = NULL WHERE idequipo = '$idOwnedEquipo' ";
+            $resultado1=mysql_query($update1, $ilink) or die(mysql_error());
+        }
+        $update2 = "UPDATE equipos SET entrenador = '$idCoach' WHERE idequipo = '$idTeam' ";
+        $resultado2=mysql_query($update2, $ilink) or die(mysql_error());
+
+        $_SESSION["editCoachOK"] = 1;
+        echo "<script> window.location.replace('entrenadores.php') </script>";
+    }
+}; //endIF modificación EQUIPO3
+
+//*********************** ASIGNAMOS UN JUGADOR A UN EQUIPO ********************//
+if ($tipoOperacion == 'jugadorToTeam') {
+
+    $idTeam = $_GET['id'];  
+    $jugador = $_POST['idJugador'];
+
+    mysql_select_db(DB_NAME_AG, $ilink);
+    $inserta="UPDATE jugadores SET idequipo = '$idTeam' WHERE pedido = '$jugador'";
+    $resultado=mysql_query($inserta, $ilink) or die(mysql_error());
+    $_SESSION["JugadorToTeam"] = 1;
+    echo "<script> window.location.replace('equipos.php') </script>";
+
+}; //endIF 
+
+//*********************** RETIRAMOS UN JUGADOR DE UN EQUIPO *******************//
+if ($tipoOperacion == 'jugadorToTeamNULL') {
+
+    $jugador = $_POST['idJugador'];
+
+    mysql_select_db(DB_NAME_AG, $ilink);
+    $inserta="UPDATE jugadores SET idequipo = NULL WHERE pedido = '$jugador'";
+    $resultado=mysql_query($inserta, $ilink) or die(mysql_error());
+    $_SESSION["JugadorToTeamNULL"] = 1;
+    echo "<script> window.location.replace('equipos.php') </script>";
+
+}; //endIF 
+
+
+
+ //************************ BORRAR UN ACHIVO *******************//
+ if ($tipoOperacion == 'delFile') {
+
+    unlink ($_POST['href']);
+    echo "<script> window.location.replace('entrenadores.php') </script>";     
+    
+}; //endIF BORRAR aRCHIVO

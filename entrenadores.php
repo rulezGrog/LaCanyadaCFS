@@ -1,90 +1,3 @@
-<script type="text/javascript">
-    $(document).on('click', '.browse', function() {
-      var file = $(this).parent().parent().parent().find('.file');
-      file.trigger('click');
-    });
-    $(document).on('change', '.file', function() {
-      $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
-    });
-  </script>
-
-   
-
-  <style>
-
-  .fileUpload {
-    position: relative;
-    overflow: hidden;
-    margin: 10px;
-}
-.fileUpload input.upload {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-                                    .fileContainer {
-                                        overflow: hidden;
-                                    }
-                                    
-                                    .fileContainer [type=file] {
-                                        cursor: inherit;
-                                        display: block;
-                                        font-size: 999px;
-                                        filter: alpha(opacity=0);
-                                        min-height: 100%;
-                                        min-width: 100%;
-                                        opacity: 0;
-                                        position: absolute;
-                                        right: 0;
-                                        text-align: right;
-                                        top: 0;
-                                    }
-                                    
-                                    /* Example stylistic flourishes */
-                                    
-                                    .fileContainer {
-                                        background: red;
-                                        border-radius: .5em;
-                                        float: left;
-                                        padding: .5em;
-                                    }
-                                    
-                                    .fileContainer [type=file] {
-                                        cursor: pointer;
-                                    }
-                                    }
-
-                                    .upload-btn-wrapper {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-}
-
-.btn {
-  border: 2px solid gray;
-  color: gray;
-  background-color: white;
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.upload-btn-wrapper input[type=file] {
-  font-size: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-}
-
-                                    </style>
 <?php  require("header.php"); 
 
 $seleccionaCoach = "SELECT * FROM entrenadores";
@@ -114,6 +27,11 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         if ($_SESSION["datosFailure"] == 1){
             echo'<div class="alert alert-danger"><strong>Faltan datos por introducir.</strong></div>';
             $_SESSION["datosFailure"] = 0;
+        }
+
+        if ($_SESSION["delOK"] == 1) {
+            echo'<div class="alert alert-danger"><strong>Se ha borrado al entrenador correctamente</strong></div>';
+            $_SESSION["delOK"] = 0;
         }
                 
         if ($numfilasCoach < 1) {
@@ -145,8 +63,12 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                     $email = decrypt($filaCoach['email']);
                     $revision = $filaCoach['revision'];
                                         
-                    $rowequipo = mysql_query("SELECT nickequipo FROM equipos WHERE entrenador = $idCoach", $ilink);                   
-                    $equipo = mysql_fetch_assoc($rowequipo);
+                    $filaOwnedEquipo = mysql_query("SELECT idequipo, nickequipo FROM equipos WHERE entrenador = $idCoach", $ilink);                   
+                    $ownedEquipo = mysql_fetch_assoc($filaOwnedEquipo);
+                    $idOwnedEquipo = $ownedEquipo['idequipo'];
+                    
+                    $rowequipoNoCoach = mysql_query("SELECT idequipo, nickequipo FROM equipos WHERE entrenador IS NULL", $ilink);
+                    $numero_filas_NoCoach = mysql_num_rows($rowequipoNoCoach);
                     
                     echo'
                     <tr>
@@ -169,7 +91,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                             echo'
                         </td>
                         <td>';
-                        if ($equipo['nickequipo'] == '') { 
+                        if ($ownedEquipo['nickequipo'] == '') { 
 
                             echo'
                             <button type="button" class="btn btn-danger btn-xs" name="addCoachToTeam" data-toggle="modal" data-target="#addTeam-'.$idCoach.'">
@@ -188,18 +110,16 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                                     <div class="form-group">
                                                     <label class="control-label col-sm-4" for="CoachToTeam">Equipos sin entrenador</label>
                                                         <div class="col-sm-8">';
-                                                            $rowequipoNoEntrena = mysql_query("SELECT idequipo, nickequipo FROM equipos WHERE entrenador IS NULL", $ilink);
-                                                            $numero_filas = mysql_num_rows($rowequipoNoEntrena);
-                                                            if(empty($numero_filas)) {
+                                                            if(empty($numero_filas_NoCoach)) {
                                                                 echo'                                                                
                                                                 <select class="form-control" id="CoachToTeam" name="CoachToTeam" disabled>
                                                                     <option value="#" selected>NO HAY EQUIPOS DISPONIBLES</option>';
                                                                 } else {
                                                                 echo'    
                                                                 <select class="form-control" id="CoachToTeam" name="CoachToTeam">';
-                                                                while ($equipoNoEntrena = mysql_fetch_array($rowequipoNoEntrena)) {                                                                
+                                                                while ($equipoNoCoach = mysql_fetch_array($rowequipoNoCoach)) {                                                                
                                                                     echo'
-                                                                    <option value="'.$equipoNoEntrena["idequipo"].'">'.$equipoNoEntrena["nickequipo"].'</option>';
+                                                                    <option value="'.$equipoNoCoach["idequipo"].'">'.$equipoNoCoach["nickequipo"].'</option>';
                                                                     }
                                                             } echo' 
                                                                 </select>
@@ -208,7 +128,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">ATRÁS</button>';
-                                                    if (empty($numero_filas)) {
+                                                    if (empty($numero_filas_NoCoach)) {
                                                     echo'    
                                                     <button type="submit" class="btn btn-success btn-sm" disabled>ENVIAR</button>';
                                                     } else {
@@ -223,13 +143,12 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                             </div>';
                                 
                         }else{
-                            echo $equipo['nickequipo'];
+                            echo $ownedEquipo['nickequipo'];
                         } 
                         echo'</td>';
                         if ($_SESSION['level'] == 1 or $_SESSION['level'] == 0) {
                         echo'
-                        <td><button type="button" class="btn btn-success btn-xs" name="editbutt" data-toggle="modal" data-target="#editarModal-'.$idCoach.'"><a href="#">EDITAR</a></button></td>                        
-                        
+                        <td><button type="button" class="btn btn-success btn-xs" name="editbutt" data-toggle="modal" data-target="#editarModal-'.$idCoach.'"><a href="#">EDITAR</a></button></td>
                         <div class="modal fade bs-example-modal-sm" id="editarModal-'.$idCoach.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -241,18 +160,18 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
                                         <h3 data-toggle="collapse" data-target="#editpanel1-'.$idCoach.'" class="modal-title flip" data-parent="#accordion" id="flip1">Datos Personales</h3>
                                         <div class="row form-group paneledit in" id="editpanel1-'.$idCoach.'">
-                                            <form accept-charset="utf-8" role="form" action="editplayer.php?id=-'.$idCoach.'&op=edit1" method="POST">                                                
+                                            <form role="form" action="operaciones.php?oper=editCoach&id='.$idCoach.'" method="POST">                                                
                                                 <div class="form-group col-sm-5">
-                                                    <label class="control-label" for="nombre">Nombre Entenador:</label>
-                                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduzca nombre" value="'.$nombreCoach.'" required>
+                                                    <label class="control-label" for="editNombreCoach">Nombre Entenador:</label>
+                                                    <input type="text" class="form-control" id="editNombreCoach" name="editNombreCoach" placeholder="Introduzca nombre" value="'.$nombreCoach.'" required>
                                                 </div>
                                                 <div class="form-group col-sm-7">
-                                                    <label class="control-label" for="apellidos">Apellidos Entrenador:</label>
-                                                    <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Introduzca los apellidos" value="'.$apellidoCoach.'" required>
+                                                    <label class="control-label" for="editApellidoCoach">Apellidos Entrenador:</label>
+                                                    <input type="text" class="form-control" id="editApellidoCoach" name="editApellidoCoach" placeholder="Introduzca los apellidos" value="'.$apellidoCoach.'" required>
                                                 </div>             
                                                 <div class="form-group col-sm-12">
-                                                    <label class="control-label" for="email">eMail:</label>
-                                                    <input type="email" class="form-control" id="email" name="email" placeholder="Introduzca eMail" value="'.$email.'" required>
+                                                    <label class="control-label" for="editEmailCoach">eMail:</label>
+                                                    <input type="email" class="form-control" id="editEmailCoach" name="editEmailCoach" placeholder="Introduzca eMail" value="'.$email.'" required>
                                                 </div>
                                                 <br>
                                                 <button type="submit" class="btn btn-warning float-right">Guardar</button>
@@ -261,12 +180,14 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
 
                                         <br>    
 
-                                        <h3 data-toggle="collapse" data-target="#editpanel2-'.$idCoach.'" class="modal-title flip" data-parent="#accordion" id="flip2-'.$idCoach.'">Revision médica</h3>
+                                        <h3 data-toggle="collapse" data-target="#editpanel2-'.$idCoach.'" class="modal-title flip" data-parent="#accordion" id="flip2-'.$idCoach.'">Otros Datos:</h3>
                                             <div class="row form-group paneledit collapse" id="editpanel2-'.$idCoach.'">
-                                                <form accept-charset="utf-8" role="form" action="editplayer.php?id=-'.$idCoach.'&op=edit2" method="POST">
+                                                <div class="col-sm-5">
+                                                <form accept-charset="utf-8" role="form" action="operaciones.php?oper=editCoach2&id='.$idCoach.'" method="POST">
                                                 <div class="row">
-                                                    <div class="col-sm-4 form-group">
-                                                        <select class="form-control" name="revision" id="revisionSelct">
+                                                    <label class="control-label col-sm-12" for="CoachToTeam">Revision Médica</label>
+                                                    <div class="col-sm-12 form-group">
+                                                        <select class="form-control" name="revisionCoach" id="revisionCoach">
                                                             <option value="0"';  if ($revision == '0') {echo'selected';} echo'>Desconocido</option>
                                                             <option value="1"';  if ($revision == '1') {echo'selected';} echo'>Entregado</option>
                                                             <option value="2"';  if ($revision == '2') {echo'selected';} echo'>NO Entregado</option>
@@ -275,30 +196,45 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                                 </div>
                                                 <button type="submit" class="btn btn-warning float-right">Guardar</button>
                                                 </form>
+                                                </div>
+
+                                                <div class="col-sm-7">
+                                                <form accept-charset="utf-8" role="form" action="operaciones.php?oper=editCoach3&id='.$idCoach.'" method="POST">
+                                                <div class="row">
+                                                    <label class="control-label col-sm-12" for="editCoachToTeam">Equipo</label>
+                                                    <div class="col-sm-12 form-group">';
+                                                    if (empty($numero_filas_NoCoach)) {
+                                                        echo'
+                                                        <select class="form-control" id="editCoachToTeam" name="editCoachToTeam" disabled>
+                                                            <option value="'.$Coach["idcoach"].'" selected>NO HAY MÁS EQUIPOS DISPONIBLES</option>';
+                                                    } else {
+                                                        if (!empty($idOwnedEquipo)) {
+                                                            echo' 
+                                                            <input type="text" name="OwnedEquipo" value="'.$idOwnedEquipo.'" style="display: none;">';
+                                                        }
+                                                        echo'
+                                                        <select class="form-control" id="editCoachToTeam" name="editCoachToTeam">';
+                                                            if (!empty($idOwnedEquipo)) {
+                                                            echo'
+                                                            <option value="'.$idOwnedEquipo.'" selected>'.$ownedEquipo['nickequipo'].'</option>';
+                                                            }
+                                                            mysql_data_seek( $rowequipoNoCoach, 0 );
+                                                            while ($equipoNoCoach = mysql_fetch_array($rowequipoNoCoach)) {                                                                
+                                                           echo'
+                                                            <option value="'.$equipoNoCoach["idequipo"].'">'.$equipoNoCoach["nickequipo"].'</option>';
+                                                            }                                                          
+                                                    }   echo'
+                                                        </select>                        
+                                                    </div>  
+                                                </div>
+                                                <button type="submit" class="btn btn-warning float-right">Guardar</button>
+                                                </form>
+                                                </div>
                                             </div> <!--row form-group#2-->
-
-                                            <br>    
-
-                                        <h3 data-toggle="collapse" data-target="#editpanel3-'.$idCoach.'" class="modal-title flip" data-parent="#accordion" id="flip2-'.$idCoach.'">Cambio de equipo</h3>
-                                            <div class="row form-group paneledit collapse" id="editpanel3-'.$idCoach.'">
-                                                <form accept-charset="utf-8" role="form" action="editplayer.php?id=-'.$idCoach.'&op=edit3" method="POST">
-                                                <div class="row">
-                                                    <div class="col-sm-4 form-group">
-                                                        <select class="form-control" name="revision" id="revisionSelct">
-                                                            <option value="0"';  if ($revision == '0') {echo'selected';} echo'>Desconocido</option>
-                                                            <option value="1"';  if ($revision == '1') {echo'selected';} echo'>Entregado</option>
-                                                            <option value="2"';  if ($revision == '2') {echo'selected';} echo'>NO Entregado</option>
-                                                        </select>                             
-                                                    </div>  
-                                                </div>
-                                                <button type="submit" class="btn btn-warning float-right">Guardar</button>
-                                                </form>
-                                            </div> <!--row form-group#3-->
 
                                         </div> <!-- modal.body -->
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">ATRÁS</button>
-                                            <button type="submit" class="btn btn-success btn-sm">ENVIAR</button>
                                         </div>
                                     </div>
                                 </div>
@@ -315,7 +251,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                         <h4 class="modal-title" id="myModalLabel">¿Estás seguro de eliminar al Entrenador? '.$nombreCoach.' '.$apellidoCoach.'</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Esta acción <strong>NO</strong> tendrá vuelta atrás y los datos borrados no podrán ser recuperados, aún así, ¿estas seguro de querer borrar al jugador?</p>
+                                        <p>Esta acción <strong>NO</strong> tendrá vuelta atrás y los datos borrados no podrán ser recuperados, <strong>incluídos los archivos asociados a este entrenador</strong>, aún así, ¿estas seguro de querer borrar al jugador?</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">NO</button>
@@ -331,31 +267,62 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">SUBIR ARCHIVO</h4>
+                                        <h4 class="modal-title" id="myModalLabel">ARCHIVOS DE '.$nombreCoach.'</h4>
                                     </div>
                                     <div class="modal-body" style="display:grid;">';
 
                                     $temporada = $_SESSION["temporada"];
+                                    $folder = "./uploads/entrenadores/$temporada/$idCoach";
+                                    echo'
+                                    <h4>Lista de Archivos</h4>
+                                    <div class="div-striped">';
 
-                                    $folder = "./uploads/entrenadores/$temporada/$idCoach/"; 
-                                    
-                                    //scan "uploads" folder and display them accordingly 
-                                    echo $folder;
                                     $results = scandir($folder);
+                                    $checkFiles = 0; //variable para comprobar si hay o no archivos, y para identificar cada archivo, como una especie de ID                        
                                     foreach ($results as $result) {
                                         if ($result==='.' or $result==='..') continue;
                                         if (is_file($folder . '/' . $result)) {
-                                            echo '
-                                                <div>
-                                                    <div class="col-sm-6" scope="row"><a href="'.$folder .'/'. $result.'">'.$result.'</a></div>
-                                                    <div class="col-sm-4"><a href="funciones.php?name='.$result.'&func=remove" class="btn btn-danger btn-xs" role="button">Borrar</a></div>
-                                                </div>';
+                                            $href = $folder .'/'. $result;
+                                            $checkFiles += 1;
+                                            echo '                                                
+                                                <div class="row">
+                                                    <div class="col-sm-1"></div>
+                                                    <div class="col-sm-8 striped"><a href="'.$href.'">'.$result.'</a></div>                                                    
+                                                    <div class="col-sm-2 striped"><a data-toggle="modal" data-target="#myModal-'.$checkFiles.'" class="btn btn-danger btn-xs" role="button" style="line-height: 30px !important; display:inline !important;">Borrar</a></div>
+                                                    
+                                                    <!-- Modal delete -->
+                                                        <div id="myModal-'.$checkFiles.'" class="modal fade" role="dialog">
+                                                            <div class="modal-dialog">
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content">
+                                                                    <form role="form" action="operaciones.php?oper=delFile" method="POST">
+                                                                        <div class="modal-body">
+                                                                            <h4>¿Estás seguro de borrar el archivo "'.$result.'"?</h4>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal">ATRÁS</button>
+                                                                            <button type="submit" value="'.$href.'" name="href" class="btn btn-danger btn-xs">BORRAR</button>                                                                        
+                                                                        </div>                                              
+                                                                </form>          
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                </div>                                            
+                                            ';                                            
                                         }
+                                    } 
+                                    if ($checkFiles == 0) {
+                                        echo'<span class="label label-default" style="margin-left:15px;">El directorio de archivos este entrenador esta vacío</span>';
                                     }
                                     echo'
+                                    </div>
+
+                                    <h4 style="margin-top:30px;">Subir Archivos</h4>
                                     <form class="card card-body bg-light" action="operaciones.php?oper=UpArchive&pth='.$folder.'" method="post" enctype="multipart/form-data">
                                         <div class="form-group col-xs-12">
-                                            <input type="file" name="file" class="jfilestyle" data-theme="yellow" data-text="BUSCAR" data-placeholder="Buscar arhivo">
+                                            <input type="file" name="file" class="jfilestyle" data-theme="yellow" data-text="BUSCAR" data-placeholder="Buscar arhivo" data-buttonBefore="true">
+                                            <input type="submit" class="btn btn-info" value="Subir Archivo">
                                             <!-- <div class="form-group col-xs-12">
                                                 <div class="fileUpload btn btn-primary col-xs-3">
                                                     <span class="">BUSCAR</span>
@@ -367,12 +334,11 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                                 </div>
                                             </div>  -->                                          
                                         </div>                                        
+                                    </form>                                         
                                     </div><!--/div-bodal-Body-->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">ATRÁS</button>
-                                        <input type="submit" class="btn btn-info" value="Subir Archivo">
-                                    </div>
-                                    </form>                                    
+                                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">ATRÁS</button>                                        
+                                    </div>                                   
                                 </div>
                             </div>
                         </div>
@@ -386,12 +352,12 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
         }        
 
         echo' 
-        
+        <!--- JAVASCRIPT PARA EL INPUT  DE LOS ARCHIVOS -->
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-filestyle.min.js"></script>
 
         <div>
-            <button type="button" class="btn btn-info" name="addcoach" data-toggle="modal" data-target="#newcoach"><a href="#">AÑADIR ENTREANDOR</a></button>        
+            <button type="button" class="btn btn-info" name="addcoach" data-toggle="modal" data-target="#newcoach"><a href="#">AÑADIR ENTRENADOR</a></button>        
         </div>
         
         <div class="modal fade bs-example-modal-sm" id="newcoach" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -400,9 +366,9 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">AÑADIR ENTRENADOR</h4>
-                        </div>
-                        <form class="form-horizontal" role="form" action="operaciones.php?oper=regCoach" method="POST">
+                        </div>                        
                             <div class="modal-body">
+                            <form class="form-horizontal" role="form" action="operaciones.php?oper=regCoach" method="POST">
                                 <div class="form-group">
                                     <label class="control-label col-sm-3" for="nombre">Nombre:</label>
                                     <div class="col-sm-8">
@@ -426,7 +392,7 @@ if (!isset($_SESSION['admin'])) { //comprobamos que no existe la session, es dec
                                 <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">ATRÁS</button>
                                 <button type="submit" class="btn btn-success btn-sm">ENVIAR</button>
                             </div>
-                        </form>
+                            </form>
                     </div>
                 </div>
         </div>      
